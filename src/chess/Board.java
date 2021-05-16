@@ -84,9 +84,10 @@ public class Board {
             int tmp = 0;
             for (int x = 0; x < 8; x++) {
 
-                if (tiles[x][7 - y].piece == null)
+                if (tiles[x][7 - y].piece == null) {
+                    res.append(x == 7 ? ++tmp : "");
                     tmp++;
-                else {
+                } else {
                     if (tmp != 0)
                         res.append(tmp);
                     res.append(tiles[x][7 - y].piece.notation);
@@ -95,7 +96,7 @@ public class Board {
             }
             res.append('/');
         }
-        return res.toString();
+        return res.deleteCharAt(res.length() - 1).toString();
     }
 
 }
