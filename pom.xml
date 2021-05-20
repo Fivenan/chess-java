@@ -6,6 +6,10 @@
 	<artifactId>chess-java</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+	</properties>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<resources>
@@ -39,7 +43,7 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.1</version>
 				<configuration>
-					<release>11</release>
+					<release>15</release>
 				</configuration>
 			</plugin>
 			<plugin>
