@@ -8,7 +8,5 @@ Implementing chess with Java
 ???
 
 #### How to run
-'''
-java -jar java-chess.jar
-'''
+> java -jar java-chess.jar
 
