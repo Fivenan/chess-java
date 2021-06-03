@@ -1,4 +1,4 @@
-package chess.pieces;
+package chess.models.pieces;
 
 import chess.models.PieceLocation;
 
@@ -18,7 +18,7 @@ public abstract class Piece {
 		this.value = value;
 	}
 
-	public static Piece getPiecefromChar(char c) {
+	public static Piece getPieceFromChar(char c) {
 		Piece res = null;
 		switch (c) {
 		case 'P':
@@ -72,6 +72,6 @@ public abstract class Piece {
 		this.pieceLocation = pieceLocation;
 	}
 	
-	public abstract void resetLocation();
+//	public abstract void resetLocation();
 
 }

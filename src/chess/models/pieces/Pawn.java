@@ -1,4 +1,4 @@
-package chess.pieces;
+package chess.models.pieces;
 
 public class Pawn extends Piece {
 
@@ -9,12 +9,12 @@ public class Pawn extends Piece {
 
 	}
 
-	@Override
-	public void resetLocation() {
-		if (isWhite) {
-
-		} else {
-
-		}
-	}
+//	@Override
+//	public void resetLocation() {
+//		if (isWhite) {
+//
+//		} else {
+//
+//		}
+//	}
 }

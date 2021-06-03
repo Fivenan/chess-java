@@ -1,4 +1,6 @@
-package chess;
+package chess.models;
+
+import chess.models.Board;
 
 public class ChessGame {
 

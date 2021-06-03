@@ -55,8 +55,8 @@
 							<addClasspath>true</addClasspath>
 							<classpathPrefix>libs/</classpathPrefix>
 							<mainClass>
-								chess.ChessGame
-							</mainClass>
+                                chess.models.ChessGame
+                            </mainClass>
 						</manifest>
 					</archive>
 				</configuration>

@@ -1,4 +1,4 @@
-package chess.pieces;
+package chess.models.pieces;
 
 public class Rook extends Piece {
 
@@ -9,9 +9,9 @@ public class Rook extends Piece {
 
 	}
 
-	@Override
-	public void resetLocation() {
-		pieceLocation.setColumnLoc(isLeftItem ? 1 : 8);
-		pieceLocation.setRowLoc(isWhite? 1 : 8);
-	}
+//	@Override
+//	public void resetLocation() {
+//		pieceLocation.setColumnLoc(isLeftItem ? 1 : 8);
+//		pieceLocation.setRowLoc(isWhite? 1 : 8);
+//	}
 }

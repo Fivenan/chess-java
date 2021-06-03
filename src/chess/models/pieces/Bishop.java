@@ -1,4 +1,4 @@
-package chess.pieces;
+package chess.models.pieces;
 
 public class Bishop extends Piece {
 
@@ -9,9 +9,9 @@ public class Bishop extends Piece {
 
 	}
 
-	@Override
-	public void resetLocation() {
-		pieceLocation.setColumnLoc(isLeftItem ? 3 : 6);
-		pieceLocation.setRowLoc(isWhite? 1 : 8);
-	}
+//	@Override
+//	public void resetLocation() {
+//		pieceLocation.setColumnLoc(isLeftItem ? 3 : 6);
+//		pieceLocation.setRowLoc(isWhite? 1 : 8);
+//	}
 }

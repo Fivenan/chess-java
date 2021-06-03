@@ -1,6 +1,6 @@
-package chess;
+package chess.models;
 
-import chess.pieces.Piece;
+import chess.models.pieces.Piece;
 
 public class Tile {
     public final int x;
