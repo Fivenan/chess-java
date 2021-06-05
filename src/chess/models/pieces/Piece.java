@@ -71,6 +71,12 @@ public abstract class Piece {
 	public void setLocation(PieceLocation pieceLocation) {
 		this.pieceLocation = pieceLocation;
 	}
+
+	public boolean isOnBoard() {
+		boolean result = false;
+		//todo
+		return result;
+	}
 	
 //	public abstract void resetLocation();
 
