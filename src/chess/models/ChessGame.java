@@ -20,11 +20,8 @@ public class ChessGame {
 //        System.out.println(board3.toFEN());
         
         IView terminalView = new Terminal();
-        Game game = new Game();
-        
-        //TODO: two possibilities, either set viewer in game, or set game in viewer. In this case both still possible, need to decide
-        game.setViewer(terminalView);
-        terminalView.setGame(game);        
+        Game game = new Game();        
+        game.setViewer(terminalView); 
         
         game.setBoard(new Board(fen2));
         game.printBoard();
