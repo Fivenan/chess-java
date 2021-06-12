@@ -70,7 +70,7 @@ public class JOGLQuad implements GLEventListener {
 	public void dispose(GLAutoDrawable gLDrawable) {
 	}
 
-	public static void main(String[] args) {
+	public static void testMain() {
 		final GLCanvas canvas = new GLCanvas();
 		final Frame frame = new Frame("Jogl Quad drawing");
 		final Animator animator = new Animator(canvas);

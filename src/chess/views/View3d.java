@@ -10,7 +10,8 @@ import com.jogamp.opengl.glu.*;
 import com.jogamp.opengl.util.Animator;
 
 public class View3d {
-	public static void main(String[] args) {
+	
+	public static void testMain() {
 		new View3d();
 	}
 
