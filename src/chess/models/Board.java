@@ -1,7 +1,5 @@
 package chess.models;
 
-import chess.models.Move;
-import chess.models.Tile;
 import chess.models.pieces.*;
 
 public class Board {
@@ -43,6 +41,26 @@ public class Board {
 
 	// load position directly using Forsyth-Edwards Notation
 	public Board(String init) {
+		String[] parts = init.split(" ", 6);
+		String[] rows = parts[0].split("/", 8);
+		for (int y = 0; y < 8; y++) {
+			for (int x = 0; x < 8; x++) {
+				tiles[x][y] = new Tile(x, y);
+			}
+		}
+		for (int y = 0; y < 8; y++) {
+			int x = 0;
+			for (char c : rows[y].toCharArray()) {
+				if (Character.isDigit(c)) {
+					x += c - 48; // char 1 is \49
+					continue;
+				}
+				tiles[x++][7 - y].place(Piece.getPieceFromChar(c));
+			}
+		}
+	}
+	
+	public void updateBoard(String init) {
 		String[] parts = init.split(" ", 6);
 		String[] rows = parts[0].split("/", 8);
 		for (int y = 0; y < 8; y++) {
