@@ -12,7 +12,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-class FENUtilTest {
+class BoardUtilTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -25,7 +25,7 @@ class FENUtilTest {
 	@ParameterizedTest
 	@MethodSource("provideParametersForRefreshFEN")
 	void testIsValid(String fen, String expected) {
-		assertEquals(expected, FENUtil.refreshFEN(fen));
+		assertEquals(expected, BoardUtil.refreshFEN(fen));
 	}
 
 	private static Stream<Arguments> provideParametersForRefreshFEN() {
@@ -47,7 +47,7 @@ class FENUtilTest {
 	@Test
 	void testFenToCharArray2d() {
 		String fen = "rnbq1k1r/pp3p1p/6pP/2pNP3/2p3n1/5N2/PP1Q1PP1/R3KB1R";
-		char[][] result = FENUtil.fenToCharArray2d(fen);
+		char[][] result = BoardUtil.fenToCharArray2d(fen);
 		char[][] fenArray = { //
 				{ 'r', 'n', 'b', 'q', '*', 'k', '*', 'r' }, //
 				{ 'p', 'p', '*', '*', '*', 'p', '*', 'p' }, //
@@ -81,7 +81,7 @@ class FENUtilTest {
 				+ "*****N**" + System.lineSeparator() //
 				+ "PP*Q*PP*" + System.lineSeparator() //
 				+ "R***KB*R";
-		assertEquals(FENUtil.charArray2dToString(fenArray), str);
+		assertEquals(BoardUtil.charArray2dToString(fenArray), str);
 	}
 
 }

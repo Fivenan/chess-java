@@ -3,12 +3,22 @@ package main.java.chess.models.util;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-public class FENUtil {
+import main.java.chess.models.ChessBoard;
+
+public class BoardUtil {
 
 	public static final String STARTING_POSITION_FEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 	public static final String DEFAULT_FEN_EMBELLISH_ARGUMENTS = " w - - 0 1";
 
-	private FENUtil() {
+	private BoardUtil() {
+	}
+
+	/**
+	 * String of the symbol of the board
+	 */
+	public static String printBoardSymbol(ChessBoard board) {
+
+		return null;
 	}
 
 	/**
@@ -30,6 +40,12 @@ public class FENUtil {
 		}
 	}
 
+	/**
+	 * extracts the first argument of the FEN in a 2d char array
+	 * 
+	 * @param piecePlacement
+	 * @return piece placement in 2d char array
+	 */
 	public static char[][] fenToCharArray2d(String piecePlacement) {
 		char[][] result = new char[8][8];
 
