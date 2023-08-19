@@ -1,15 +1,19 @@
 package main.java.chess.models.oop;
 
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 
+import lombok.Getter;
+import lombok.Setter;
 import main.java.chess.models.ChessBoard;
-import main.java.chess.models.Move;
+import main.java.chess.models.Player;
 import main.java.chess.models.enums.Color;
 import main.java.chess.models.pieces.Bishop;
 import main.java.chess.models.pieces.King;
 import main.java.chess.models.pieces.Knight;
 import main.java.chess.models.pieces.Pawn;
-import main.java.chess.models.pieces.Piece;
+import main.java.chess.models.pieces.PieceFactory;
 import main.java.chess.models.pieces.Queen;
 import main.java.chess.models.pieces.Rook;
 import main.java.chess.models.util.NotationValidator;
@@ -19,16 +23,46 @@ public class OopChessBoard implements ChessBoard {
 	private static final Logger LOGGER = Logger.getLogger(OopChessBoard.class.getName());
 
 	private Tile[][] tiles = new Tile[8][8];
+
+	@Getter
+	@Setter
 	private Color turn = Color.WHITE;
+
+	@Getter
+	@Setter
 	private Move lastMove;
+
+	@Getter
+	@Setter
+	private boolean whiteCanCastleKingSide = false;
+
+	@Getter
+	@Setter
+	private boolean whiteCanCastleQueenSide = false;
+
+	@Getter
+	@Setter
+	private boolean blackCanCastleKingSide = false;
+
+	@Getter
+	@Setter
+	private boolean blackCanCastleQueenSide = false;
+
+	@Getter
+	@Setter
 	private Tile enPassantTargetTile;
+
+	@Getter
+	@Setter
 	private int halfmoveClock = 0; // move since last capture or pawn advance
+
+	@Getter
+	@Setter
 	private int fullmoveNumber = 1; // move from start, incremented after black's move
 
-	private boolean blackCanCastleKingSide = true;
-	private boolean blackCanCastleQueenSide = true;
-	private boolean whiteCanCastleKingSide = true;
-	private boolean whiteCanCastleQueenSide = true;
+	@Getter
+	@Setter
+	private Map<Color, Player> players;
 
 	public OopChessBoard() {
 		for (int y = 0; y < 8; y++) {
@@ -38,8 +72,12 @@ public class OopChessBoard implements ChessBoard {
 		}
 	}
 
+	public OopChessBoard(List<Move> moves) {
+
+	}
+
 	/**
-	 * load position directly using Forsyth-Edwards Notation. E.g.
+	 * load position directly using Forsyth-Edwards Notation. E.g.,
 	 * rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
 	 * rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1
 	 * rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq c6 0 2
@@ -47,7 +85,6 @@ public class OopChessBoard implements ChessBoard {
 	 */
 	@Override
 	public void setBoard(String fen) {
-		String[] parts = fen.split(" ", 6);
 
 		// Validate FEN
 		if (!NotationValidator.isValidFEN(fen)) {
@@ -57,30 +94,47 @@ public class OopChessBoard implements ChessBoard {
 
 		LOGGER.info("Setting board to " + fen);
 
-		String[] rows = parts[0].split("/", 8);
-		for (int y = 0; y < 8; y++) {
-			for (int x = 0; x < 8; x++) {
-				tiles[x][y] = new Tile(x, y);
+		String[] parts = fen.split(" ", 6);
+		String[] ranks = parts[0].split("/", 8);
+		for (int rank = 0; rank < 8; rank++) {
+			for (int file = 0; file < 8; file++) {
+				tiles[file][rank] = new Tile(file, rank);
 			}
 		}
-		for (int y = 0; y < 8; y++) {
-			int x = 0;
-			for (char c : rows[y].toCharArray()) {
+		for (int rank = 0; rank < 8; rank++) {
+			int file = 0;
+			for (char c : ranks[rank].toCharArray()) {
 				if (Character.isDigit(c)) {
-					x += c - 48; // char 1 is \49
+					file += c - '0';
 					continue;
 				}
-				tiles[x++][7 - y].place(Piece.getPieceFromChar(c));
+				tiles[rank][file++].place(PieceFactory.getPieceFromChar(c));
 			}
 		}
+
+		turn = parts[1].equals("w") ? Color.WHITE : Color.BLACK;
+
+		whiteCanCastleKingSide = parts[2].contains("K");
+		whiteCanCastleQueenSide = parts[2].contains("Q");
+		blackCanCastleKingSide = parts[2].contains("k");
+		blackCanCastleQueenSide = parts[2].contains("q");
+
+		if (!parts[3].equals("-")) {
+			enPassantTargetTile = getTile(parts[3]);
+		} else {
+			enPassantTargetTile = null;
+		}
+
+		halfmoveClock = Integer.valueOf(parts[4]);
+		fullmoveNumber = Integer.valueOf(parts[5]);
 
 	}
 
 	@Override
 	public void emptyBoard() {
-		for (int y = 0; y < 8; y++) {
-			for (int x = 0; x < 8; x++) {
-				tiles[x][y] = new Tile(x, y);
+		for (int rank = 0; rank < 8; rank++) {
+			for (int file = 0; file < 8; file++) {
+				tiles[rank][file] = new Tile(rank, file);
 			}
 		}
 
@@ -88,31 +142,43 @@ public class OopChessBoard implements ChessBoard {
 
 	@Override
 	public void restartBoard() {
-		for (int y = 2; y < 6; y++) {
-			for (int x = 0; x < 8; x++) {
-				tiles[x][y] = new Tile(x, y);
+		for (int rank = 2; rank < 6; rank++) {
+			for (int file = 0; file < 8; file++) {
+				tiles[rank][file] = new Tile(rank, file);
 			}
 		}
 		tiles[0][0] = new Tile(0, 0, new Rook(Color.WHITE));
-		tiles[1][0] = new Tile(1, 0, new Knight(Color.WHITE));
-		tiles[2][0] = new Tile(2, 0, new Bishop(Color.WHITE));
-		tiles[3][0] = new Tile(3, 0, new Queen(Color.WHITE));
-		tiles[4][0] = new Tile(4, 0, new King(Color.WHITE));
-		tiles[5][0] = new Tile(5, 0, new Bishop(Color.WHITE));
-		tiles[6][0] = new Tile(6, 0, new Knight(Color.WHITE));
-		tiles[7][0] = new Tile(7, 0, new Rook(Color.WHITE));
-		tiles[0][7] = new Tile(0, 7, new Rook(Color.BLACK));
-		tiles[1][7] = new Tile(1, 7, new Knight(Color.BLACK));
-		tiles[2][7] = new Tile(2, 7, new Bishop(Color.BLACK));
-		tiles[3][7] = new Tile(3, 7, new Queen(Color.BLACK));
-		tiles[4][7] = new Tile(4, 7, new King(Color.BLACK));
-		tiles[5][7] = new Tile(5, 7, new Bishop(Color.BLACK));
-		tiles[6][7] = new Tile(6, 7, new Knight(Color.BLACK));
+		tiles[0][1] = new Tile(0, 1, new Knight(Color.WHITE));
+		tiles[0][2] = new Tile(0, 2, new Bishop(Color.WHITE));
+		tiles[0][3] = new Tile(0, 3, new Queen(Color.WHITE));
+		tiles[0][4] = new Tile(0, 4, new King(Color.WHITE));
+		tiles[0][5] = new Tile(0, 5, new Bishop(Color.WHITE));
+		tiles[0][6] = new Tile(0, 6, new Knight(Color.WHITE));
+		tiles[0][7] = new Tile(0, 7, new Rook(Color.WHITE));
+		tiles[7][0] = new Tile(7, 0, new Rook(Color.BLACK));
+		tiles[7][1] = new Tile(7, 1, new Knight(Color.BLACK));
+		tiles[7][2] = new Tile(7, 2, new Bishop(Color.BLACK));
+		tiles[7][3] = new Tile(7, 3, new Queen(Color.BLACK));
+		tiles[7][4] = new Tile(7, 4, new King(Color.BLACK));
+		tiles[7][5] = new Tile(7, 5, new Bishop(Color.BLACK));
+		tiles[7][6] = new Tile(7, 6, new Knight(Color.BLACK));
 		tiles[7][7] = new Tile(7, 7, new Rook(Color.BLACK));
-		for (int x = 0; x < 8; x++) {
-			tiles[x][1] = new Tile(x, 1, new Pawn(Color.WHITE));
-			tiles[x][6] = new Tile(x, 6, new Pawn(Color.BLACK));
+		for (int file = 0; file < 8; file++) {
+			tiles[1][file] = new Tile(1, file, new Pawn(Color.WHITE));
+			tiles[6][file] = new Tile(6, file, new Pawn(Color.BLACK));
 		}
+
+		turn = Color.WHITE;
+
+		whiteCanCastleKingSide = true;
+		whiteCanCastleQueenSide = true;
+		blackCanCastleKingSide = true;
+		blackCanCastleQueenSide = true;
+
+		enPassantTargetTile = null;
+
+		halfmoveClock = 0;
+		fullmoveNumber = 1;
 
 	}
 
@@ -128,11 +194,6 @@ public class OopChessBoard implements ChessBoard {
 
 	}
 
-	@Override
-	public String getTurn() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public String getMoveNumber() {
@@ -141,35 +202,89 @@ public class OopChessBoard implements ChessBoard {
 	}
 
 	@Override
-	public String getFEN() {
-		StringBuilder res = new StringBuilder();
-		for (int y = 0; y < 8; y++) {
-			int tmp = 0;
-			for (int x = 0; x < 8; x++) {
+	public String getFENBoard() {
+		StringBuilder result = new StringBuilder();
+		String delimiter = "";
 
-				if (tiles[x][7 - y].piece == null) {
-					res.append(x == 7 ? ++tmp : "");
-					tmp++;
-				} else {
-					if (tmp != 0)
-						res.append(tmp);
-					res.append(tiles[x][7 - y].piece.notation);
-					tmp = 0;
-				}
+		for (Tile[] rank : tiles) {
+			result.append(delimiter);
+			for (Tile tile : rank) {
+				result.append(tile.getNotation());
 			}
-			res.append('/');
+			delimiter = "/";
 		}
-		return res.deleteCharAt(res.length() - 1).toString();
+		return cascadeXs(result.toString());
+	}
+
+	@Override
+	public String getFEN() {
+		StringBuilder fen = new StringBuilder();
+		fen.append(getFENBoard());
+		fen.append(" ");
+		fen.append(turn == Color.WHITE ? "w" : "b");
+		fen.append(" ");
+		String castling = (whiteCanCastleKingSide ? "K" : "") + (whiteCanCastleQueenSide ? "Q" : "")
+						+ (blackCanCastleKingSide ? "k" : "") + (blackCanCastleQueenSide ? "q" : "");
+		fen.append(!castling.isEmpty() ? castling : "-");
+		fen.append(" ");
+		fen.append(enPassantTargetTile != null ? enPassantTargetTile.getPosition() : "-");
+		fen.append(" ");
+		fen.append(halfmoveClock);
+		fen.append(" ");
+		fen.append(fullmoveNumber);
+		return fen.toString();
+	}
+
+	private String cascadeXs(String s) {
+		StringBuilder result = new StringBuilder();
+		int count = 0;
+
+		for (char c : s.toCharArray()) {
+			if (c == 'x') {
+				count++;
+			} else {
+				if (count > 0) {
+					result.append(count);
+					count = 0;
+				}
+				result.append(c);
+			}
+		}
+
+		if (count > 0) {
+			result.append(count);
+		}
+
+		return result.toString();
+	}
+
+	/**
+	 * Returns the tile on the board
+	 * 
+	 * @param s chess notation a1-h8
+	 * @return
+	 */
+	public Tile getTile(String s) {
+		if (!s.matches("[a-h][1-8]")) {
+			LOGGER.warning("Invalid tile position: " + s);
+			return null;
+		}
+		return tiles[7 + '0' - s.charAt(1)][s.charAt(0) - 'a'];
+	}
+
+	public Tile getTile(int rank, int file) {
+		return tiles[rank][file];
 	}
 
 	public String toString() {
 		StringBuilder res = new StringBuilder();
-//        Board.values().stream().forEachOrdered(k -> System.out.println(k));
-		for (int y = 0; y < 8; y++) {
-			for (int x = 0; x < 8; x++) {
-				res.append(tiles[x][y].symbol());
+		String delimiter = "";
+		for (int rank = 0; rank < 8; rank++) { // rank is y, row
+			res.append(delimiter);
+			for (int file = 0; file < 8; file++) { // file is x, column
+				res.append(tiles[rank][file].getSymbol());
 			}
-			res.append("\n");
+			delimiter = "\n";
 		}
 		return res.toString();
 	}

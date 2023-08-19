@@ -1,5 +1,7 @@
 package main.java.chess.models;
 
+import main.java.chess.models.oop.Move;
+
 public interface ChessBoard {
 
 	public void setBoard(String fen);
@@ -12,9 +14,9 @@ public interface ChessBoard {
 
 	public void move(Move move);
 
-	public String getTurn();
-
 	public String getMoveNumber();
+
+	public String getFENBoard();
 
 	public String getFEN();
 

@@ -6,6 +6,8 @@ package main.java.chess.models.oop;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.util.logging.Logger;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,6 +21,8 @@ import main.java.chess.models.ChessBoard;
  * 
  */
 class OopChessBoardTest {
+
+	private static final Logger LOGGER = Logger.getLogger(OopChessBoardTest.class.getName());
 
 	ChessBoard chessBoard;
 
@@ -42,11 +46,14 @@ class OopChessBoardTest {
 	 * {@link main.java.chess.models.oop.OopChessBoard#initialize(java.lang.String)}.
 	 */
 	@ParameterizedTest
-	@ValueSource(strings = { "rnbq1k1r/pp3p1p/6pP/2pNP3/2p3n1/5N2/PP1Q1PP1/R3KB1R",
-			"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR" })
+	@ValueSource(strings = { "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+			"rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1" })
 	void testSetBoard(String fen) {
 		chessBoard.setBoard(fen);
-		assertEquals(chessBoard.getFEN(), fen);
+		System.out.println(chessBoard.toString());
+		System.out.println(chessBoard.getFENBoard());
+		System.out.println(fen);
+		assertEquals(fen, chessBoard.getFEN());
 	}
 
 	/**
@@ -55,10 +62,17 @@ class OopChessBoardTest {
 	 */
 	@Test
 	void testEmptyBoard() {
-		String fen = "rnbq1k1r/pp3p1p/6pP/2pNP3/2p3n1/5N2/PP1Q1PP1/R3KB1R";
+		LOGGER.info("Test empty board from a random starting FEN");
+		String fen = "rnbqk2r/pp3p1p/6pP/2pNP3/2p3n1/5N2/PP1Q1PP1/R3KB1R w KQkq - 0 1";
 		chessBoard.setBoard(fen);
 		chessBoard.emptyBoard();
-		assertEquals(chessBoard.getFEN(), "8/8/8/8/8/8/8/8");
+		System.out.println('\u2654');
+		char whiteKingSymbol = '\u2654';
+		System.out.println("White King: " + whiteKingSymbol);
+		System.out.println(chessBoard.toString());
+		System.out.println(chessBoard.getFENBoard());
+		System.out.println(chessBoard.getFEN());
+		assertEquals("8/8/8/8/8/8/8/8", chessBoard.getFENBoard());
 	}
 
 	/**

@@ -188,7 +188,7 @@ public class NotationValidator {
 		int pawnRank = targetRank + pawnRankOffset;
 		int pawnRankInArray = 7 - pawnRank;
 
-		char[][] fen2d = FENUtil.fenToCharArray2d(piecePlacement);
+		char[][] fen2d = BoardUtil.fenToCharArray2d(piecePlacement);
 
 		// Check if the tile behind the pawn is not empty
 		if (fen2d[targetRankInArray][targetFile] != '*') {
