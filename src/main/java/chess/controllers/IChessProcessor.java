@@ -1,10 +1,10 @@
 package main.java.chess.controllers;
 
-import main.java.chess.models.Board;
+import main.java.chess.models.ChessBoard;
 
 public interface IChessProcessor {
 
 	//update board information with some AI processor
-	public Board processMove(Board currentBoard);
+	public ChessBoard processMove(ChessBoard currentBoard);
 	
 }

@@ -1,26 +1,27 @@
 package main.java.chess.controllers;
 
-import main.java.chess.models.Board;
+import main.java.chess.models.ChessBoard;
+import main.java.chess.models.oop.OopChessBoard;
 import main.java.chess.views.IView;
 
 public class Game {
-	private Board board = new Board();
+	private ChessBoard chessBoard = new OopChessBoard();
 	private IView viewer;
 
 	public Game() {
 
 	}
 
-	public Game(Board board) {
+	public Game(ChessBoard board) {
 		setBoard(board);
 	}
 
-	public void setBoard(Board board) {
-		this.board = board;
+	public void setBoard(ChessBoard chessBoard) {
+		this.chessBoard = chessBoard;
 	}
 
-	public Board getBoard() {
-		return board;
+	public ChessBoard getChessBoard() {
+		return chessBoard;
 	}
 
 	public void setViewer(IView viewer) {

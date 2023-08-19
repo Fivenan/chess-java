@@ -1,6 +1,7 @@
 package main.java.chess.models;
 
 import main.java.chess.controllers.Game;
+import main.java.chess.models.oop.OopChessBoard;
 import main.java.chess.views.IView;
 import main.java.chess.views.Terminal;
 
@@ -23,14 +24,17 @@ public class ChessGame {
         Game game = new Game();        
         game.setViewer(terminalView); 
         
-        game.setBoard(new Board(fen2));
+		ChessBoard board2 = new OopChessBoard();
+		board2.setBoard(fen2);
+		game.setBoard(board2);
         game.printBoard();
         
-        Board board3 = new Board(fen3);
+		ChessBoard board3 = new OopChessBoard();
+		board2.setBoard(fen3);
         game.setBoard(board3);
         game.printBoard();
         
-        System.out.println(board3.toFEN());
+		System.out.println(board3.getFEN());
     }
 
 }
