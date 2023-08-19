@@ -1,17 +1,15 @@
 package main.java.chess.models.pieces;
 
 import main.java.chess.models.enums.Color;
+import main.java.chess.models.enums.PieceType;
 
 public class Queen extends Piece {
 
+	public static final PieceType pieceType = PieceType.QUEEN;
+
 	public Queen(Color color) {
-		super(color, color == Color.WHITE ? 'Q' : 'q', color == Color.WHITE ? '\u2655' : '\u265b', 9);
+		super(pieceType, color);
 
 	}
 
-//	@Override
-//	public void resetLocation() {
-//		pieceLocation.setColumnLoc(isWhite? 5 : 4);
-//		pieceLocation.setRowLoc(isWhite? 1 : 8);
-//	}
 }

@@ -1,20 +1,30 @@
 package main.java.chess.models.oop;
 
+import lombok.Getter;
+import lombok.Setter;
 import main.java.chess.models.pieces.Piece;
 
 public class Tile {
-    public final int x;
-    public final int y;
-    public Piece piece;
+
+	public static final char EMPTY_TILE_NOTATION = 'x';
+	public static final char EMPTY_BLACK_TILE_SYMBOL = '\u2b1b';
+	public static final char EMPTY_WHITE_TILE_SYMBOL = '\u2b1c';
+
+	public final int file; // column, x
+	public final int rank; // row, y
+
+	@Getter
+	@Setter
+	private Piece piece;
 
 
-    public Tile(int x, int y) {
-        this.x = x + 1;
-        this.y = y + 1;
+    public Tile(int file, int rank) {
+        this.file = file + 1;
+        this.rank = rank + 1;
     }
 
-    public Tile(int x, int y, Piece p) {
-        this(x, y);
+    public Tile(int file, int rank, Piece p) {
+        this(file, rank);
         this.piece = p;
     }
 
@@ -26,11 +36,19 @@ public class Tile {
         this.piece = null;
     }
 
-    public char symbol() {
+	public char getSymbol() {
         return piece == null ?
-                (x + y) % 2 == 0 ? '\u2b1b' : '\u2b1c' :
-                piece.symbol;
+				(file + rank) % 2 == 0 ? EMPTY_BLACK_TILE_SYMBOL : EMPTY_WHITE_TILE_SYMBOL
+				:
+				piece.getSymbol();
     }
 
+	public char getNotation() {
+		return piece == null ? EMPTY_TILE_NOTATION : piece.getNotation();
+	}
+
+	public String getPosition() {
+		return ((char) ('a' + file)) + "" + (7 - rank);
+	}
 
 }

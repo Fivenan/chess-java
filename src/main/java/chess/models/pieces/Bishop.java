@@ -1,13 +1,16 @@
 package main.java.chess.models.pieces;
 
 import main.java.chess.models.enums.Color;
+import main.java.chess.models.enums.PieceType;
 
 public class Bishop extends Piece {
 
-	private boolean isLeftItem = false;
+	public static final PieceType pieceType = PieceType.BISHOP;
+
+	private boolean isOnBlack = false;
 
 	public Bishop(Color color) {
-		super(color, color == Color.WHITE ? 'B' : 'b', color == Color.WHITE ? '\u2657' : '\u265d', 3);
+		super(pieceType, color);
 
 	}
 
