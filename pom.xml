@@ -55,8 +55,8 @@
 							<addClasspath>true</addClasspath>
 							<classpathPrefix>libs/</classpathPrefix>
 							<mainClass>
-                                chess.models.ChessGame
-                            </mainClass>
+								chess.models.ChessGame
+							</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
@@ -73,6 +73,12 @@
 			<groupId>org.jogamp.jogl</groupId>
 			<artifactId>jogl-all-main</artifactId>
 			<version>2.3.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.28</version> <!-- Use the latest version -->
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 </project>
