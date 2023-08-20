@@ -95,25 +95,9 @@ public class OopChessBoard implements ChessBoard {
 		LOGGER.info("Setting board to " + fen);
 
 		String[] parts = fen.split(" ", 6);
-		String[] ranks = parts[0].split("/", 8);
-		for (int rank = 0; rank < 8; rank++) {
-			for (int file = 0; file < 8; file++) {
-				tiles[file][rank] = new Tile(file, rank);
-			}
-		}
-		for (int rank = 0; rank < 8; rank++) {
-			int file = 0;
-			for (char c : ranks[rank].toCharArray()) {
-				if (Character.isDigit(c)) {
-					file += c - '0';
-					continue;
-				}
-				tiles[rank][file++].place(PieceFactory.getPieceFromChar(c));
-			}
-		}
 
+		importFENBoardToTiles(parts[0]);
 		turn = parts[1].equals("w") ? Color.WHITE : Color.BLACK;
-
 		whiteCanCastleKingSide = parts[2].contains("K");
 		whiteCanCastleQueenSide = parts[2].contains("Q");
 		blackCanCastleKingSide = parts[2].contains("k");
@@ -137,7 +121,22 @@ public class OopChessBoard implements ChessBoard {
 				tiles[rank][file] = new Tile(rank, file);
 			}
 		}
+	}
 
+	private void importFENBoardToTiles(String fenBoard) {
+		String[] ranks = fenBoard.split("/", 8);
+		emptyBoard();
+
+		for (int rank = 0; rank < 8; rank++) {
+			int file = 0;
+			for (char c : ranks[rank].toCharArray()) {
+				if (Character.isDigit(c)) {
+					file += c - '0';
+					continue;
+				}
+				tiles[rank][file++].place(PieceFactory.getPieceFromChar(c));
+			}
+		}
 	}
 
 	@Override
@@ -260,6 +259,8 @@ public class OopChessBoard implements ChessBoard {
 
 	/**
 	 * Returns the tile on the board
+	 * a --> 0, h --> 7
+	 * 1 --> 7, 8 --> 0
 	 * 
 	 * @param s chess notation a1-h8
 	 * @return
@@ -269,7 +270,8 @@ public class OopChessBoard implements ChessBoard {
 			LOGGER.warning("Invalid tile position: " + s);
 			return null;
 		}
-		return tiles[7 + '0' - s.charAt(1)][s.charAt(0) - 'a'];
+		System.out.println("Tile: [rank: " + (7 + '1' - s.charAt(1)) + "], [file: " + (s.charAt(0) - 'a') + "]");
+		return tiles[7 + '1' - s.charAt(1)][s.charAt(0) - 'a'];
 	}
 
 	public Tile getTile(int rank, int file) {

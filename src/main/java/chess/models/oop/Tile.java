@@ -18,9 +18,9 @@ public class Tile {
 	private Piece piece;
 
 
-    public Tile(int file, int rank) {
-        this.file = file + 1;
-        this.rank = rank + 1;
+	public Tile(int rank, int file) {
+		this.rank = rank;
+		this.file = file;
     }
 
     public Tile(int file, int rank, Piece p) {
@@ -47,8 +47,14 @@ public class Tile {
 		return piece == null ? EMPTY_TILE_NOTATION : piece.getNotation();
 	}
 
+	/**
+	 * Returns the tile on the board
+	 * a --> 0, h --> 7
+	 * 1 --> 7, 8 --> 0
+	 */
 	public String getPosition() {
-		return ((char) ('a' + file)) + "" + (7 - rank);
+		System.out.println("Tile: [rank: " + rank + "], [file: " + file + "]");
+		return ((char) ('a' + file)) + "" + (8 - rank);
 	}
 
 }

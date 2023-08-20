@@ -49,6 +49,7 @@ class OopChessBoardTest {
 	@ValueSource(strings = { "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
 			"rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1" })
 	void testSetBoard(String fen) {
+		LOGGER.info("Testing set board method from the starting FEN" + fen);
 		chessBoard.setBoard(fen);
 		System.out.println(chessBoard.toString());
 		System.out.println(chessBoard.getFENBoard());
@@ -62,7 +63,7 @@ class OopChessBoardTest {
 	 */
 	@Test
 	void testEmptyBoard() {
-		LOGGER.info("Test empty board from a random starting FEN");
+		LOGGER.info("Testing empty board method from a random starting FEN");
 		String fen = "rnbqk2r/pp3p1p/6pP/2pNP3/2p3n1/5N2/PP1Q1PP1/R3KB1R w KQkq - 0 1";
 		chessBoard.setBoard(fen);
 		chessBoard.emptyBoard();
