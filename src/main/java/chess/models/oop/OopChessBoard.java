@@ -284,7 +284,7 @@ public class OopChessBoard implements ChessBoard {
 		for (int rank = 0; rank < 8; rank++) { // rank is y, row
 			res.append(delimiter);
 			for (int file = 0; file < 8; file++) { // file is x, column
-				res.append(tiles[rank][file].getSymbol());
+				res.append(tiles[rank][file].getNotation());
 			}
 			delimiter = "\n";
 		}

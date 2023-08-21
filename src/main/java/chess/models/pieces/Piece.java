@@ -1,7 +1,11 @@
 package main.java.chess.models.pieces;
 
+import java.util.List;
+
 import main.java.chess.models.enums.Color;
 import main.java.chess.models.enums.PieceType;
+import main.java.chess.models.oop.Move;
+import main.java.chess.models.oop.OopChessBoard;
 
 public abstract class Piece {
 
@@ -24,5 +28,7 @@ public abstract class Piece {
 	public int getValue() {
 		return pieceType.getValue();
 	}
+
+	public abstract List<Move> generateLegalMoves(OopChessBoard b, int rank, int file);
 
 }
