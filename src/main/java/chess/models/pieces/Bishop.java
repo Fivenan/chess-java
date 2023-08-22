@@ -38,11 +38,13 @@ public class Bishop extends Piece {
 			List<Tile> validMoves) {
 		int toRank = rank + dr;
 		int toFile = file + df;
-		if (!isInTheBoard(toRank, toFile) || pieceExistsAndSameColor(b, toRank, toFile)) {
+		if (!isInTheBoard(toRank, toFile)) {
 			return;
 		}
-		if (pieceExistAndDifferentColor(b, toRank, toFile)) {
-			validMoves.add(b.getTile(toRank, toFile));
+		if (pieceExists(b, toRank, toFile)) {
+			if (pieceHasDifferentColor(b, toRank, toFile)) {
+				validMoves.add(b.getTile(toRank, toFile));
+			}
 			return;
 		}
 		// TODO creates open check
@@ -53,20 +55,17 @@ public class Bishop extends Piece {
 	}
 
 	private boolean isInTheBoard(int rank, int file) {
-		return rank >= 0 && rank <= 7 && file >= 0 && file <= 7;
+		return rank >= 0 //
+				&& rank <= 7 //
+				&& file >= 0 //
+				&& file <= 7;
 	}
 
-	private boolean pieceExistsAndSameColor(OopChessBoard b, int rank, int file) {
-		if (b.getTile(rank, file).getPiece() == null) {
-			return false;
-		}
-		return b.getTile(rank, file).getPiece().color == super.color;
+	private boolean pieceExists(OopChessBoard b, int rank, int file) {
+		return b.getTile(rank, file).getPiece() != null;
 	}
 
-	private boolean pieceExistAndDifferentColor(OopChessBoard b, int rank, int file) {
-		if (b.getTile(rank, file).getPiece() == null) {
-			return false;
-		}
+	private boolean pieceHasDifferentColor(OopChessBoard b, int rank, int file) {
 		return b.getTile(rank, file).getPiece().color != super.color;
 	}
 

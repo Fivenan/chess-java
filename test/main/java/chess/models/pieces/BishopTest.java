@@ -41,4 +41,36 @@ class BishopTest {
 		validMoves.stream().map(Move::toString).forEach(System.out::println);
 	}
 
+	@ParameterizedTest
+	@ValueSource(strings = { "B7/8/8/8/8/8/8/8 w - - 0 1" }) //
+	void testGenerateLegalMoves3(String fen) {
+		board.setBoard(fen);
+		List<Move> validMoves = board.getTile(0, 0).getPiece().generateLegalMoves(board, 0, 0);
+		validMoves.stream().map(Move::toString).forEach(System.out::println);
+	}
+
+	@ParameterizedTest
+	@ValueSource(strings = { "7B/8/8/8/8/8/8/8 w - - 0 1" }) //
+	void testGenerateLegalMoves4(String fen) {
+		board.setBoard(fen);
+		List<Move> validMoves = board.getTile(0, 7).getPiece().generateLegalMoves(board, 0, 7);
+		validMoves.stream().map(Move::toString).forEach(System.out::println);
+	}
+
+	@ParameterizedTest
+	@ValueSource(strings = { "8/8/8/8/8/8/8/B7 w - - 0 1" }) //
+	void testGenerateLegalMoves5(String fen) {
+		board.setBoard(fen);
+		List<Move> validMoves = board.getTile(7, 0).getPiece().generateLegalMoves(board, 7, 0);
+		validMoves.stream().map(Move::toString).forEach(System.out::println);
+	}
+
+	@ParameterizedTest
+	@ValueSource(strings = { "8/8/8/8/8/8/8/7B w - - 0 1" }) //
+	void testGenerateLegalMoves6(String fen) {
+		board.setBoard(fen);
+		List<Move> validMoves = board.getTile(7, 7).getPiece().generateLegalMoves(board, 7, 7);
+		validMoves.stream().map(Move::toString).forEach(System.out::println);
+	}
+
 }
