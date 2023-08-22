@@ -1,6 +1,7 @@
 package main.java.chess.models.pieces;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import main.java.chess.models.enums.Color;
 import main.java.chess.models.enums.PieceType;
@@ -30,7 +31,14 @@ public abstract class Piece {
 		return pieceType.getValue();
 	}
 
-	public abstract List<Move> generateLegalMoves(OopChessBoard b, int rank, int file);
+	public List<Move> generateLegalMoves(OopChessBoard b, int rank, int file) {
+		Tile start = b.getTile(rank, file);
+		return generateLegalTargetTiles(b, rank, file).stream() //
+				.map(end -> new Move(start, end)) //
+				.collect(Collectors.toList());
+	}
+
+	public abstract List<Tile> generateLegalTargetTiles(OopChessBoard b, int rank, int file);
 
 	void generateValidMovesRecursive(OopChessBoard b, int rank, int file, int dr, int df,
 			List<Tile> validMoves) {

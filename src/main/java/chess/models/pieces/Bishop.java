@@ -3,11 +3,9 @@ package main.java.chess.models.pieces;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 import main.java.chess.models.enums.Color;
 import main.java.chess.models.enums.PieceType;
-import main.java.chess.models.oop.Move;
 import main.java.chess.models.oop.OopChessBoard;
 import main.java.chess.models.oop.Tile;
 
@@ -24,14 +22,13 @@ public class Bishop extends Piece {
 
 	}
 
-	public List<Move> generateLegalMoves(OopChessBoard b, int rank, int file) {
+	public List<Tile> generateLegalTargetTiles(OopChessBoard b, int rank, int file) {
 		List<Tile> validTargets = new ArrayList<>();
 		super.generateValidMovesRecursive(b, rank, file, -1, -1, validTargets);
 		super.generateValidMovesRecursive(b, rank, file, -1, 1, validTargets);
 		super.generateValidMovesRecursive(b, rank, file, 1, -1, validTargets);
 		super.generateValidMovesRecursive(b, rank, file, 1, 1, validTargets);
-		Tile start = b.getTile(rank, file);
-		return validTargets.stream().map(end -> new Move(start, end)).collect(Collectors.toList());
+		return validTargets;
 	}
 
 
