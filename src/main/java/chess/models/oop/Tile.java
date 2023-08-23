@@ -1,5 +1,7 @@
 package main.java.chess.models.oop;
 
+import java.util.Objects;
+
 import lombok.Getter;
 import lombok.Setter;
 import main.java.chess.models.pieces.Piece;
@@ -32,7 +34,7 @@ public class Tile {
         this.piece = p;
     }
 
-    public void take() {
+	public void clear() {
         this.piece = null;
     }
 
@@ -55,6 +57,21 @@ public class Tile {
 	public String getPosition() {
 //		System.out.println("Tile: [rank: " + rank + "], [file: " + file + "]");
 		return ((char) ('a' + file)) + "" + (8 - rank);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		Tile other = (Tile) obj;
+		return file == other.file && Objects.equals(piece, other.piece) && rank == other.rank;
 	}
 
 }

@@ -1,5 +1,6 @@
 package main.java.chess.models.oop;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -13,6 +14,7 @@ import main.java.chess.models.pieces.Bishop;
 import main.java.chess.models.pieces.King;
 import main.java.chess.models.pieces.Knight;
 import main.java.chess.models.pieces.Pawn;
+import main.java.chess.models.pieces.Piece;
 import main.java.chess.models.pieces.PieceFactory;
 import main.java.chess.models.pieces.Queen;
 import main.java.chess.models.pieces.Rook;
@@ -63,6 +65,10 @@ public class OopChessBoard implements ChessBoard {
 	@Getter
 	@Setter
 	private Map<Color, Player> players;
+
+	@Getter
+	@Setter
+	private List<Move> moveHistory = new ArrayList<>();;
 
 	public OopChessBoard() {
 		for (int y = 0; y < 8; y++) {
@@ -289,6 +295,21 @@ public class OopChessBoard implements ChessBoard {
 			delimiter = "\n";
 		}
 		return res.toString();
+	}
+
+	public void applyMove(Move move) {
+
+		if (!Move.isLegalMove(move, this)) {
+			LOGGER.warning("Move is illegal.");
+			return;
+		}
+
+		Piece moving = tiles[move.getStart().rank][move.getStart().file].getPiece();
+		Piece taken = tiles[move.getEnd().rank][move.getEnd().file].getPiece();
+		tiles[move.getStart().rank][move.getStart().file].clear();
+		tiles[move.getEnd().rank][move.getEnd().file].setPiece(moving);
+
+		moveHistory.add(move);
 	}
 
 }
