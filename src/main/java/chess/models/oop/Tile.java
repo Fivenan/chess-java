@@ -34,6 +34,10 @@ public class Tile {
         this.piece = p;
     }
 
+	public boolean isEmpty() {
+		return piece == null;
+	}
+
 	public void clear() {
         this.piece = null;
     }
