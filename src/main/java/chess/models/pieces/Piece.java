@@ -75,4 +75,8 @@ public abstract class Piece {
 		return b.getTile(rank, file).getPiece().color != color;
 	}
 
+	public boolean canPromote(int rank) {
+		return false;
+	}
+
 }
