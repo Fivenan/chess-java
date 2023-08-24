@@ -1,10 +1,17 @@
 package main.java.chess.models.oop;
 
-public class EnPassantMove extends Move {
+import main.java.chess.models.enums.Color;
 
-	public EnPassantMove(Tile start, Tile end) {
+public class EnPassantMove extends CaptureMove {
+
+	public EnPassantMove(Tile start, Tile end, OopChessBoard b) {
 		super(start, end);
-		// TODO Auto-generated constructor stub
+		super.setCapturedTile(b.getTile(end.rank + dr(), end.file));
+		super.setCapturedPiece(getCapturedPiece());
+	}
+
+	private int dr() {
+		return getMovingPiece().color == Color.WHITE ? 1 : -1;
 	}
 
 }
