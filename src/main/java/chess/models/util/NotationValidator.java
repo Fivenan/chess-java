@@ -190,7 +190,7 @@ public class NotationValidator {
 
 		char[][] fen2d = BoardUtil.fenToCharArray2d(piecePlacement);
 
-		// Check if the tile behind the pawn is not empty
+		// Check if the tile behind the to-be-captured pawn is not empty
 		if (fen2d[targetRankInArray][targetFile] != '*') {
 			return false;
 		}
