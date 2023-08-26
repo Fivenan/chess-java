@@ -8,9 +8,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import main.java.chess.models.oop.Move;
 import main.java.chess.models.oop.OopChessBoard;
 import main.java.chess.models.oop.Tile;
+import main.java.chess.models.oop.moves.Move;
 
 class PawnTest {
 
@@ -41,7 +41,7 @@ class PawnTest {
 		board.setBoard(fen);
 		int rank = 1;
 		int file = 0;
-		List<Move> validMoves = board.getTile(rank, file).getPiece().generateLegalMoves(board, rank, file);
+		List<Move> validMoves = board.getTile(rank, file).getPiece().generateValidMoves(board, rank, file);
 		printResult(rank, file, validMoves);
 	}
 	/**
@@ -55,7 +55,7 @@ class PawnTest {
 		board.setBoard(fen);
 		int rank = 6;
 		int file = 0;
-		List<Move> validMoves = board.getTile(rank, file).getPiece().generateLegalMoves(board, rank, file);
+		List<Move> validMoves = board.getTile(rank, file).getPiece().generateValidMoves(board, rank, file);
 		printResult(rank, file, validMoves);
 	}
 
@@ -72,7 +72,7 @@ class PawnTest {
 		board.setBoard(fen);
 		int rank = 4;
 		int file = 2;
-		List<Move> validMoves = board.getTile(rank, file).getPiece().generateLegalMoves(board, rank, file);
+		List<Move> validMoves = board.getTile(rank, file).getPiece().generateValidMoves(board, rank, file);
 		printResult(rank, file, validMoves);
 	}
 
@@ -89,7 +89,7 @@ class PawnTest {
 		board.setBoard(fen);
 		int rank = 3;
 		int file = 4;
-		List<Move> validMoves = board.getTile(rank, file).getPiece().generateLegalMoves(board, rank, file);
+		List<Move> validMoves = board.getTile(rank, file).getPiece().generateValidMoves(board, rank, file);
 		printResult(rank, file, validMoves);
 	}
 
@@ -103,7 +103,7 @@ class PawnTest {
 		board.setBoard(fen);
 		int rank = 6;
 		int file = 3;
-		List<Move> validMoves = board.getTile(rank, file).getPiece().generateLegalMoves(board, rank, file);
+		List<Move> validMoves = board.getTile(rank, file).getPiece().generateValidMoves(board, rank, file);
 		printResult(rank, file, validMoves);
 	}
 
@@ -117,7 +117,7 @@ class PawnTest {
 		board.setBoard(fen);
 		int rank = 1;
 		int file = 3;
-		List<Move> validMoves = board.getTile(rank, file).getPiece().generateLegalMoves(board, rank, file);
+		List<Move> validMoves = board.getTile(rank, file).getPiece().generateValidMoves(board, rank, file);
 		printResult(rank, file, validMoves);
 	}
 

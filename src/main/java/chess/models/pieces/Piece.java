@@ -5,9 +5,11 @@ import java.util.stream.Collectors;
 
 import main.java.chess.models.enums.Color;
 import main.java.chess.models.enums.PieceType;
-import main.java.chess.models.oop.Move;
 import main.java.chess.models.oop.OopChessBoard;
 import main.java.chess.models.oop.Tile;
+import main.java.chess.models.oop.moves.CapturingMove;
+import main.java.chess.models.oop.moves.Move;
+import main.java.chess.models.oop.moves.NormalMove;
 
 public abstract class Piece {
 
@@ -31,17 +33,17 @@ public abstract class Piece {
 		return pieceType.getValue();
 	}
 
-	public List<Move> generateLegalMoves(OopChessBoard b, int rank, int file) {
-		Tile start = b.getTile(rank, file);
-		return generateLegalTargetTiles(b, rank, file).stream() //
-				.map(end -> new Move(start, end)) //
+	public abstract List<Move> generateValidMoves(OopChessBoard b, int rank, int file);
+
+	public List<Tile> generateValidTargetTiles(OopChessBoard b, int rank, int file) {
+		return generateValidMoves(b, rank, file).stream() //
+				.map(Move::getEnd) //
 				.collect(Collectors.toList());
 	}
 
-	public abstract List<Tile> generateLegalTargetTiles(OopChessBoard b, int rank, int file);
-
 	void generateValidMovesRecursive(OopChessBoard b, int rank, int file, int dr, int df,
-			List<Tile> validMoves) {
+			List<Move> validMoves) {
+		Move tmp;
 		int toRank = rank + dr;
 		int toFile = file + df;
 		if (!isInTheBoard(toRank, toFile)) {
@@ -49,14 +51,16 @@ public abstract class Piece {
 		}
 		if (pieceExists(b, toRank, toFile)) {
 			if (pieceHasDifferentColor(b, toRank, toFile)) {
-				validMoves.add(b.getTile(toRank, toFile));
+				tmp = new CapturingMove(b.getTile(rank, file), b.getTile(toRank, toFile));
+				validMoves.add(tmp);
+				return;
 			}
-			return;
 		}
 		// TODO creates open check
 		// TODO checks the opponent's king
 
-		validMoves.add(b.getTile(toRank, toFile));
+		tmp = new NormalMove(b.getTile(rank, file), b.getTile(toRank, toFile));
+		validMoves.add(tmp);
 		generateValidMovesRecursive(b, toRank, toFile, dr, df, validMoves);
 	}
 

@@ -6,27 +6,27 @@ import java.util.List;
 import main.java.chess.models.enums.Color;
 import main.java.chess.models.enums.PieceType;
 import main.java.chess.models.oop.OopChessBoard;
-import main.java.chess.models.oop.Tile;
+import main.java.chess.models.oop.moves.Move;
 
 public class Queen extends Piece {
 
-	public static final PieceType pieceType = PieceType.QUEEN;
+	public static final PieceType PIECE_TYPE = PieceType.QUEEN;
 
 	public Queen(Color color) {
-		super(pieceType, color);
+		super(PIECE_TYPE, color);
 	}
 
-	public List<Tile> generateLegalTargetTiles(OopChessBoard b, int rank, int file) {
-		List<Tile> validTargets = new ArrayList<>();
-		super.generateValidMovesRecursive(b, rank, file, -1, -1, validTargets);
-		super.generateValidMovesRecursive(b, rank, file, -1, 1, validTargets);
-		super.generateValidMovesRecursive(b, rank, file, 1, -1, validTargets);
-		super.generateValidMovesRecursive(b, rank, file, 1, 1, validTargets);
-		super.generateValidMovesRecursive(b, rank, file, 0, -1, validTargets);
-		super.generateValidMovesRecursive(b, rank, file, 0, 1, validTargets);
-		super.generateValidMovesRecursive(b, rank, file, 1, 0, validTargets);
-		super.generateValidMovesRecursive(b, rank, file, -1, 0, validTargets);
-		return validTargets;
+	public List<Move> generateValidMoves(OopChessBoard b, int rank, int file) {
+		List<Move> validMoves = new ArrayList<>();
+		super.generateValidMovesRecursive(b, rank, file, -1, -1, validMoves);
+		super.generateValidMovesRecursive(b, rank, file, -1, 1, validMoves);
+		super.generateValidMovesRecursive(b, rank, file, 1, -1, validMoves);
+		super.generateValidMovesRecursive(b, rank, file, 1, 1, validMoves);
+		super.generateValidMovesRecursive(b, rank, file, 0, -1, validMoves);
+		super.generateValidMovesRecursive(b, rank, file, 0, 1, validMoves);
+		super.generateValidMovesRecursive(b, rank, file, 1, 0, validMoves);
+		super.generateValidMovesRecursive(b, rank, file, -1, 0, validMoves);
+		return validMoves;
 	}
 
 }
