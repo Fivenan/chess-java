@@ -1,6 +1,6 @@
 package main.java.chess.models;
 
-import main.java.chess.models.oop.Move;
+import main.java.chess.models.oop.moves.Move;
 
 public interface ChessBoard {
 

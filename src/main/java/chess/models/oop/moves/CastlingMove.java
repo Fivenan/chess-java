@@ -1,4 +1,6 @@
-package main.java.chess.models.oop;
+package main.java.chess.models.oop.moves;
+
+import main.java.chess.models.oop.Tile;
 
 public class CastlingMove extends Move {
 

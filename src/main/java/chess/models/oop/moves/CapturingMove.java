@@ -1,16 +1,17 @@
-package main.java.chess.models.oop;
+package main.java.chess.models.oop.moves;
 
 import java.util.Objects;
 
+import main.java.chess.models.oop.Tile;
 import main.java.chess.models.pieces.Piece;
 
-public class CaptureMove extends Move {
+public class CapturingMove extends Move {
 
 	private Piece movingPiece;
 	private Piece capturedPiece;
 	private Tile capturedTile;
 
-	public CaptureMove(Tile start, Tile end) {
+	public CapturingMove(Tile start, Tile end) {
 		super(start, end);
 		this.movingPiece = start.getPiece();
 		this.capturedPiece = end.getPiece();
@@ -57,7 +58,7 @@ public class CaptureMove extends Move {
 		if (getClass() != obj.getClass()) {
 			return false;
 		}
-		CaptureMove other = (CaptureMove) obj;
+		CapturingMove other = (CapturingMove) obj;
 		return Objects.equals(capturedPiece, other.capturedPiece) && Objects.equals(capturedTile, other.capturedTile)
 				&& Objects.equals(movingPiece, other.movingPiece);
 	}

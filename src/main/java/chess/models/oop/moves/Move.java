@@ -1,13 +1,15 @@
-package main.java.chess.models.oop;
+package main.java.chess.models.oop.moves;
 
 import java.util.List;
 import java.util.Objects;
 
 import main.java.chess.models.enums.Color;
+import main.java.chess.models.oop.OopChessBoard;
+import main.java.chess.models.oop.Tile;
 import main.java.chess.models.pieces.Pawn;
 import main.java.chess.models.pieces.Piece;
 
-public class Move {
+public abstract class Move {
 
 	private Tile start;
 	private Tile end;
@@ -84,7 +86,7 @@ public class Move {
 	public static boolean isLegalMove(Move move, OopChessBoard board) {
 		Tile start = board.getTile(move.getStart().getPosition());
 		List<Move> validMoves = board.getTile(move.getStart().rank, move.getStart().file).getPiece()
-				.generateLegalMoves(board, start.rank, start.file);
+				.generateValidMoves(board, start.rank, start.file);
 		return validMoves.contains(move);
 	}
 

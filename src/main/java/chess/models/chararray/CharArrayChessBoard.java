@@ -1,7 +1,7 @@
 package main.java.chess.models.chararray;
 
 import main.java.chess.models.ChessBoard;
-import main.java.chess.models.oop.Move;
+import main.java.chess.models.oop.moves.Move;
 import main.java.chess.models.util.BoardUtil;
 
 public class CharArrayChessBoard implements ChessBoard {

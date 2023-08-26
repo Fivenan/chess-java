@@ -25,8 +25,8 @@ public class Tile {
 		this.file = file;
     }
 
-    public Tile(int file, int rank, Piece p) {
-        this(file, rank);
+	public Tile(int rank, int file, Piece p) {
+		this(rank, file);
         this.piece = p;
     }
 

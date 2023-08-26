@@ -10,6 +10,7 @@ import lombok.Setter;
 import main.java.chess.models.ChessBoard;
 import main.java.chess.models.Player;
 import main.java.chess.models.enums.Color;
+import main.java.chess.models.oop.moves.Move;
 import main.java.chess.models.pieces.Bishop;
 import main.java.chess.models.pieces.King;
 import main.java.chess.models.pieces.Knight;
