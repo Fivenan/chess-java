@@ -42,7 +42,7 @@ public abstract class Piece {
 	}
 
 	void generateValidMovesRecursive(OopChessBoard b, int rank, int file, int dr, int df,
-			List<Move> validMoves) {
+			List<Move> validMoves, boolean recurse) {
 		Move tmp;
 		int toRank = rank + dr;
 		int toFile = file + df;
@@ -61,7 +61,9 @@ public abstract class Piece {
 
 		tmp = new NormalMove(b.getTile(rank, file), b.getTile(toRank, toFile));
 		validMoves.add(tmp);
-		generateValidMovesRecursive(b, toRank, toFile, dr, df, validMoves);
+		if (recurse) {
+			generateValidMovesRecursive(b, toRank, toFile, dr, df, validMoves, recurse);
+		}
 	}
 
 	private boolean isInTheBoard(int rank, int file) {
