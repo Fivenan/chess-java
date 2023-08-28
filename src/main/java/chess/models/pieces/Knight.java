@@ -7,41 +7,30 @@ import main.java.chess.models.enums.Color;
 import main.java.chess.models.enums.PieceType;
 import main.java.chess.models.oop.OopChessBoard;
 import main.java.chess.models.oop.Tile;
+import main.java.chess.models.oop.moves.CapturingMove;
+import main.java.chess.models.oop.moves.Move;
+import main.java.chess.models.oop.moves.NormalMove;
 
 public class Knight extends Piece {
 
-	public static final PieceType pieceType = PieceType.KNIGHT;
+	public static final PieceType PIECE_TYPE = PieceType.KNIGHT;
 
 	public Knight(Color color) {
-		super(pieceType, color);
+		super(PIECE_TYPE, color);
 
 	}
 
-	public List<Integer[]> movesFrom(OopChessBoard b, int rank, int file) {
-//        boolean filledWithSameColor = b.tiles[x][y].piece.isWhite != super.isWhite;
-		List<Integer[]> res = new ArrayList<>();
-		if (targetIsValid(b, file + 2, rank + 1))
-			res.add(new Integer[] { rank + 2, file + 1 });
-		if (targetIsValid(b, file + 2, rank - 1))
-			res.add(new Integer[] { rank + 2, file - 1 });
-		if (targetIsValid(b, file - 2, rank + 1))
-			res.add(new Integer[] { rank - 2, file + 1 });
-		if (targetIsValid(b, file - 2, rank - 1))
-			res.add(new Integer[] { rank - 2, file - 1 });
-		if (targetIsValid(b, file + 1, rank + 2))
-			res.add(new Integer[] { rank + 1, file + 2 });
-		if (targetIsValid(b, file + 1, rank - 2))
-			res.add(new Integer[] { rank + 1, file - 2 });
-		if (targetIsValid(b, file - 1, rank + 2))
-			res.add(new Integer[] { rank - 1, file + 2 });
-		if (targetIsValid(b, file - 1, rank - 2))
-			res.add(new Integer[] { rank - 1, file - 2 });
-
-		return res;
-	}
-
-	private boolean targetIsValid(OopChessBoard b, int rank, int file) {
-		return targetTileInBound(rank, file) && targetTileNotSameColor(b, rank, file);
+	public List<Move> generateValidMoves(OopChessBoard b, int rank, int file) {
+		List<Move> validMoves = new ArrayList<>();
+		validMoves.add(getMove(b, rank, file, rank + 2, file + 1));
+		validMoves.add(getMove(b, rank, file, rank + 2, file - 1));
+		validMoves.add(getMove(b, rank, file, rank - 2, file + 1));
+		validMoves.add(getMove(b, rank, file, rank - 2, file - 1));
+		validMoves.add(getMove(b, rank, file, rank + 1, file + 2));
+		validMoves.add(getMove(b, rank, file, rank + 1, file - 2));
+		validMoves.add(getMove(b, rank, file, rank - 1, file + 2));
+		validMoves.add(getMove(b, rank, file, rank - 1, file - 2));
+		return null;
 	}
 
 	private boolean targetTileInBound(int rank, int file) {
@@ -50,12 +39,20 @@ public class Knight extends Piece {
 		return fileInBound && rankInBound;
 	}
 
-	private boolean targetTileNotSameColor(OopChessBoard b, int rank, int file) {
-		Tile targetTile = b.getTile(rank, file);
-		if (targetTile.getPiece() == null) {
-			return true;
+	private Move getMove(OopChessBoard b, int rank, int file, int toRank, int toFile) {
+		if (!targetTileInBound(toRank, toFile)) {
+			return null;
 		}
-		return b.getTile(rank, file).getPiece().color != super.color;
+		Tile start = b.getTile(rank, file);
+		Tile end = b.getTile(toRank, toFile);
+		if (end.isEmpty()) {
+			return new NormalMove(start, end);
+		} else if (end.getPiece().color != super.color) {
+			return new CapturingMove(start, end);
+		} else {
+			return null;
+		}
+
 	}
 
 //	private boolean causesDiscoveredCheck(OopChessBoard b, int rank, int file);
