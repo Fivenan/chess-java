@@ -30,7 +30,7 @@ public class Knight extends Piece {
 		validMoves.add(getMove(b, rank, file, rank + 1, file - 2));
 		validMoves.add(getMove(b, rank, file, rank - 1, file + 2));
 		validMoves.add(getMove(b, rank, file, rank - 1, file - 2));
-		return null;
+		return validMoves;
 	}
 
 	private boolean targetTileInBound(int rank, int file) {
