@@ -18,14 +18,14 @@ public class Queen extends Piece {
 
 	public List<Move> generateValidMoves(OopChessBoard b, int rank, int file) {
 		List<Move> validMoves = new ArrayList<>();
-		super.generateValidMovesRecursive(b, rank, file, -1, -1, validMoves);
-		super.generateValidMovesRecursive(b, rank, file, -1, 1, validMoves);
-		super.generateValidMovesRecursive(b, rank, file, 1, -1, validMoves);
-		super.generateValidMovesRecursive(b, rank, file, 1, 1, validMoves);
-		super.generateValidMovesRecursive(b, rank, file, 0, -1, validMoves);
-		super.generateValidMovesRecursive(b, rank, file, 0, 1, validMoves);
-		super.generateValidMovesRecursive(b, rank, file, 1, 0, validMoves);
-		super.generateValidMovesRecursive(b, rank, file, -1, 0, validMoves);
+		super.generateValidMovesRecursive(b, rank, file, -1, -1, validMoves, true);
+		super.generateValidMovesRecursive(b, rank, file, -1, 1, validMoves, true);
+		super.generateValidMovesRecursive(b, rank, file, 1, -1, validMoves, true);
+		super.generateValidMovesRecursive(b, rank, file, 1, 1, validMoves, true);
+		super.generateValidMovesRecursive(b, rank, file, 0, -1, validMoves, true);
+		super.generateValidMovesRecursive(b, rank, file, 0, 1, validMoves, true);
+		super.generateValidMovesRecursive(b, rank, file, 1, 0, validMoves, true);
+		super.generateValidMovesRecursive(b, rank, file, -1, 0, validMoves, true);
 		return validMoves;
 	}
 
