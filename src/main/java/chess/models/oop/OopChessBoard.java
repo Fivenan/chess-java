@@ -10,6 +10,7 @@ import lombok.Setter;
 import main.java.chess.models.ChessBoard;
 import main.java.chess.models.Player;
 import main.java.chess.models.enums.Color;
+import main.java.chess.models.oop.moves.CapturingMove;
 import main.java.chess.models.oop.moves.Move;
 import main.java.chess.models.pieces.Bishop;
 import main.java.chess.models.pieces.King;
@@ -189,14 +190,25 @@ public class OopChessBoard implements ChessBoard {
 	}
 
 	@Override
-	public void move(String endPosition) {
+	public void moveTo(String endPosition) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void move(Move move) {
-		// TODO Auto-generated method stub
+	public void apply(Move move) {
+		// check the possible moves
+
+		// apply the move
+		if (move instanceof CapturingMove) {
+			CapturingMove cm = (CapturingMove) move;
+			Tile cdt = cm.getCapturedTile();
+//			Piece capturedPiece = cdt.getPiece(); // for storing purposes, e.g. Shogi-like gameplay
+			cdt.clear();
+		}
+		Piece movingPiece = move.getStart().getPiece();
+		move.getEnd().setPiece(movingPiece);
+		move.getStart().clear();
 
 	}
 

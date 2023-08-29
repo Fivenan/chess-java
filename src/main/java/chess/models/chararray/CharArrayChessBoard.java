@@ -36,13 +36,13 @@ public class CharArrayChessBoard implements ChessBoard {
 	}
 
 	@Override
-	public void move(String endPosition) {
+	public void moveTo(String endPosition) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void move(Move move) {
+	public void apply(Move move) {
 		// TODO Auto-generated method stub
 
 	}

@@ -10,9 +10,9 @@ public interface ChessBoard {
 
 	public void restartBoard();
 
-	public void move(String endPosition);
+	public void moveTo(String endPosition);
 
-	public void move(Move move);
+	public void apply(Move move);
 
 	public String getMoveNumber();
 
