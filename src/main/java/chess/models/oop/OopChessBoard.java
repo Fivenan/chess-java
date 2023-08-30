@@ -198,7 +198,12 @@ public class OopChessBoard implements ChessBoard {
 	@Override
 	public void apply(Move move) {
 		// check the possible moves
+		Piece movingPiece = move.getStart().getPiece();
 
+		List<Move> moves = movingPiece.generateValidMoves(this, move.getStart().rank, move.getStart().file);
+		if (!moves.contains(move)) {
+			return;
+		}
 		// apply the move
 		if (move instanceof CapturingMove) {
 			CapturingMove cm = (CapturingMove) move;
@@ -206,7 +211,6 @@ public class OopChessBoard implements ChessBoard {
 //			Piece capturedPiece = cdt.getPiece(); // for storing purposes, e.g. Shogi-like gameplay
 			cdt.clear();
 		}
-		Piece movingPiece = move.getStart().getPiece();
 		move.getEnd().setPiece(movingPiece);
 		move.getStart().clear();
 
