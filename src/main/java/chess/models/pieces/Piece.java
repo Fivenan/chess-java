@@ -1,6 +1,7 @@
 package main.java.chess.models.pieces;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import main.java.chess.models.enums.Color;
@@ -83,6 +84,26 @@ public abstract class Piece {
 
 	public boolean canPromote(int rank) {
 		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(color, pieceType);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		Piece other = (Piece) obj;
+		return color == other.color && pieceType == other.pieceType;
 	}
 
 }

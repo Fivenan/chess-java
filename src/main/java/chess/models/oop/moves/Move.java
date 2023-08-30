@@ -90,4 +90,5 @@ public abstract class Move {
 		return validMoves.contains(move);
 	}
 
+
 }

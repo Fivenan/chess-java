@@ -1,7 +1,5 @@
 package main.java.chess.models.oop;
 
-import java.util.Objects;
-
 import lombok.Getter;
 import lombok.Setter;
 import main.java.chess.models.pieces.Piece;
@@ -75,7 +73,7 @@ public class Tile {
 			return false;
 		}
 		Tile other = (Tile) obj;
-		return file == other.file && Objects.equals(piece, other.piece) && rank == other.rank;
+		return file == other.file && rank == other.rank;
 	}
 
 }
