@@ -12,6 +12,7 @@ import main.java.chess.models.oop.moves.EnPassantMove;
 import main.java.chess.models.oop.moves.Move;
 import main.java.chess.models.oop.moves.NormalMove;
 import main.java.chess.models.oop.moves.PawnTwoStepMove;
+import main.java.chess.models.oop.moves.PromotionCapturingMove;
 import main.java.chess.models.oop.moves.PromotionMove;
 
 public class Pawn extends Piece {
@@ -31,14 +32,14 @@ public class Pawn extends Piece {
 			tmp = new CapturingMove(b.getTile(rank, file), b.getTile(rank + movingDirection(), file - 1));
 			if (canPromote(rank)) {
 				// TODO consider the promotion while capturing case
-				tmp = new PromotionMove(b.getTile(rank, file), b.getTile(rank + movingDirection(), file + 1));
+				tmp = new PromotionCapturingMove(b.getTile(rank, file), b.getTile(rank + movingDirection(), file + 1));
 			}
 			validMoves.add(tmp);
 		}
 		if (canCaptureEastFile(b, rank, file)) {
 			tmp = new CapturingMove(b.getTile(rank, file), b.getTile(rank + movingDirection(), file + 1));
 			if (canPromote(rank)) {
-				tmp = new PromotionMove(b.getTile(rank, file), b.getTile(rank + movingDirection(), file + 1));
+				tmp = new PromotionCapturingMove(b.getTile(rank, file), b.getTile(rank + movingDirection(), file + 1));
 			}
 			validMoves.add(tmp);
 		}
@@ -63,7 +64,7 @@ public class Pawn extends Piece {
 	}
 
 	public boolean isInInitialPosition(int rank) {
-		return ((rank == 1 && color == Color.BLACK) && (rank == 6 && color == Color.WHITE));
+		return ((rank == 1 && color == Color.BLACK) || (rank == 6 && color == Color.WHITE));
 	}
 
 	private int movingDirection() {

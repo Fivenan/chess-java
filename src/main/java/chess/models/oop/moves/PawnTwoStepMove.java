@@ -1,5 +1,7 @@
 package main.java.chess.models.oop.moves;
 
+import java.util.Objects;
+
 import main.java.chess.models.enums.Color;
 import main.java.chess.models.oop.OopChessBoard;
 import main.java.chess.models.oop.Tile;
@@ -20,6 +22,21 @@ public class PawnTwoStepMove extends Move {
 
 	private Piece getMovingPiece(Tile start) {
 		return start.getPiece();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (!super.equals(obj)) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		PawnTwoStepMove other = (PawnTwoStepMove) obj;
+		return Objects.equals(enPassantTile, other.enPassantTile);
 	}
 
 }
