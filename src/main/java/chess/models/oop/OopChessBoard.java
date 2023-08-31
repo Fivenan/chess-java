@@ -216,6 +216,17 @@ public class OopChessBoard implements ChessBoard {
 
 	}
 
+	public List<Move> getAllPossibleMoves() {
+		List<Move> moves = new ArrayList<>();
+		for (Tile[] tilesInRank : tiles) {
+			for (Tile tile : tilesInRank) {
+				if (!tile.isEmpty()) {
+					moves.addAll(tile.getPiece().generateValidMoves(this, tile.rank, tile.file));
+				}
+			}
+		}
+		return moves;
+	}
 
 	@Override
 	public String getMoveNumber() {

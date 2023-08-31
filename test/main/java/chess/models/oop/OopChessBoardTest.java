@@ -6,6 +6,7 @@ package main.java.chess.models.oop;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 import org.junit.jupiter.api.AfterEach;
@@ -122,6 +123,18 @@ class OopChessBoardTest {
 		Move move = new NormalMove(chessBoard.getTile(6, 4), chessBoard.getTile(4, 4));
 		chessBoard.apply(move);
 		assertEquals(endFen, chessBoard.getFENBoard());
+	}
+
+	/**
+	 * Test method for
+	 * {@link main.java.chess.models.oop.OopChessBoard#getAllPossibleMoves()}.
+	 */
+	@Test
+	void testGetAllPossibleMoves() {
+		String startFen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+		chessBoard.setBoard(startFen);
+		List<Move> moves = chessBoard.getAllPossibleMoves();
+		moves.stream().forEach(System.out::println);
 	}
 
 	/**
