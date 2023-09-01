@@ -54,8 +54,8 @@ public abstract class Piece {
 			if (pieceHasDifferentColor(b, toRank, toFile)) {
 				tmp = new CapturingMove(b.getTile(rank, file), b.getTile(toRank, toFile));
 				validMoves.add(tmp);
-				return;
 			}
+			return;
 		}
 		// TODO creates open check
 		// TODO checks the opponent's king

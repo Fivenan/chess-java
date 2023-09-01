@@ -56,7 +56,7 @@ public abstract class Move {
 	}
 
 	public String toString() {
-		return "[" + start.getPosition() + ", " + end.getPosition() + "]";
+		return "[" + start.getPiece().pieceType.name() + " " + start.getPosition() + ", " + end.getPosition() + "]";
 	}
 
 	public String toString(int moveNumber) {
