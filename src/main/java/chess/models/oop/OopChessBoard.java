@@ -225,6 +225,8 @@ public class OopChessBoard implements ChessBoard {
 				}
 			}
 		}
+		while (moves.remove(null))
+			;
 		return moves;
 	}
 
@@ -338,6 +340,33 @@ public class OopChessBoard implements ChessBoard {
 		tiles[move.getEnd().rank][move.getEnd().file].setPiece(moving);
 
 		moveHistory.add(move);
+	}
+
+	public boolean isEmptyBetweenTwoTilesInRow(Tile t1, Tile t2) throws IllegalArgumentException {
+		int fileMax = (t1.file > t2.file) ? t1.file : t2.file;
+		int fileMin = (t1.file > t2.file) ? t2.file : t1.file;
+		int rank = t1.rank;
+		if (rank != t2.rank) {
+			throw new IllegalArgumentException(
+					"Rank of the tiles " + t1.getPosition() + "and" + t2.getPosition() + " are different!");
+		}
+		for (int file = fileMin + 1; file < fileMax; file++) {
+			if (!getTile(rank, file).isEmpty()) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public boolean isEmptyBetweenTwoTilesInRow(int rank, int file1, int file2) {
+		int fileMax = (file1 > file2) ? file1 : file2;
+		int fileMin = (file1 > file2) ? file2 : file1;
+		for (int file = fileMin + 1; file < fileMax; file++) {
+			if (!getTile(rank, file).isEmpty()) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 }

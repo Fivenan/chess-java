@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Objects;
 
 import main.java.chess.models.enums.Color;
+import main.java.chess.models.enums.PieceType;
 import main.java.chess.models.oop.OopChessBoard;
 import main.java.chess.models.oop.Tile;
 import main.java.chess.models.pieces.Pawn;
@@ -56,7 +57,26 @@ public abstract class Move {
 	}
 
 	public String toString() {
-		return "[" + start.getPiece().pieceType.name() + " " + start.getPosition() + ", " + end.getPosition() + "]";
+		return "[" + start.getPiece().color.name() + " " + start.getPiece().pieceType.name() + " " + start.getPosition()
+				+ ", " + end.getPosition() + "]";
+	}
+
+	public String getMoveString() {
+		if (this instanceof CastlingMove) {
+			// TODO
+		}
+		if (this instanceof PromotionMove) {
+			// TODO
+		}
+		StringBuilder res = new StringBuilder();
+		if (start.getPiece().pieceType != PieceType.PAWN) {
+			res.append(start.getPiece().getNotation());
+		}
+		if (this instanceof CapturingMove) {
+			// TODO
+		}
+		res.append(end.getPosition());
+		return res.toString();
 	}
 
 	public String toString(int moveNumber) {
@@ -75,8 +95,7 @@ public abstract class Move {
 			return false;
 		}
 		Move other = (Move) obj;
-		return Objects.equals(end, other.end)
-				&& Objects.equals(start, other.start);
+		return Objects.equals(end, other.end) && Objects.equals(start, other.start);
 	}
 
 	public static String printMoveInTurn(int moveNumber, Move white, Move black) {
@@ -89,6 +108,5 @@ public abstract class Move {
 				.generateValidMoves(board, start.rank, start.file);
 		return validMoves.contains(move);
 	}
-
 
 }
