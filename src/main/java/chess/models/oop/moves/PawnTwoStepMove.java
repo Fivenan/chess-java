@@ -39,4 +39,9 @@ public class PawnTwoStepMove extends Move {
 		return Objects.equals(enPassantTile, other.enPassantTile);
 	}
 
+	@Override
+	public String getNotation() {
+		return String.valueOf(getEnd().getNotation());
+	}
+
 }

@@ -19,4 +19,9 @@ public class PromotionMove extends Move {
 		this.promotedPiece = promotedPiece;
 	}
 
+	@Override
+	public String getNotation() {
+		return "" + getEnd().getNotation() + "=" + promotedPiece.getNotation();
+	}
+
 }

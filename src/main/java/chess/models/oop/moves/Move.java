@@ -36,6 +36,8 @@ public abstract class Move {
 		this.end = end;
 	}
 
+	public abstract String getNotation();
+
 	public static String print(OopChessBoard b, Move m) {
 		Piece p = b.getTile(m.getStart().rank, m.getStart().file).getPiece();
 		if (p instanceof Pawn) {

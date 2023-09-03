@@ -63,4 +63,10 @@ public class CapturingMove extends Move {
 				&& Objects.equals(movingPiece, other.movingPiece);
 	}
 
+	@Override
+	public String getNotation() { // Nexg5 Ng4x5
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -22,4 +22,9 @@ public class CastlingMove extends Move {
 		rookMove = new NormalMove(rookStartTile, rookEndTile);
 	}
 
+	@Override
+	public String getNotation() {
+		return (rookStartTile.file == 0) ? "O-O-O" : "O-O";
+	}
+
 }
