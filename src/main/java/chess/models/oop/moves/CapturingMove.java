@@ -3,6 +3,7 @@ package main.java.chess.models.oop.moves;
 import java.util.Objects;
 
 import main.java.chess.models.oop.Tile;
+import main.java.chess.models.pieces.Pawn;
 import main.java.chess.models.pieces.Piece;
 
 public class CapturingMove extends Move {
@@ -65,8 +66,14 @@ public class CapturingMove extends Move {
 
 	@Override
 	public String getNotation() { // Nexg5 Ng4x5
-		// TODO Auto-generated method stub
-		return null;
+		StringBuilder res = new StringBuilder();
+		Piece piece = getStart().getPiece();
+		if (!(piece instanceof Pawn)) {
+			res.append(piece.getNotation());
+			res.append('x');
+		}
+		res.append(getEnd().getNotation());
+		return res.toString();
 	}
 
 }
