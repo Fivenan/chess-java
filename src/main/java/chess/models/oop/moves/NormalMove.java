@@ -23,22 +23,5 @@ public class NormalMove extends Move {
 		res.append(getEnd().getPosition());
 		return res.toString();
 	}
-
-	public String getSpecifyingTile(List<Move> otherMovesWithSameTarget) {
-		String specificFile = "";
-		String specificRank = "";
-		for (Move otherMove : otherMovesWithSameTarget) {
-			if (this.getStart().getPiece().pieceType == otherMove.getStart().getPiece().pieceType) {
-				if (otherMove.getStart().file == this.getStart().file) {
-					specificFile = this.getStart().getFile();
-					continue;
-				}
-				if (otherMove.getStart().rank == this.getStart().rank) {
-					specificRank = this.getStart().getRank();
-				}
-			}
-		}
-		return specificFile + specificRank;
-	}
 }
 

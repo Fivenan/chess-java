@@ -61,6 +61,14 @@ public class Tile {
 		return ((char) ('a' + file)) + "" + (8 - rank);
 	}
 
+	public String getFile() {
+		return "" + (char) ('a' + file);
+	}
+
+	public String getRank() {
+		return "" + (8 - rank);
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {

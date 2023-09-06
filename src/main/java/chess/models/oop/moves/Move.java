@@ -36,7 +36,24 @@ public abstract class Move {
 		this.end = end;
 	}
 
-	public abstract String getNotation();
+	public abstract String getNotation(List<Move> otherMovesWithSameTarget);
+
+	public String getSpecifyingTile(List<Move> otherMovesWithSameTarget) {
+		String specificFile = "";
+		String specificRank = "";
+		for (Move otherMove : otherMovesWithSameTarget) {
+			if (this.getStart().getPiece().pieceType == otherMove.getStart().getPiece().pieceType) {
+				if (otherMove.getStart().file == this.getStart().file) {
+					specificFile = this.getStart().getFile();
+					continue;
+				}
+				if (otherMove.getStart().rank == this.getStart().rank) {
+					specificRank = this.getStart().getRank();
+				}
+			}
+		}
+		return specificFile + specificRank;
+	}
 
 	public static String print(OopChessBoard b, Move m) {
 		Piece p = b.getTile(m.getStart().rank, m.getStart().file).getPiece();
