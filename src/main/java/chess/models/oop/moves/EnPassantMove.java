@@ -15,6 +15,4 @@ public class EnPassantMove extends CapturingMove {
 	private int dr() {
 		return getMovingPiece().color == Color.WHITE ? -1 : 1;
 	}
-
-	// TODO check notation of en passant
 }

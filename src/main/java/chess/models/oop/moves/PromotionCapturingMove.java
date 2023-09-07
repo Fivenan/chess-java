@@ -1,5 +1,7 @@
 package main.java.chess.models.oop.moves;
 
+import java.util.List;
+
 import main.java.chess.models.oop.Tile;
 import main.java.chess.models.pieces.Piece;
 
@@ -17,6 +19,11 @@ public class PromotionCapturingMove extends CapturingMove {
 
 	public void setPromotedPiece(Piece promotedPiece) {
 		this.promotedPiece = promotedPiece;
+	}
+
+	@Override
+	public String getNotation(List<Move> otherMovesWithSameTarget) {
+		return getStart().getFile() + "x" + getEnd().getNotation() + "=" + promotedPiece.getNotation();
 	}
 
 }

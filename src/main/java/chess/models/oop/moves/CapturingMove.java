@@ -1,5 +1,6 @@
 package main.java.chess.models.oop.moves;
 
+import java.util.List;
 import java.util.Objects;
 
 import main.java.chess.models.oop.Tile;
@@ -65,13 +66,13 @@ public class CapturingMove extends Move {
 	}
 
 	@Override
-	public String getNotation() { // Nexg5 Ng4x5
+	public String getNotation(List<Move> otherMovesWithSameTarget) { // Nexg5 Ng4x5
 		StringBuilder res = new StringBuilder();
 		Piece piece = getStart().getPiece();
 		if (!(piece instanceof Pawn)) {
 			res.append(piece.getNotation());
-			res.append('x');
 		}
+		res.append('x');
 		res.append(getEnd().getNotation());
 		return res.toString();
 	}

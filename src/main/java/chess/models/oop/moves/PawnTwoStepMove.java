@@ -7,7 +7,7 @@ import main.java.chess.models.oop.OopChessBoard;
 import main.java.chess.models.oop.Tile;
 import main.java.chess.models.pieces.Piece;
 
-public class PawnTwoStepMove extends Move {
+public class PawnTwoStepMove extends NormalMove {
 
 	Tile enPassantTile;
 
@@ -25,6 +25,11 @@ public class PawnTwoStepMove extends Move {
 	}
 
 	@Override
+	public int hashCode() {
+		return Objects.hash(enPassantTile);
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
@@ -37,11 +42,6 @@ public class PawnTwoStepMove extends Move {
 		}
 		PawnTwoStepMove other = (PawnTwoStepMove) obj;
 		return Objects.equals(enPassantTile, other.enPassantTile);
-	}
-
-	@Override
-	public String getNotation() {
-		return String.valueOf(getEnd().getNotation());
 	}
 
 }

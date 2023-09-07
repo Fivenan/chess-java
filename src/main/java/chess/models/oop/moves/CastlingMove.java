@@ -1,5 +1,7 @@
 package main.java.chess.models.oop.moves;
 
+import java.util.List;
+
 import main.java.chess.models.oop.OopChessBoard;
 import main.java.chess.models.oop.Tile;
 
@@ -23,7 +25,7 @@ public class CastlingMove extends Move {
 	}
 
 	@Override
-	public String getNotation() {
+	public String getNotation(List<Move> otherMovesWithSameTarget) {
 		return (rookStartTile.file == 0) ? "O-O-O" : "O-O";
 	}
 
