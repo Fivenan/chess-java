@@ -11,6 +11,7 @@ import main.java.chess.models.ChessBoard;
 import main.java.chess.models.Player;
 import main.java.chess.models.enums.Color;
 import main.java.chess.models.oop.moves.CapturingMove;
+import main.java.chess.models.oop.moves.CastlingMove;
 import main.java.chess.models.oop.moves.Move;
 import main.java.chess.models.pieces.Bishop;
 import main.java.chess.models.pieces.King;
@@ -211,6 +212,21 @@ public class OopChessBoard implements ChessBoard {
 //			Piece capturedPiece = cdt.getPiece(); // for storing purposes, e.g. Shogi-like gameplay
 			cdt.clear();
 		}
+		if (move instanceof CastlingMove) {
+			CastlingMove cm = (CastlingMove) move;
+			Tile rt = cm.getRookStartTile();
+			if (rt.file == 0 && rt.rank == 0 && blackCanCastleQueenSide) {
+
+			} else if (rt.file == 0 && rt.rank == 7 && whiteCanCastleQueenSide) {
+
+			} else if (rt.file == 7 && rt.rank == 0 && blackCanCastleKingSide) {
+
+			} else if (rt.file == 7 && rt.rank == 7 && whiteCanCastleKingSide) {
+
+			}
+
+		}
+
 		move.getEnd().setPiece(movingPiece);
 		move.getStart().clear();
 
