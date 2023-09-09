@@ -215,14 +215,20 @@ public class OopChessBoard implements ChessBoard {
 		if (move instanceof CastlingMove) {
 			CastlingMove cm = (CastlingMove) move;
 			Tile rt = cm.getRookStartTile();
-			if (rt.file == 0 && rt.rank == 0 && blackCanCastleQueenSide) {
-
-			} else if (rt.file == 0 && rt.rank == 7 && whiteCanCastleQueenSide) {
-
-			} else if (rt.file == 7 && rt.rank == 0 && blackCanCastleKingSide) {
-
-			} else if (rt.file == 7 && rt.rank == 7 && whiteCanCastleKingSide) {
-
+			if ((rt.file == 0 && rt.rank == 0 && blackCanCastleQueenSide)
+					|| (rt.file == 7 && rt.rank == 0 && blackCanCastleKingSide)) {
+				apply(cm.getRookMove());
+				cm.getEnd().setPiece(cm.getStart().getPiece());
+				cm.getStart().clear();
+				blackCanCastleQueenSide = false;
+				blackCanCastleKingSide = false;
+			} else if ((rt.file == 0 && rt.rank == 7 && whiteCanCastleQueenSide)
+					|| (rt.file == 7 && rt.rank == 0 && whiteCanCastleKingSide)) {
+				apply(cm.getRookMove());
+				cm.getEnd().setPiece(cm.getStart().getPiece());
+				cm.getStart().clear();
+				whiteCanCastleQueenSide = false;
+				whiteCanCastleKingSide = false;
 			}
 
 		}

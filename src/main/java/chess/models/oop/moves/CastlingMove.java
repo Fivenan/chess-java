@@ -28,6 +28,10 @@ public class CastlingMove extends Move {
 		return rookStartTile;
 	}
 
+	public Move getRookMove() {
+		return rookMove;
+	}
+
 	@Override
 	public String getNotation(List<Move> otherMovesWithSameTarget) {
 		return (rookStartTile.file == 0) ? "O-O-O" : "O-O";
