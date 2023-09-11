@@ -211,6 +211,7 @@ public class OopChessBoard implements ChessBoard {
 			Tile cdt = cm.getCapturedTile();
 //			Piece capturedPiece = cdt.getPiece(); // for storing purposes, e.g. Shogi-like gameplay
 			cdt.clear();
+			halfmoveClock = 0;
 		} else {
 			halfmoveClock++;
 		}
@@ -229,6 +230,7 @@ public class OopChessBoard implements ChessBoard {
 				whiteCanCastleKingSide = false;
 			}
 		}
+		enPassantTargetTile = move.getEnPassantTile();
 		move.getEnd().setPiece(movingPiece);
 		move.getStart().clear();
 
@@ -238,6 +240,10 @@ public class OopChessBoard implements ChessBoard {
 		} else {
 			turn = Color.BLACK;
 		}
+		if (movingPiece instanceof Pawn) {
+			halfmoveClock = 0;
+		}
+
 
 	}
 

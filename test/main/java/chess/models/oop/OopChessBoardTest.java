@@ -16,7 +16,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import main.java.chess.models.oop.moves.Move;
-import main.java.chess.models.oop.moves.NormalMove;
 import main.java.chess.models.oop.moves.PawnTwoStepMove;
 
 /**
@@ -120,9 +119,9 @@ class OopChessBoardTest {
 		String startFen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 		String endFen = "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1";
 		chessBoard.setBoard(startFen);
-		Move move = new NormalMove(chessBoard.getTile(6, 4), chessBoard.getTile(4, 4));
+		Move move = new PawnTwoStepMove(chessBoard, chessBoard.getTile(6, 4), chessBoard.getTile(4, 4));
 		chessBoard.apply(move);
-		assertEquals(endFen, chessBoard.getFENBoard());
+		assertEquals(endFen, chessBoard.getFEN());
 	}
 
 	/**

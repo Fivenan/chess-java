@@ -117,6 +117,10 @@ public abstract class Move {
 		return Objects.equals(end, other.end) && Objects.equals(start, other.start);
 	}
 
+	public Tile getEnPassantTile() {
+		return null;
+	}
+
 	public static String printMoveInTurn(int moveNumber, Move white, Move black) {
 		return null;
 	}

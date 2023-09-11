@@ -25,6 +25,11 @@ public class PawnTwoStepMove extends NormalMove {
 	}
 
 	@Override
+	public Tile getEnPassantTile() {
+		return enPassantTile;
+	}
+
+	@Override
 	public int hashCode() {
 		return Objects.hash(enPassantTile);
 	}
