@@ -101,7 +101,7 @@ public class Pawn extends Piece {
 	}
 
 	public Piece promoteInto(PieceType pt) {
-		return PieceFactory.createPiece(pt, color);
+		return PieceFactory.create(pt, color);
 	}
 
 

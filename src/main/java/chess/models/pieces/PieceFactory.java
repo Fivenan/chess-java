@@ -8,7 +8,7 @@ public class PieceFactory {
 	private PieceFactory() {
 	}
 
-	public static Piece createPiece(PieceType type, Color color) {
+	public static Piece create(PieceType type, Color color) {
 
 		Piece newPiece = null;
 		switch (type) {

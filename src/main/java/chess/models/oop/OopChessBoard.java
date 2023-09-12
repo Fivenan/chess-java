@@ -4,23 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import lombok.Getter;
 import lombok.Setter;
 import main.java.chess.models.ChessBoard;
 import main.java.chess.models.Player;
 import main.java.chess.models.enums.Color;
+import main.java.chess.models.enums.PieceType;
 import main.java.chess.models.oop.moves.CapturingMove;
 import main.java.chess.models.oop.moves.CastlingMove;
 import main.java.chess.models.oop.moves.Move;
-import main.java.chess.models.pieces.Bishop;
-import main.java.chess.models.pieces.King;
-import main.java.chess.models.pieces.Knight;
 import main.java.chess.models.pieces.Pawn;
 import main.java.chess.models.pieces.Piece;
 import main.java.chess.models.pieces.PieceFactory;
-import main.java.chess.models.pieces.Queen;
-import main.java.chess.models.pieces.Rook;
 import main.java.chess.models.util.NotationValidator;
 
 public class OopChessBoard implements ChessBoard {
@@ -155,25 +152,25 @@ public class OopChessBoard implements ChessBoard {
 				tiles[rank][file] = new Tile(rank, file);
 			}
 		}
-		tiles[0][0] = new Tile(0, 0, new Rook(Color.WHITE));
-		tiles[0][1] = new Tile(0, 1, new Knight(Color.WHITE));
-		tiles[0][2] = new Tile(0, 2, new Bishop(Color.WHITE));
-		tiles[0][3] = new Tile(0, 3, new Queen(Color.WHITE));
-		tiles[0][4] = new Tile(0, 4, new King(Color.WHITE));
-		tiles[0][5] = new Tile(0, 5, new Bishop(Color.WHITE));
-		tiles[0][6] = new Tile(0, 6, new Knight(Color.WHITE));
-		tiles[0][7] = new Tile(0, 7, new Rook(Color.WHITE));
-		tiles[7][0] = new Tile(7, 0, new Rook(Color.BLACK));
-		tiles[7][1] = new Tile(7, 1, new Knight(Color.BLACK));
-		tiles[7][2] = new Tile(7, 2, new Bishop(Color.BLACK));
-		tiles[7][3] = new Tile(7, 3, new Queen(Color.BLACK));
-		tiles[7][4] = new Tile(7, 4, new King(Color.BLACK));
-		tiles[7][5] = new Tile(7, 5, new Bishop(Color.BLACK));
-		tiles[7][6] = new Tile(7, 6, new Knight(Color.BLACK));
-		tiles[7][7] = new Tile(7, 7, new Rook(Color.BLACK));
+		tiles[0][0] = new Tile(0, 0, PieceFactory.create(PieceType.ROOK, Color.BLACK));
+		tiles[0][1] = new Tile(0, 1, PieceFactory.create(PieceType.KNIGHT, Color.BLACK));
+		tiles[0][2] = new Tile(0, 2, PieceFactory.create(PieceType.BISHOP, Color.BLACK));
+		tiles[0][3] = new Tile(0, 3, PieceFactory.create(PieceType.QUEEN, Color.BLACK));
+		tiles[0][4] = new Tile(0, 4, PieceFactory.create(PieceType.KING, Color.BLACK));
+		tiles[0][5] = new Tile(0, 5, PieceFactory.create(PieceType.BISHOP, Color.BLACK));
+		tiles[0][6] = new Tile(0, 6, PieceFactory.create(PieceType.KNIGHT, Color.BLACK));
+		tiles[0][7] = new Tile(0, 7, PieceFactory.create(PieceType.ROOK, Color.BLACK));
+		tiles[7][0] = new Tile(7, 0, PieceFactory.create(PieceType.ROOK, Color.WHITE));
+		tiles[7][1] = new Tile(7, 1, PieceFactory.create(PieceType.KNIGHT, Color.WHITE));
+		tiles[7][2] = new Tile(7, 2, PieceFactory.create(PieceType.BISHOP, Color.WHITE));
+		tiles[7][3] = new Tile(7, 3, PieceFactory.create(PieceType.QUEEN, Color.WHITE));
+		tiles[7][4] = new Tile(7, 4, PieceFactory.create(PieceType.KING, Color.WHITE));
+		tiles[7][5] = new Tile(7, 5, PieceFactory.create(PieceType.BISHOP, Color.WHITE));
+		tiles[7][6] = new Tile(7, 6, PieceFactory.create(PieceType.KNIGHT, Color.WHITE));
+		tiles[7][7] = new Tile(7, 7, PieceFactory.create(PieceType.ROOK, Color.WHITE));
 		for (int file = 0; file < 8; file++) {
-			tiles[1][file] = new Tile(1, file, new Pawn(Color.WHITE));
-			tiles[6][file] = new Tile(6, file, new Pawn(Color.BLACK));
+			tiles[1][file] = new Tile(1, file, PieceFactory.create(PieceType.PAWN, Color.BLACK));
+			tiles[6][file] = new Tile(6, file, PieceFactory.create(PieceType.PAWN, Color.WHITE));
 		}
 
 		turn = Color.WHITE;
@@ -191,8 +188,15 @@ public class OopChessBoard implements ChessBoard {
 	}
 
 	@Override
-	public void moveTo(String endPosition) {
-		// TODO Auto-generated method stub
+	public void moveTo(String moveNotation) {
+		String endPosition = moveNotation.substring(moveNotation.length() - 2);
+		int endRank = getTile(endPosition).rank;
+		int endFile = getTile(endPosition).file;
+		List<Move> possibleMoves = getAllPossibleMoves();
+		List<Move> targetedPossibleMoves = possibleMoves.stream()
+				.filter(m -> m.getEnd().file == endFile && m.getEnd().rank == endRank).collect(Collectors.toList());
+
+//		List<String> possibleMovesString = possibleMoves.stream().map(Move::getNotation).collect(Collectors.toList());
 
 	}
 

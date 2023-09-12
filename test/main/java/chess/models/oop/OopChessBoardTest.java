@@ -84,7 +84,8 @@ class OopChessBoardTest {
 	 */
 	@Test
 	void testRestartBoard() {
-		fail("Not yet implemented");
+		chessBoard.restartBoard();
+		assertEquals("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1", chessBoard.getFEN());
 	}
 
 	/**
@@ -153,12 +154,5 @@ class OopChessBoardTest {
 		fail("Not yet implemented");
 	}
 
-	/**
-	 * Test method for {@link main.java.chess.models.oop.OopChessBoard#getFEN()}.
-	 */
-	@Test
-	void testGetFEN() {
-		fail("Not yet implemented");
-	}
 
 }
