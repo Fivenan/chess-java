@@ -3,11 +3,13 @@ package main.java.chess.models.oop;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import lombok.Getter;
 import lombok.Setter;
+import main.java.chess.exceptions.InvalidMoveException;
 import main.java.chess.models.ChessBoard;
 import main.java.chess.models.Player;
 import main.java.chess.models.enums.Color;
@@ -193,10 +195,31 @@ public class OopChessBoard implements ChessBoard {
 		int endRank = getTile(endPosition).rank;
 		int endFile = getTile(endPosition).file;
 		List<Move> possibleMoves = getAllPossibleMoves();
-		List<Move> targetedPossibleMoves = possibleMoves.stream()
-				.filter(m -> m.getEnd().file == endFile && m.getEnd().rank == endRank).collect(Collectors.toList());
-
+		Map<String, Move> targetedPossibleMoves = possibleMoves.stream()
+				.filter(m -> m.getEnd().file == endFile && m.getEnd().rank == endRank)
+				.collect(Collectors.toMap(m -> m.getEnd().getPosition(), Function.identity()));
+		if (targetedPossibleMoves.containsKey(moveNotation)) {
+			apply(targetedPossibleMoves.get(moveNotation));
+		}
 //		List<String> possibleMovesString = possibleMoves.stream().map(Move::getNotation).collect(Collectors.toList());
+
+	}
+
+	public void move(String start, String end) throws InvalidMoveException {
+		Tile startTile = getTile(start);
+		Tile endTile = getTile(end);
+		if (startTile.isEmpty()) {
+			throw new InvalidMoveException("Tile " + startTile.getPosition() + " is empty.");
+		}
+		List<Tile> targets = startTile.getPiece().generateValidTargetTiles(this, startTile.rank, startTile.file);
+		List<Move> moves = startTile.getPiece().generateValidMoves(this, startTile.rank, startTile.file);
+		for (Move move : moves) {
+			if (move.getEnd().equals(endTile)) {
+				apply(move);
+				return;
+			}
+		}
+		throw new InvalidMoveException();
 
 	}
 
