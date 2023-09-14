@@ -199,6 +199,20 @@ public class OopChessBoard implements ChessBoard {
 		return null;
 	}
 
+	private boolean isCheck() {
+		boolean capturedIsKing = false;
+		boolean colorIsDifferent = false;
+		List<Move> possibleMoves = getAllPossibleMoves();
+		for (Move move : possibleMoves) {
+			if (move instanceof CapturingMove) {
+				capturedIsKing = ((CapturingMove) move).getCapturedPiece().pieceType == PieceType.KING;
+				colorIsDifferent = ((CapturingMove) move).getStart().getPiece().color != ((CapturingMove) move)
+						.getCapturedPiece().color;
+			}
+		}
+		return capturedIsKing & colorIsDifferent;
+	}
+
 	@Override
 	public void moveTo(String moveNotation) {
 		String endPosition = moveNotation.substring(moveNotation.length() - 2);
