@@ -8,7 +8,9 @@ public interface ChessBoard {
 
 	public void emptyBoard();
 
-	public void restartBoard();
+	public void initialize();
+
+	public boolean isGameOver();
 
 	public void moveTo(String endPosition);
 

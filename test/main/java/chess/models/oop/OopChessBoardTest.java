@@ -80,11 +80,11 @@ class OopChessBoardTest {
 
 	/**
 	 * Test method for
-	 * {@link main.java.chess.models.oop.OopChessBoard#restartBoard()}.
+	 * {@link main.java.chess.models.oop.OopChessBoard#initialize()}.
 	 */
 	@Test
 	void testRestartBoard() {
-		chessBoard.restartBoard();
+		chessBoard.initialize();
 		assertEquals("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1", chessBoard.getFEN());
 	}
 

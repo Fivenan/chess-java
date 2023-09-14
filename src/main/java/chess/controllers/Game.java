@@ -14,6 +14,9 @@ public class Game {
 
 	public Game(ChessBoard board) {
 		setBoard(board);
+		while (!board.isGameOver()) {
+
+		}
 	}
 
 	public void setBoard(ChessBoard chessBoard) {

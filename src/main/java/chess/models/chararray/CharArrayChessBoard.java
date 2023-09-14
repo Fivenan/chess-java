@@ -30,9 +30,13 @@ public class CharArrayChessBoard implements ChessBoard {
 	}
 
 	@Override
-	public void restartBoard() {
+	public void initialize() {
 		// TODO Auto-generated method stub
 
+	}
+
+	public boolean isGameOver() {
+		return false;
 	}
 
 	@Override

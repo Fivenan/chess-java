@@ -13,6 +13,7 @@ import main.java.chess.exceptions.InvalidMoveException;
 import main.java.chess.models.ChessBoard;
 import main.java.chess.models.Player;
 import main.java.chess.models.enums.Color;
+import main.java.chess.models.enums.GameOver;
 import main.java.chess.models.enums.PieceType;
 import main.java.chess.models.oop.moves.CapturingMove;
 import main.java.chess.models.oop.moves.CastlingMove;
@@ -148,7 +149,7 @@ public class OopChessBoard implements ChessBoard {
 	}
 
 	@Override
-	public void restartBoard() {
+	public void initialize() {
 		for (int rank = 2; rank < 6; rank++) {
 			for (int file = 0; file < 8; file++) {
 				tiles[rank][file] = new Tile(rank, file);
@@ -189,6 +190,15 @@ public class OopChessBoard implements ChessBoard {
 
 	}
 
+	public boolean isGameOver() {
+
+		return false;
+	}
+
+	private GameOver getGameOverType() {
+		return null;
+	}
+
 	@Override
 	public void moveTo(String moveNotation) {
 		String endPosition = moveNotation.substring(moveNotation.length() - 2);
@@ -219,7 +229,7 @@ public class OopChessBoard implements ChessBoard {
 				return;
 			}
 		}
-		throw new InvalidMoveException();
+		throw new InvalidMoveException("Move is illegal.");
 
 	}
 
@@ -270,8 +280,21 @@ public class OopChessBoard implements ChessBoard {
 		if (movingPiece instanceof Pawn) {
 			halfmoveClock = 0;
 		}
+	}
 
+	public void applyMove(Move move) {
 
+		if (!Move.isLegalMove(move, this)) {
+			LOGGER.warning("Move is illegal.");
+			return;
+		}
+
+		Piece moving = tiles[move.getStart().rank][move.getStart().file].getPiece();
+		Piece taken = tiles[move.getEnd().rank][move.getEnd().file].getPiece();
+		tiles[move.getStart().rank][move.getStart().file].clear();
+		tiles[move.getEnd().rank][move.getEnd().file].setPiece(moving);
+
+		moveHistory.add(move);
 	}
 
 	public List<Move> getAllPossibleMoves() {
@@ -383,21 +406,6 @@ public class OopChessBoard implements ChessBoard {
 			delimiter = "\n";
 		}
 		return res.toString();
-	}
-
-	public void applyMove(Move move) {
-
-		if (!Move.isLegalMove(move, this)) {
-			LOGGER.warning("Move is illegal.");
-			return;
-		}
-
-		Piece moving = tiles[move.getStart().rank][move.getStart().file].getPiece();
-		Piece taken = tiles[move.getEnd().rank][move.getEnd().file].getPiece();
-		tiles[move.getStart().rank][move.getStart().file].clear();
-		tiles[move.getEnd().rank][move.getEnd().file].setPiece(moving);
-
-		moveHistory.add(move);
 	}
 
 	public boolean isEmptyBetweenTwoTilesInRow(Tile t1, Tile t2) throws IllegalArgumentException {
