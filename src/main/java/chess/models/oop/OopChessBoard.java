@@ -213,6 +213,20 @@ public class OopChessBoard implements ChessBoard {
 		return capturedIsKing & colorIsDifferent;
 	}
 
+	private boolean isBeingChecked() {
+		boolean capturedIsKing = false;
+		List<Move> possibleMoves = getAllPossibleMoves(getOpponentColor());
+		for (Move move : possibleMoves) {
+			if (move instanceof CapturingMove) {
+				capturedIsKing = ((CapturingMove) move).getCapturedPiece().pieceType == PieceType.KING;
+			}
+		}
+		return capturedIsKing;
+	}
+
+	private Color getOpponentColor() {
+		return turn == Color.WHITE ? Color.WHITE : Color.BLACK;
+	}
 	@Override
 	public void moveTo(String moveNotation) {
 		String endPosition = moveNotation.substring(moveNotation.length() - 2);
@@ -316,6 +330,20 @@ public class OopChessBoard implements ChessBoard {
 		for (Tile[] tilesInRank : tiles) {
 			for (Tile tile : tilesInRank) {
 				if (!tile.isEmpty()) {
+					moves.addAll(tile.getPiece().generateValidMoves(this, tile.rank, tile.file));
+				}
+			}
+		}
+		while (moves.remove(null))
+			;
+		return moves;
+	}
+
+	public List<Move> getAllPossibleMoves(Color color) {
+		List<Move> moves = new ArrayList<>();
+		for (Tile[] tilesInRank : tiles) {
+			for (Tile tile : tilesInRank) {
+				if (!tile.isEmpty() && tile.getPiece().color == color) {
 					moves.addAll(tile.getPiece().generateValidMoves(this, tile.rank, tile.file));
 				}
 			}
