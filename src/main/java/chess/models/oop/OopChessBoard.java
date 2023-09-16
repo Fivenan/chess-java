@@ -213,6 +213,17 @@ public class OopChessBoard implements ChessBoard {
 		return capturedIsKing & colorIsDifferent;
 	}
 
+	private boolean isCheck(Color color) {
+		boolean capturedIsKing = false;
+		List<Move> possibleMoves = getAllPossibleMoves(color);
+		for (Move move : possibleMoves) {
+			if (move instanceof CapturingMove) {
+				capturedIsKing = ((CapturingMove) move).getCapturedPiece().pieceType == PieceType.KING;
+			}
+		}
+		return capturedIsKing;
+	}
+
 	private boolean isBeingChecked() {
 		boolean capturedIsKing = false;
 		List<Move> possibleMoves = getAllPossibleMoves(getOpponentColor());
