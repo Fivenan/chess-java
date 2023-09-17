@@ -199,6 +199,20 @@ public class OopChessBoard implements ChessBoard {
 		return null;
 	}
 
+	private boolean isCheckmate() {
+		if (!isBeingChecked()) {
+			return false;
+		}
+		List<Move> moves = getAllPossibleMoves(turn);
+		for (Move move : moves) {
+			apply(move);
+			if (!isBeingChecked()) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	private boolean isCheck() {
 		boolean capturedIsKing = false;
 		boolean colorIsDifferent = false;
