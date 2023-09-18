@@ -1,40 +1,31 @@
 package main.java.chess.models;
 
-import main.java.chess.controllers.Game;
+import java.util.List;
+import java.util.Map;
+
+import main.java.chess.models.enums.Color;
 import main.java.chess.models.oop.OopChessBoard;
-import main.java.chess.views.IView;
-import main.java.chess.views.Terminal;
+import main.java.chess.models.oop.Tile;
+import main.java.chess.models.oop.moves.Move;
 
 public class ChessGame {
 
-    public static void main(String[] args) {
-//        Board board1 = new Board();
-//        System.out.println(board1);
+	private Map<Color, Player> players;
+	private ChessBoard chessBoard;
 
-        String fen1 = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
-        String fen2 = "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1";
-        String fen3 = "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq c6 0 2";
-//        Board board2 = new Board(fen2);
-//        System.out.println(board2);
-//        Board board3 = new Board(fen3);
-//        System.out.println(board3);
-//        System.out.println(board3.toFEN());
-        
-        IView terminalView = new Terminal();
-        Game game = new Game();        
-        game.setViewer(terminalView); 
-        
-		ChessBoard board2 = new OopChessBoard();
-		board2.setBoard(fen2);
-		game.setBoard(board2);
-        game.printBoard();
-        
-		ChessBoard board3 = new OopChessBoard();
-		board2.setBoard(fen3);
-        game.setBoard(board3);
-        game.printBoard();
-        
-		System.out.println(board3.getFEN());
-    }
+	private Color turn;
 
+	private Move lastMove;
+	private List<Move> moves;
+	private boolean whiteCanCastleKingSide = false;
+	private boolean whiteCanCastleQueenSide = false;
+	private boolean blackCanCastleKingSide = false;
+	private boolean blackCanCastleQueenSide = false;
+	private Tile enPassantTargetTile;
+	private int halfmoveClock = 0; // move since last capture or pawn advance
+	private int fullmoveNumber = 1; // move from start, incremented after black's move
+
+	public ChessGame() {
+		chessBoard = new OopChessBoard();
+	}
 }
