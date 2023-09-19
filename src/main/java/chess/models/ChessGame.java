@@ -3,6 +3,7 @@ package main.java.chess.models;
 import java.util.List;
 import java.util.Map;
 
+import main.java.chess.exceptions.IllegalTurnException;
 import main.java.chess.models.enums.Color;
 import main.java.chess.models.oop.OopChessBoard;
 import main.java.chess.models.oop.Tile;
@@ -10,7 +11,8 @@ import main.java.chess.models.oop.moves.Move;
 
 public class ChessGame {
 
-	private Map<Color, Player> players;
+	private Map<Player, Color> players;
+	private Map<Color, Long> time;
 	private ChessBoard chessBoard;
 
 	private Color turn;
@@ -27,5 +29,16 @@ public class ChessGame {
 
 	public ChessGame() {
 		chessBoard = new OopChessBoard();
+	}
+
+	public void play(Player player, Move move) throws IllegalTurnException {
+		play(players.get(player), move);
+	}
+
+	public void play(Color color, Move move) throws IllegalTurnException {
+		if (color != turn) {
+			throw new IllegalTurnException("It's not your turn!");
+		}
+		chessBoard.apply(move);
 	}
 }
