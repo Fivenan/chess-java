@@ -24,4 +24,6 @@ public interface ChessBoard {
 
 	public String toString();
 
+	public void move(String start, String end);
+
 }

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import main.java.chess.exceptions.IllegalTurnException;
+import main.java.chess.exceptions.InvalidMoveException;
 import main.java.chess.models.enums.Color;
 import main.java.chess.models.oop.OopChessBoard;
 import main.java.chess.models.oop.Tile;
@@ -29,6 +30,13 @@ public class ChessGame {
 
 	public ChessGame() {
 		chessBoard = new OopChessBoard();
+	}
+
+	public void play(Color color, String start, String end) throws IllegalTurnException, InvalidMoveException {
+		if (color != turn) {
+			throw new IllegalTurnException("It's not your turn!");
+		}
+		chessBoard.move(start, end);
 	}
 
 	public void play(Player player, Move move) throws IllegalTurnException {
