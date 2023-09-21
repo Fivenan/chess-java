@@ -12,27 +12,13 @@ import main.java.chess.models.pieces.Piece;
 
 public abstract class Move {
 
+	private Piece movingPiece;
 	private Tile start;
 	private Tile end;
 
 	public Move(Tile start, Tile end) {
+		this.movingPiece = start.getPiece();
 		this.start = start;
-		this.end = end;
-	}
-
-	public Tile getStart() {
-		return start;
-	}
-
-	public void setStart(Tile start) {
-		this.start = start;
-	}
-
-	public Tile getEnd() {
-		return end;
-	}
-
-	public void setEnd(Tile end) {
 		this.end = end;
 	}
 
@@ -75,10 +61,7 @@ public abstract class Move {
 		return null;
 	}
 
-	public String toString() {
-		return "[" + start.getPiece().color.name() + " " + start.getPiece().pieceType.name() + " " + start.getPosition()
-				+ ", " + end.getPosition() + "]";
-	}
+	public abstract void apply(OopChessBoard b);
 
 	public String getMoveString() {
 		if (this instanceof CastlingMove) {
@@ -96,6 +79,30 @@ public abstract class Move {
 		}
 		res.append(end.getPosition());
 		return res.toString();
+	}
+
+	public Tile getEnPassantTile() {
+		return null;
+	}
+
+	public static boolean isLegalMove(Move move, OopChessBoard board) {
+		Tile start = board.getTile(move.getStart().getPosition());
+		List<Move> validMoves = board.getTile(move.getStart().rank, move.getStart().file).getPiece()
+				.generateValidMoves(board, start.rank, start.file);
+		return validMoves.contains(move);
+	}
+
+	/*
+	 *************************************************************************************************************************************************
+	 *
+	 * GETTER, SETTER, DEFAULT METHODS
+	 *
+	 ************************************************************************************************************************************************* 
+	 */
+
+	public String toString() {
+		return "[" + start.getPiece().color.name() + " " + start.getPiece().pieceType.name() + " " + start.getPosition()
+				+ ", " + end.getPosition() + "]";
 	}
 
 	public String toString(int moveNumber) {
@@ -117,19 +124,28 @@ public abstract class Move {
 		return Objects.equals(end, other.end) && Objects.equals(start, other.start);
 	}
 
-	public Tile getEnPassantTile() {
-		return null;
+	public Piece getMovingPiece() {
+		return movingPiece;
 	}
 
-	public static String printMoveInTurn(int moveNumber, Move white, Move black) {
-		return null;
+	public void setMovingPiece(Piece movingPiece) {
+		this.movingPiece = movingPiece;
 	}
 
-	public static boolean isLegalMove(Move move, OopChessBoard board) {
-		Tile start = board.getTile(move.getStart().getPosition());
-		List<Move> validMoves = board.getTile(move.getStart().rank, move.getStart().file).getPiece()
-				.generateValidMoves(board, start.rank, start.file);
-		return validMoves.contains(move);
+	public Tile getStart() {
+		return start;
+	}
+
+	public void setStart(Tile start) {
+		this.start = start;
+	}
+
+	public Tile getEnd() {
+		return end;
+	}
+
+	public void setEnd(Tile end) {
+		this.end = end;
 	}
 
 }

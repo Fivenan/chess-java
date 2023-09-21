@@ -24,6 +24,15 @@ public class CastlingMove extends Move {
 		rookMove = new NormalMove(rookStartTile, rookEndTile);
 	}
 
+	@Override
+	public void apply(OopChessBoard b) {
+		getEnd().setPiece(getMovingPiece());
+		getStart().clear();
+		rookEndTile.setPiece(rookStartTile.getPiece());
+		rookStartTile.clear();
+		b.hasCastled();
+	}
+
 	public Tile getRookStartTile() {
 		return rookStartTile;
 	}

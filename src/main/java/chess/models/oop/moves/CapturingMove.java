@@ -3,29 +3,28 @@ package main.java.chess.models.oop.moves;
 import java.util.List;
 import java.util.Objects;
 
+import main.java.chess.models.oop.OopChessBoard;
 import main.java.chess.models.oop.Tile;
 import main.java.chess.models.pieces.Pawn;
 import main.java.chess.models.pieces.Piece;
 
 public class CapturingMove extends Move {
 
-	private Piece movingPiece;
 	private Piece capturedPiece;
 	private Tile capturedTile;
 
 	public CapturingMove(Tile start, Tile end) {
 		super(start, end);
-		this.movingPiece = start.getPiece();
 		this.capturedPiece = end.getPiece();
 		this.capturedTile = end;
 	}
 
-	public Piece getMovingPiece() {
-		return movingPiece;
-	}
-
-	public void setMovingPiece(Piece movingPiece) {
-		this.movingPiece = movingPiece;
+	@Override
+	public void apply(OopChessBoard b) {
+		capturedTile.clear();
+		getEnd().setPiece(getMovingPiece());
+		getStart().clear();
+		b.resetHalfmoveClock();
 	}
 
 	public Piece getCapturedPiece() {
@@ -46,7 +45,7 @@ public class CapturingMove extends Move {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(capturedPiece, capturedTile, movingPiece);
+		return Objects.hash(capturedPiece, capturedTile, getMovingPiece());
 	}
 
 	@Override
@@ -62,7 +61,7 @@ public class CapturingMove extends Move {
 		}
 		CapturingMove other = (CapturingMove) obj;
 		return Objects.equals(capturedPiece, other.capturedPiece) && Objects.equals(capturedTile, other.capturedTile)
-				&& Objects.equals(movingPiece, other.movingPiece);
+				&& Objects.equals(getMovingPiece(), other.getMovingPiece());
 	}
 
 	@Override
