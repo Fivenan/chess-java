@@ -7,8 +7,6 @@ import java.util.function.Function;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-import lombok.Getter;
-import lombok.Setter;
 import main.java.chess.exceptions.InvalidMoveException;
 import main.java.chess.models.ChessBoard;
 import main.java.chess.models.Player;
@@ -29,48 +27,26 @@ public class OopChessBoard implements ChessBoard {
 
 	private Tile[][] tiles = new Tile[8][8];
 
-	@Getter
-	@Setter
 	private Color turn = Color.WHITE;
 
-	@Getter
-	@Setter
 	private Move lastMove;
 
-	@Getter
-	@Setter
 	private boolean whiteCanCastleKingSide = false;
 
-	@Getter
-	@Setter
 	private boolean whiteCanCastleQueenSide = false;
 
-	@Getter
-	@Setter
 	private boolean blackCanCastleKingSide = false;
 
-	@Getter
-	@Setter
 	private boolean blackCanCastleQueenSide = false;
 
-	@Getter
-	@Setter
 	private Tile enPassantTargetTile;
 
-	@Getter
-	@Setter
 	private int halfmoveClock = 0; // move since last capture or pawn advance
 
-	@Getter
-	@Setter
 	private int fullmoveNumber = 1; // move from start, incremented after black's move
 
-	@Getter
-	@Setter
 	private Map<Color, Player> players;
 
-	@Getter
-	@Setter
 	private List<Move> moveHistory = new ArrayList<>();;
 
 	public OopChessBoard() {
@@ -274,7 +250,6 @@ public class OopChessBoard implements ChessBoard {
 		if (startTile.isEmpty()) {
 			throw new InvalidMoveException("Tile " + startTile.getPosition() + " is empty.");
 		}
-		List<Tile> targets = startTile.getPiece().generateValidTargetTiles(this, startTile.rank, startTile.file);
 		List<Move> moves = startTile.getPiece().generateValidMoves(this, startTile.rank, startTile.file);
 		for (Move move : moves) {
 			if (move.getEnd().equals(endTile)) {
@@ -376,12 +351,6 @@ public class OopChessBoard implements ChessBoard {
 		while (moves.remove(null))
 			;
 		return moves;
-	}
-
-	@Override
-	public String getMoveNumber() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
@@ -500,6 +469,121 @@ public class OopChessBoard implements ChessBoard {
 			}
 		}
 		return true;
+	}
+
+	public void incrementFullmoveNumber() {
+		fullmoveNumber++;
+	}
+
+	public void incrementHalfmoveClock() {
+		halfmoveClock++;
+	}
+
+	public void resetHalfmoveClock() {
+		halfmoveClock = 0;
+	}
+
+	public void hasCastled() {
+		whiteCanCastleKingSide = false;
+		whiteCanCastleQueenSide = false;
+		blackCanCastleKingSide = false;
+		blackCanCastleQueenSide = false;
+	}
+
+	/*
+	 *************************************************************************************************************************************************
+	 *
+	 * GETTER, SETTER, DEFAULT METHODS
+	 *
+	 ************************************************************************************************************************************************* 
+	 */
+
+	public Color getTurn() {
+		return turn;
+	}
+
+	public void setTurn(Color turn) {
+		this.turn = turn;
+	}
+
+	public Move getLastMove() {
+		return lastMove;
+	}
+
+	public void setLastMove(Move lastMove) {
+		this.lastMove = lastMove;
+	}
+
+	public boolean isWhiteCanCastleKingSide() {
+		return whiteCanCastleKingSide;
+	}
+
+	public void setWhiteCanCastleKingSide(boolean whiteCanCastleKingSide) {
+		this.whiteCanCastleKingSide = whiteCanCastleKingSide;
+	}
+
+	public boolean isWhiteCanCastleQueenSide() {
+		return whiteCanCastleQueenSide;
+	}
+
+	public void setWhiteCanCastleQueenSide(boolean whiteCanCastleQueenSide) {
+		this.whiteCanCastleQueenSide = whiteCanCastleQueenSide;
+	}
+
+	public boolean isBlackCanCastleKingSide() {
+		return blackCanCastleKingSide;
+	}
+
+	public void setBlackCanCastleKingSide(boolean blackCanCastleKingSide) {
+		this.blackCanCastleKingSide = blackCanCastleKingSide;
+	}
+
+	public boolean isBlackCanCastleQueenSide() {
+		return blackCanCastleQueenSide;
+	}
+
+	public void setBlackCanCastleQueenSide(boolean blackCanCastleQueenSide) {
+		this.blackCanCastleQueenSide = blackCanCastleQueenSide;
+	}
+
+	public Tile getEnPassantTargetTile() {
+		return enPassantTargetTile;
+	}
+
+	public void setEnPassantTargetTile(Tile enPassantTargetTile) {
+		this.enPassantTargetTile = enPassantTargetTile;
+	}
+
+	public int getHalfmoveClock() {
+		return halfmoveClock;
+	}
+
+	public void setHalfmoveClock(int halfmoveClock) {
+		this.halfmoveClock = halfmoveClock;
+	}
+
+	public int getFullmoveNumber() {
+		return fullmoveNumber;
+	}
+
+	public void setFullmoveNumber(int fullmoveNumber) {
+		this.fullmoveNumber = fullmoveNumber;
+	}
+
+	public Map<Color, Player> getPlayers() {
+		return players;
+	}
+
+	public void setPlayers(Map<Color, Player> players) {
+		this.players = players;
+	}
+
+	public List<Move> getMoveHistory() {
+		return moveHistory;
+	}
+
+	public void setMoveHistory(List<Move> moveHistory) {
+		this.moveHistory = moveHistory;
 	}
 
 }
