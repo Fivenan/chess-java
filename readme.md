@@ -1,0 +1,1 @@
+this is the explanation of the software chess.
