@@ -471,6 +471,12 @@ public class OopChessBoard implements ChessBoard {
 		return true;
 	}
 
+	private OopChessBoard cloneBoard() {
+		OopChessBoard board = (new OopChessBoard());
+		board.setBoard(getFEN());
+		return board;
+	}
+
 	public void incrementFullmoveNumber() {
 		fullmoveNumber++;
 	}
