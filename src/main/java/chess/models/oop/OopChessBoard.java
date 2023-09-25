@@ -225,9 +225,16 @@ public class OopChessBoard implements ChessBoard {
 		return capturedIsKing;
 	}
 
+	private boolean causesCheck(Move move) {
+		OopChessBoard board = cloneBoard();
+		board.apply(move);
+		return board.isBeingChecked();
+	}
+
 	private Color getOpponentColor() {
 		return turn == Color.WHITE ? Color.WHITE : Color.BLACK;
 	}
+
 	@Override
 	public void moveTo(String moveNotation) {
 		String endPosition = moveNotation.substring(moveNotation.length() - 2);
@@ -376,7 +383,7 @@ public class OopChessBoard implements ChessBoard {
 		fen.append(turn == Color.WHITE ? "w" : "b");
 		fen.append(" ");
 		String castling = (whiteCanCastleKingSide ? "K" : "") + (whiteCanCastleQueenSide ? "Q" : "")
-						+ (blackCanCastleKingSide ? "k" : "") + (blackCanCastleQueenSide ? "q" : "");
+				+ (blackCanCastleKingSide ? "k" : "") + (blackCanCastleQueenSide ? "q" : "");
 		fen.append(!castling.isEmpty() ? castling : "-");
 		fen.append(" ");
 		fen.append(enPassantTargetTile != null ? enPassantTargetTile.getPosition() : "-");
