@@ -1,7 +1,7 @@
 package main.java.chess.models.oop;
 
-import lombok.Getter;
-import lombok.Setter;
+import java.util.Objects;
+
 import main.java.chess.models.pieces.Piece;
 
 public class Tile {
@@ -13,42 +13,28 @@ public class Tile {
 	public final int file; // column, x
 	public final int rank; // row, y
 
-	@Getter
-	@Setter
 	private Piece piece;
-
 
 	public Tile(int rank, int file) {
 		this.rank = rank;
 		this.file = file;
-    }
+	}
 
 	public Tile(int rank, int file, Piece p) {
 		this(rank, file);
-        this.piece = p;
-    }
-
-    public void place(Piece p) {
-        this.piece = p;
-    }
-
-	public boolean isEmpty() {
-		return piece == null;
+		this.piece = p;
 	}
-
-	public void clear() {
-        this.piece = null;
-    }
-
-	public char getSymbol() {
-        return piece == null ?
-				(file + rank) % 2 == 0 ? EMPTY_BLACK_TILE_SYMBOL : EMPTY_WHITE_TILE_SYMBOL
-				:
-				piece.getSymbol();
-    }
 
 	public char getNotation() {
 		return piece == null ? EMPTY_TILE_NOTATION : piece.getNotation();
+	}
+
+	public char getSymbol() {
+		return piece == null ? getSymbolIfEmpty() : piece.getSymbol();
+	}
+
+	private char getSymbolIfEmpty() {
+		return (file + rank) % 2 == 0 ? EMPTY_BLACK_TILE_SYMBOL : EMPTY_WHITE_TILE_SYMBOL;
 	}
 
 	/**
@@ -61,12 +47,33 @@ public class Tile {
 		return ((char) ('a' + file)) + "" + (8 - rank);
 	}
 
+	public boolean isEmpty() {
+		return piece == null;
+	}
+
+	public void clear() {
+		this.piece = null;
+	}
+
 	public String getFile() {
 		return "" + (char) ('a' + file);
 	}
 
 	public String getRank() {
 		return "" + (8 - rank);
+	}
+
+	public Piece getPiece() {
+		return piece;
+	}
+
+	public void setPiece(Piece piece) {
+		this.piece = piece;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(file, piece, rank);
 	}
 
 	@Override
@@ -81,7 +88,7 @@ public class Tile {
 			return false;
 		}
 		Tile other = (Tile) obj;
-		return file == other.file && rank == other.rank;
+		return file == other.file && Objects.equals(piece, other.piece) && rank == other.rank;
 	}
 
 }

@@ -119,7 +119,7 @@ public class OopChessBoard implements ChessBoard {
 					file += c - '0';
 					continue;
 				}
-				tiles[rank][file++].place(PieceFactory.getPieceFromChar(c));
+				tiles[rank][file++].setPiece(PieceFactory.getPieceFromChar(c));
 			}
 		}
 	}
