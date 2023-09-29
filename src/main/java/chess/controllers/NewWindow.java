@@ -76,8 +76,8 @@ public class NewWindow extends Application {
 
 		// Create a scene and place it in the stage
 		Scene scene = new Scene(pane);
-		primaryStage.setTitle("java2s.com");
-		primaryStage.setScene(scene); // Place in scene in the stage
+		primaryStage.setTitle("de.fivenan.java.chess");
+		primaryStage.setScene(scene);
 		primaryStage.show();
 		;
 	}
