@@ -1,4 +1,4 @@
-package main.java.chess.controllers;
+package main.java.chess.views;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -55,8 +55,7 @@ public class NewWindow extends Application {
 		primaryStage.show();
 	}
 
-	@Override /* from w w w .jav a 2 s . com */
-	public void start(Stage primaryStage) {
+	public void start3(Stage primaryStage) {
 		// Create a GridPane
 		GridPane pane = new GridPane();
 
@@ -80,6 +79,28 @@ public class NewWindow extends Application {
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		;
+	}
+
+	@Override
+	public void start(Stage primaryStage) {
+		// Create a GridPane to divide the window into two parts
+		GridPane gridPane = new GridPane();
+
+		// Add calculator on the left
+		ChessBoardPane calculatorPane = new ChessBoardPane();
+		gridPane.add(calculatorPane, 0, 0);
+
+		// Add Tic-Tac-Toe game on the right
+		TicTacToePane ticTacToePane = new TicTacToePane();
+		gridPane.add(ticTacToePane, 1, 0);
+
+		// Create the main scene
+		Scene scene = new Scene(gridPane, 600, 400);
+
+		// Set up the stage
+		primaryStage.setTitle("Dual App");
+		primaryStage.setScene(scene);
+		primaryStage.show();
 	}
 
 	public static void main(String[] args) {
