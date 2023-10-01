@@ -87,15 +87,17 @@ public class NewWindow extends Application {
 		GridPane gridPane = new GridPane();
 
 		// Add calculator on the left
-		ChessBoardPane calculatorPane = new ChessBoardPane();
-		gridPane.add(calculatorPane, 0, 0);
+		ChessBoardPane chessBoardPane = new ChessBoardPane();
+		gridPane.add(chessBoardPane, 0, 0);
 
 		// Add Tic-Tac-Toe game on the right
 		TicTacToePane ticTacToePane = new TicTacToePane();
 		gridPane.add(ticTacToePane, 1, 0);
+//		CalculatorPane calculatorPane = new CalculatorPane();
+//		gridPane.add(calculatorPane, 2, 0);
 
 		// Create the main scene
-		Scene scene = new Scene(gridPane, 600, 400);
+		Scene scene = new Scene(gridPane, 1300, 800);
 
 		// Set up the stage
 		primaryStage.setTitle("Dual App");
