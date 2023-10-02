@@ -12,10 +12,13 @@ public class ChessBoardPane extends GridPane {
 	public ChessBoardPane() {
 		Button[][] buttons = new Button[8][8];
 
+		double windowWidth = getWidth();
+		double windowHeight = getHeight();
+
 		for (int row = 0; row < 8; row++) {
 			for (int col = 0; col < 8; col++) {
 				Button button = new Button();
-				button.setMinSize(100, 100);
+				button.setMinSize(windowWidth / 8, windowHeight / 8);
 				button.setText("" + row + "" + col);
 				if ((row + col) % 2 == 0) {
 					button.setStyle("-fx-background-color: " + Color.WHITE.getHex() + "; ");
