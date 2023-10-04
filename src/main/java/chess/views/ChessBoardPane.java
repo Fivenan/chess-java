@@ -4,12 +4,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import main.java.chess.models.oop.OopChessBoard;
 
 public class ChessBoardPane extends GridPane {
 
 	private TextField display;
 
 	public ChessBoardPane() {
+		OopChessBoard oopChessBoard = new OopChessBoard();
+		oopChessBoard.setBoard("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
 		Button[][] buttons = new Button[8][8];
 
 		double windowWidth = getWidth();
@@ -23,6 +26,7 @@ public class ChessBoardPane extends GridPane {
 				Button button = new Button();
 				button.setMinSize(tileWidth, tileWidth);
 				button.setText("" + row + "" + col);
+				button.setText("" + oopChessBoard.getTile(row, col).getNotation());
 //				if ((row + col) % 2 == 0) {
 //					button.setStyle("-fx-background-color: " + Color.WHITE.getHex() + "; ");
 //				} else {
