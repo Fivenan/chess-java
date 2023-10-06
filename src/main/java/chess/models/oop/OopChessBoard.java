@@ -1,6 +1,7 @@
 package main.java.chess.models.oop;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -167,11 +168,23 @@ public class OopChessBoard implements ChessBoard {
 	}
 
 	public boolean isGameOver() {
-
+		
 		return false;
 	}
 
 	private GameOver getGameOverType() {
+		List<Move> moves = getAllPossibleMoves(turn);
+		if (moves.isEmpty()) {
+			if (isCheckmate()) {
+				return GameOver.CHECKMATE;
+			} else {
+				return GameOver.STALEMATE;
+			}
+		}
+		if (halfmoveClock > 49) {
+			return GameOver.FIFTY_MOVE_RULE;
+		}
+		// if ()
 		return null;
 	}
 
@@ -501,6 +514,10 @@ public class OopChessBoard implements ChessBoard {
 		whiteCanCastleQueenSide = false;
 		blackCanCastleKingSide = false;
 		blackCanCastleQueenSide = false;
+	}
+
+	public List<Piece> getAllPiecesOnBoard() {
+		return Arrays.stream(tiles).filter(t -> !t.isEmpty()).map(t -> t.getPiece()).toList();
 	}
 
 	/*
