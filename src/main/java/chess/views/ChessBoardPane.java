@@ -1,7 +1,6 @@
 package main.java.chess.views;
 
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import main.java.chess.models.oop.OopChessBoard;
@@ -49,16 +48,7 @@ public class ChessBoardPane extends GridPane {
 			}
 		}
 
-		Label firstNameLabel = new Label("From");
-		TextField firstNameField = new TextField();
-		Label lastNameLabel = new Label("To");
-		TextField lastNameField = new TextField();
 
-		// Add elements to the grid pane
-		add(firstNameLabel, 8, 0);
-		add(firstNameField, 9, 0);
-		add(lastNameLabel, 8, 1);
-		add(lastNameField, 9, 1);
 
 //		// Create UI components
 //		display = new TextField();
