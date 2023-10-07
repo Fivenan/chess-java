@@ -15,8 +15,8 @@ public class ChessGameInfoPane extends GridPane {
 
 		// Add elements to the grid pane
 		add(firstNameLabel, 0, 0);
-		add(firstNameField, 1, 0);
-		add(lastNameLabel, 0, 1);
+		add(firstNameField, 0, 1);
+		add(lastNameLabel, 1, 0);
 		add(lastNameField, 1, 1);
 
 		Button button = new Button("Ok");

@@ -1,12 +1,12 @@
 package main.java.chess.models.oop;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import main.java.chess.exceptions.InvalidMoveException;
 import main.java.chess.models.ChessBoard;
@@ -168,7 +168,7 @@ public class OopChessBoard implements ChessBoard {
 	}
 
 	public boolean isGameOver() {
-		
+
 		return false;
 	}
 
@@ -517,7 +517,8 @@ public class OopChessBoard implements ChessBoard {
 	}
 
 	public List<Piece> getAllPiecesOnBoard() {
-		return Arrays.stream(tiles).filter(t -> !t.isEmpty()).map(t -> t.getPiece()).toList();
+		return Stream.of(tiles).flatMap(Stream::of).filter(t -> !t.isEmpty()).map(Tile::getPiece)
+				.collect(Collectors.toList());
 	}
 
 	/*
