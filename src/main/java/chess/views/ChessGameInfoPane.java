@@ -8,23 +8,23 @@ import javafx.scene.layout.GridPane;
 public class ChessGameInfoPane extends GridPane {
 	public ChessGameInfoPane() {
 
-		Label firstNameLabel = new Label("From");
-		TextField firstNameField = new TextField();
-		Label lastNameLabel = new Label("To");
-		TextField lastNameField = new TextField();
+		Label startTileLabel = new Label("From");
+		TextField startTileField = new TextField();
+		Label endTileLabel = new Label("To");
+		TextField endTileField = new TextField();
 
 		// Add elements to the grid pane
-		add(firstNameLabel, 0, 0);
-		add(firstNameField, 0, 1);
-		add(lastNameLabel, 1, 0);
-		add(lastNameField, 1, 1);
+		add(startTileLabel, 0, 0);
+		add(startTileField, 0, 1);
+		add(endTileLabel, 1, 0);
+		add(endTileField, 1, 1);
 
 		Button button = new Button("Ok");
+		button.setOnAction(e -> handleMove(startTileField.getText(), endTileField.getText()));
 		add(button, 0, 2);
 	}
 
-	private void handleButtonClick(int row, int col) {
-		// Handle the button click (implement game logic here)
-		System.out.println("Button clicked: " + row + ", " + col);
+	private void handleMove(String startTile, String endTile) {
+		System.out.println("Moving from " + startTile + " to " + endTile);
 	}
 }
