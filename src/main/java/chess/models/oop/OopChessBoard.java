@@ -59,7 +59,10 @@ public class OopChessBoard implements ChessBoard {
 	}
 
 	public OopChessBoard(List<Move> moves) {
-
+		this();
+		for (Move move : moves) {
+			apply(move);
+		}
 	}
 
 	/**
