@@ -63,6 +63,7 @@ public class OopChessBoard implements ChessBoard {
 		for (Move move : moves) {
 			apply(move);
 		}
+		moveHistory = moves;
 	}
 
 	/**
