@@ -51,15 +51,10 @@ public class OopChessBoard implements ChessBoard {
 	private List<Move> moveHistory = new ArrayList<>();;
 
 	public OopChessBoard() {
-		for (int y = 0; y < 8; y++) {
-			for (int x = 0; x < 8; x++) {
-				tiles[x][y] = new Tile(x, y);
-			}
-		}
+		emptyBoard();
 	}
 
-	public OopChessBoard(List<Move> moves) {
-		this();
+	public void setBoard(List<Move> moves) {
 		for (Move move : moves) {
 			apply(move);
 		}
@@ -131,11 +126,7 @@ public class OopChessBoard implements ChessBoard {
 
 	@Override
 	public void initialize() {
-		for (int rank = 2; rank < 6; rank++) {
-			for (int file = 0; file < 8; file++) {
-				tiles[rank][file] = new Tile(rank, file);
-			}
-		}
+		emptyBoard();
 		tiles[0][0] = new Tile(0, 0, PieceFactory.create(PieceType.ROOK, Color.BLACK));
 		tiles[0][1] = new Tile(0, 1, PieceFactory.create(PieceType.KNIGHT, Color.BLACK));
 		tiles[0][2] = new Tile(0, 2, PieceFactory.create(PieceType.BISHOP, Color.BLACK));
