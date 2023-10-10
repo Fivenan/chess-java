@@ -163,7 +163,17 @@ public class OopChessBoard implements ChessBoard {
 	}
 
 	public boolean isGameOver() {
-
+		List<Move> moves = getAllPossibleMoves(turn);
+		if (moves.isEmpty()) {
+			if (isCheckmate()) {
+				return true;
+			} else {
+				return true;
+			}
+		}
+		if (halfmoveClock >= 100) {
+			return true;
+		}
 		return false;
 	}
 
