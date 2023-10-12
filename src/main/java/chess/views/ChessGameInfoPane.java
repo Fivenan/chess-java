@@ -4,9 +4,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import main.java.chess.models.ChessGame;
 
 public class ChessGameInfoPane extends GridPane {
-	public ChessGameInfoPane() {
+
+	private ChessGame chessGame;
+
+	public ChessGameInfoPane(ChessGame chessGame) {
+
+		this.chessGame = chessGame;
 
 		Label startTileLabel = new Label("From");
 		TextField startTileField = new TextField();

@@ -4,8 +4,11 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import main.java.chess.models.ChessGame;
 
 public class ChessApp extends Application {
+
+	ChessGame chessGame = new ChessGame();
 
 	public static void main(String[] args) {
 		launch(args);
@@ -17,11 +20,11 @@ public class ChessApp extends Application {
 		GridPane gridPane = new GridPane();
 
 		// Add calculator on the left
-		ChessBoardPane chessBoardPane = new ChessBoardPane();
+		ChessBoardPane chessBoardPane = new ChessBoardPane(chessGame);
 		gridPane.add(chessBoardPane, 0, 0);
 
 		// Add Tic-Tac-Toe game on the right
-		ChessGameInfoPane chessGameInfoPane = new ChessGameInfoPane();
+		ChessGameInfoPane chessGameInfoPane = new ChessGameInfoPane(chessGame);
 		gridPane.add(chessGameInfoPane, 1, 0);
 
 		// Create the main scene

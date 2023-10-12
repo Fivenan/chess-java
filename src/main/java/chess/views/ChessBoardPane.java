@@ -3,13 +3,18 @@ package main.java.chess.views;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import main.java.chess.models.ChessGame;
 import main.java.chess.models.oop.OopChessBoard;
 
 public class ChessBoardPane extends GridPane {
 
 	private TextField display;
 
-	public ChessBoardPane() {
+	private ChessGame chessGame;
+
+	public ChessBoardPane(ChessGame chessGame) {
+
+		this.chessGame = chessGame;
 		OopChessBoard oopChessBoard = new OopChessBoard();
 		oopChessBoard.setBoard("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
 		Button[][] buttons = new Button[8][8];
