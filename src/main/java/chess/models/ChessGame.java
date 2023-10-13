@@ -6,8 +6,8 @@ import java.util.Map;
 import main.java.chess.exceptions.IllegalTurnException;
 import main.java.chess.exceptions.InvalidMoveException;
 import main.java.chess.models.enums.Color;
+import main.java.chess.models.enums.GameOver;
 import main.java.chess.models.oop.OopChessBoard;
-import main.java.chess.models.oop.Tile;
 import main.java.chess.models.oop.moves.Move;
 
 public class ChessGame {
@@ -17,16 +17,10 @@ public class ChessGame {
 	private ChessBoard chessBoard;
 
 	private Color turn;
-
-	private Move lastMove;
 	private List<Move> moves;
-	private boolean whiteCanCastleKingSide = false;
-	private boolean whiteCanCastleQueenSide = false;
-	private boolean blackCanCastleKingSide = false;
-	private boolean blackCanCastleQueenSide = false;
-	private Tile enPassantTargetTile;
-	private int halfmoveClock = 0; // move since last capture or pawn advance
-	private int fullmoveNumber = 1; // move from start, incremented after black's move
+
+	private Color winner;
+	private GameOver gameOverType;
 
 	public ChessGame() {
 		chessBoard = new OopChessBoard();
@@ -48,5 +42,41 @@ public class ChessGame {
 			throw new IllegalTurnException("It's not your turn!");
 		}
 		chessBoard.apply(move);
+	}
+
+	public void resignation() {
+		// Set the game over flag to true
+		gameOverType = GameOver.RESIGNATION;
+		// Set the winner to the other player
+		winner = (turn == Color.WHITE) ? Color.BLACK : Color.WHITE;
+		// Print a message indicating the resignation
+		System.out.println(winner + " wins by resignation.");
+	}
+
+	public void agreedDraw() {
+		// Set the game over flag to true
+		gameOverType = GameOver.AGREED_DRAW;
+		// Set the winner to null (indicating a draw)
+		winner = null;
+		// Print a message indicating the agreed draw
+		System.out.println("Game ends in a draw by agreement.");
+	}
+
+	public void timeForfeit() {
+		// Set the game over flag to true
+		gameOverType = GameOver.TIME_FORFEIT;
+		// Set the winner to the other player
+		winner = (turn == Color.WHITE) ? Color.BLACK : Color.WHITE;
+		// Print a message indicating the time forfeit
+		System.out.println(winner + " wins on time forfeit.");
+	}
+
+	public void insufficientMaterial() {
+		// Set the game over flag to true
+		gameOverType = GameOver.INSUFFICIENT_MATERIAL;
+		// Set the winner to null (indicating a draw)
+		winner = null;
+		// Print a message indicating the insufficient material
+		System.out.println("Game ends in a draw due to insufficient material.");
 	}
 }

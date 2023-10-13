@@ -529,42 +529,6 @@ public class OopChessBoard implements ChessBoard {
 				.collect(Collectors.toList());
 	}
 
-	public void resignation() {
-		// Set the game over flag to true
-		isGameOver = true;
-		// Set the winner to the other player
-		winner = (turn == Color.WHITE) ? Color.BLACK : Color.WHITE;
-		// Print a message indicating the resignation
-		System.out.println(winner + " wins by resignation.");
-	}
-
-	public void agreedDraw() {
-		// Set the game over flag to true
-		isGameOver = true;
-		// Set the winner to null (indicating a draw)
-		winner = null;
-		// Print a message indicating the agreed draw
-		System.out.println("Game ends in a draw by agreement.");
-	}
-
-	public void timeForfeit() {
-		// Set the game over flag to true
-		isGameOver = true;
-		// Set the winner to the other player
-		winner = (turn == Color.WHITE) ? Color.BLACK : Color.WHITE;
-		// Print a message indicating the time forfeit
-		System.out.println(winner + " wins on time forfeit.");
-	}
-
-	public void insufficientMaterial() {
-		// Set the game over flag to true
-		isGameOver = true;
-		// Set the winner to null (indicating a draw)
-		winner = null;
-		// Print a message indicating the insufficient material
-		System.out.println("Game ends in a draw due to insufficient material.");
-	}
-
 	/*
 	 *************************************************************************************************************************************************
 	 *

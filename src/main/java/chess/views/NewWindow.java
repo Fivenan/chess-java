@@ -87,12 +87,12 @@ public class NewWindow extends Application {
 		GridPane gridPane = new GridPane();
 
 		// Add calculator on the left
-		ChessBoardPane chessBoardPane = new ChessBoardPane();
-		gridPane.add(chessBoardPane, 0, 0);
-
-		// Add Tic-Tac-Toe game on the right
-		ChessGameInfoPane chessGameInfoPane = new ChessGameInfoPane();
-		gridPane.add(chessGameInfoPane, 1, 0);
+//		ChessBoardPane chessBoardPane = new ChessBoardPane();
+//		gridPane.add(chessBoardPane, 0, 0);
+//
+//		// Add Tic-Tac-Toe game on the right
+//		ChessGameInfoPane chessGameInfoPane = new ChessGameInfoPane();
+//		gridPane.add(chessGameInfoPane, 1, 0);
 //		CalculatorPane calculatorPane = new CalculatorPane();
 //		gridPane.add(calculatorPane, 2, 0);
 
