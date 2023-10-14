@@ -8,13 +8,14 @@ import main.java.chess.exceptions.InvalidMoveException;
 import main.java.chess.models.enums.Color;
 import main.java.chess.models.enums.GameOver;
 import main.java.chess.models.oop.OopChessBoard;
+import main.java.chess.models.oop.Tile;
 import main.java.chess.models.oop.moves.Move;
 
 public class ChessGame {
 
 	private Map<Player, Color> players;
 	private Map<Color, Long> time;
-	private ChessBoard chessBoard;
+	private OopChessBoard chessBoard;
 
 	private Color turn;
 	private List<Move> moves;
@@ -24,6 +25,11 @@ public class ChessGame {
 
 	public ChessGame() {
 		chessBoard = new OopChessBoard();
+	}
+
+	public List<Tile> getTargets(Color color, String start) {
+		Tile startTile = chessBoard.getTile(start);
+		return startTile.getPiece().generateValidTargetTiles(chessBoard, startTile.rank, startTile.file);
 	}
 
 	public void play(Color color, String start, String end) throws IllegalTurnException, InvalidMoveException {
