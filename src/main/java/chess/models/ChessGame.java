@@ -2,6 +2,8 @@ package main.java.chess.models;
 
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import main.java.chess.exceptions.IllegalTurnException;
 import main.java.chess.exceptions.InvalidMoveException;
@@ -18,6 +20,8 @@ public class ChessGame {
 	private OopChessBoard chessBoard;
 
 	private Color turn;
+	private Tile startTile;
+	private Map<Tile, Move> currrentTargets; 
 	private List<Move> moves;
 
 	private Color winner;
@@ -28,8 +32,18 @@ public class ChessGame {
 	}
 
 	public List<Tile> getTargets(Color color, String start) {
-		Tile startTile = chessBoard.getTile(start);
-		return startTile.getPiece().generateValidTargetTiles(chessBoard, startTile.rank, startTile.file);
+		startTile = chessBoard.getTile(start);
+		currrentTargets = startTile.getPiece()
+									.generateValidMoves(chessBoard, startTile.rank, startTile.file)
+									.stream()
+									.collect(Collectors.toMap(Move::getEnd, Function.identity()));
+
+		return currrentTargets.keySet().stream().collect(Collectors.toList());
+	}
+
+	public void moveFromStartTileToTarget(Color color, String endTile) {
+		Tile end = chessBoard.getTile(endTile);
+		chessBoard.move(startTile, end);
 	}
 
 	public void play(Color color, String start, String end) throws IllegalTurnException, InvalidMoveException {
