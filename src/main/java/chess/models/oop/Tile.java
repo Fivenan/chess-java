@@ -43,7 +43,6 @@ public class Tile {
 	 * 1 --> 7, 8 --> 0
 	 */
 	public String getPosition() {
-//		System.out.println("Tile: [rank: " + rank + "], [file: " + file + "]");
 		return ((char) ('a' + file)) + "" + (8 - rank);
 	}
 

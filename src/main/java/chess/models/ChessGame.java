@@ -1,5 +1,6 @@
 package main.java.chess.models;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +30,9 @@ public class ChessGame {
 
 	public List<Tile> getTargets(Color color, String start) {
 		Tile startTile = chessBoard.getTile(start);
+		if (startTile.getPiece().color != color) {
+			return new ArrayList<Tile>();
+		}
 		return startTile.getPiece().generateValidTargetTiles(chessBoard, startTile.rank, startTile.file);
 	}
 
