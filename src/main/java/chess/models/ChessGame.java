@@ -1,5 +1,6 @@
 package main.java.chess.models;
 
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,9 +13,9 @@ import main.java.chess.models.oop.moves.Move;
 
 public class ChessGame {
 
-	private Map<Player, Color> players;
+	private Map<Color, Player> players;
 	private Map<Color, Long> time;
-	private ChessBoard chessBoard;
+	private ChessBoardInterface chessBoard;
 
 	private Color turn;
 	private List<Move> moves;
@@ -22,7 +23,10 @@ public class ChessGame {
 	private Color winner;
 	private GameOver gameOverType;
 
-	public ChessGame() {
+	public ChessGame(Player whitePlayer, Player blackPlayer) {
+		players = new EnumMap<>(Color.class);
+		players.put(Color.WHITE, whitePlayer);
+		players.put(Color.BLACK, blackPlayer);
 		chessBoard = new OopChessBoard();
 	}
 
@@ -30,7 +34,7 @@ public class ChessGame {
 		if (color != turn) {
 			throw new IllegalTurnException("It's not your turn!");
 		}
-		chessBoard.move(start, end);
+		moves.add(chessBoard.move(start, end));
 	}
 
 	public void play(Player player, Move move) throws IllegalTurnException {
@@ -42,6 +46,7 @@ public class ChessGame {
 			throw new IllegalTurnException("It's not your turn!");
 		}
 		chessBoard.apply(move);
+
 	}
 
 	public void resignation() {
