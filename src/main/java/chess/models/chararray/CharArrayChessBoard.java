@@ -1,11 +1,11 @@
 package main.java.chess.models.chararray;
 
 import main.java.chess.exceptions.InvalidMoveException;
-import main.java.chess.models.ChessBoard;
+import main.java.chess.models.ChessBoardInterface;
 import main.java.chess.models.oop.moves.Move;
 import main.java.chess.models.util.BoardUtil;
 
-public class CharArrayChessBoard implements ChessBoard {
+public class CharArrayChessBoard implements ChessBoardInterface {
 
 	private char[][] tiles;
 
@@ -65,9 +65,9 @@ public class CharArrayChessBoard implements ChessBoard {
 	}
 
 	@Override
-	public void move(String start, String end) throws InvalidMoveException {
+	public Move move(String start, String end) throws InvalidMoveException {
 		// TODO Auto-generated method stub
-
+		return null;
 	}
 
 }

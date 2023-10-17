@@ -3,7 +3,7 @@ package main.java.chess.models;
 import main.java.chess.exceptions.InvalidMoveException;
 import main.java.chess.models.oop.moves.Move;
 
-public interface ChessBoard {
+public interface ChessBoardInterface {
 
 	public void setBoard(String fen);
 
@@ -23,6 +23,6 @@ public interface ChessBoard {
 
 	public String toString();
 
-	public void move(String start, String end) throws InvalidMoveException;
+	public Move move(String start, String end) throws InvalidMoveException;
 
 }

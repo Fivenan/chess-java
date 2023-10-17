@@ -8,7 +8,7 @@ import main.java.chess.models.ChessGame;
 
 public class ChessApp extends Application {
 
-	ChessGame chessGame = new ChessGame();
+	ChessGame chessGame;
 
 	public static void main(String[] args) {
 		launch(args);

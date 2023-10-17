@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import main.java.chess.exceptions.InvalidMoveException;
-import main.java.chess.models.ChessBoard;
+import main.java.chess.models.ChessBoardInterface;
 import main.java.chess.models.Player;
 import main.java.chess.models.enums.Color;
 import main.java.chess.models.enums.GameOver;
@@ -22,7 +22,7 @@ import main.java.chess.models.pieces.Piece;
 import main.java.chess.models.pieces.PieceFactory;
 import main.java.chess.models.util.NotationValidator;
 
-public class OopChessBoard implements ChessBoard {
+public class OopChessBoard implements ChessBoardInterface {
 
 	private static final Logger LOGGER = Logger.getLogger(OopChessBoard.class.getName());
 
@@ -271,7 +271,7 @@ public class OopChessBoard implements ChessBoard {
 
 	}
 
-	public void move(String start, String end) throws InvalidMoveException {
+	public Move move(String start, String end) throws InvalidMoveException {
 		Tile startTile = getTile(start);
 		Tile endTile = getTile(end);
 		if (startTile.isEmpty()) {
@@ -281,7 +281,7 @@ public class OopChessBoard implements ChessBoard {
 		for (Move move : moves) {
 			if (move.getEnd().equals(endTile)) {
 				apply(move);
-				return;
+				return move;
 			}
 		}
 		throw new InvalidMoveException("Move is illegal.");

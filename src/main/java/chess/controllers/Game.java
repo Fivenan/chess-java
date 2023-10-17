@@ -1,11 +1,11 @@
 package main.java.chess.controllers;
 
-import main.java.chess.models.ChessBoard;
+import main.java.chess.models.ChessBoardInterface;
 import main.java.chess.models.oop.OopChessBoard;
 import main.java.chess.views.IView;
 
 public class Game {
-	private ChessBoard chessBoard = new OopChessBoard();
+	private ChessBoardInterface chessBoard = new OopChessBoard();
 	private IView viewer;
 
 	public Game() {
@@ -16,18 +16,18 @@ public class Game {
 //
 //	}
 
-	public Game(ChessBoard board) {
+	public Game(ChessBoardInterface board) {
 		setBoard(board);
 		while (!board.isGameOver()) {
 
 		}
 	}
 
-	public void setBoard(ChessBoard chessBoard) {
+	public void setBoard(ChessBoardInterface chessBoard) {
 		this.chessBoard = chessBoard;
 	}
 
-	public ChessBoard getChessBoard() {
+	public ChessBoardInterface getChessBoard() {
 		return chessBoard;
 	}
 

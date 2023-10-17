@@ -1,7 +1,7 @@
 package main.java.chess.views;
 
 import main.java.chess.controllers.Game;
-import main.java.chess.models.ChessBoard;
+import main.java.chess.models.ChessBoardInterface;
 
 public class Terminal implements IView {
 
@@ -12,7 +12,7 @@ public class Terminal implements IView {
 
 	@Override
 	public void show() {
-		ChessBoard chessBoard = null;
+		ChessBoardInterface chessBoard = null;
 		if (game != null && (chessBoard = game.getChessBoard()) != null) {
 			System.out.println(chessBoard);
 		}

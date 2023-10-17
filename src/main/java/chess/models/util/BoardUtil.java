@@ -3,7 +3,7 @@ package main.java.chess.models.util;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-import main.java.chess.models.ChessBoard;
+import main.java.chess.models.ChessBoardInterface;
 
 public class BoardUtil {
 
@@ -16,7 +16,7 @@ public class BoardUtil {
 	/**
 	 * String of the symbol of the board
 	 */
-	public static String printBoardSymbol(ChessBoard board) {
+	public static String printBoardSymbol(ChessBoardInterface board) {
 
 		return null;
 	}
