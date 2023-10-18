@@ -37,10 +37,6 @@ public class ChessGame {
 		moves.add(chessBoard.move(start, end));
 	}
 
-	public void play(Player player, Move move) throws IllegalTurnException {
-		play(players.get(player), move);
-	}
-
 	public void play(Color color, Move move) throws IllegalTurnException {
 		if (color != turn) {
 			throw new IllegalTurnException("It's not your turn!");
