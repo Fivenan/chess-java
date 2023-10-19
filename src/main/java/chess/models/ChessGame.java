@@ -15,6 +15,7 @@ public class ChessGame {
 
 	private Map<Color, Player> players;
 	private Map<Color, Long> time;
+
 	private ChessBoardInterface chessBoard;
 
 	private Color turn;
@@ -22,6 +23,10 @@ public class ChessGame {
 
 	private Color winner;
 	private GameOver gameOverType;
+
+	public ChessGame() {
+		chessBoard = new OopChessBoard();
+	}
 
 	public ChessGame(Player whitePlayer, Player blackPlayer) {
 		players = new EnumMap<>(Color.class);
