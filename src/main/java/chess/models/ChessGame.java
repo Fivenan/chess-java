@@ -3,12 +3,14 @@ package main.java.chess.models;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import main.java.chess.exceptions.IllegalTurnException;
 import main.java.chess.exceptions.InvalidMoveException;
 import main.java.chess.models.enums.Color;
 import main.java.chess.models.enums.GameOver;
 import main.java.chess.models.oop.OopChessBoard;
+import main.java.chess.models.oop.Tile;
 import main.java.chess.models.oop.moves.Move;
 
 public class ChessGame {
@@ -16,7 +18,7 @@ public class ChessGame {
 	private Map<Color, Player> players;
 	private Map<Color, Long> time;
 
-	private ChessBoardInterface chessBoard;
+	private OopChessBoard chessBoard;
 
 	private Color turn;
 	private List<Move> moves;
@@ -33,6 +35,11 @@ public class ChessGame {
 		players.put(Color.WHITE, whitePlayer);
 		players.put(Color.BLACK, blackPlayer);
 		chessBoard = new OopChessBoard();
+	}
+
+	public List<Tile> availableTargets(Color color, String start) {
+		return chessBoard.getAllPossibleMoves(color).stream().filter(m -> m.getStart().getPosition().equals(start))
+				.map(m -> m.getEnd()).collect(Collectors.toList());
 	}
 
 	public void play(Color color, String start, String end) throws IllegalTurnException, InvalidMoveException {
