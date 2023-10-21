@@ -16,7 +16,7 @@ import main.java.chess.models.oop.moves.Move;
 public class ChessGame {
 
 	private Map<Color, Player> players;
-	private Map<Color, Long> time;
+	private Map<Color, List<Long>> time;
 
 	private OopChessBoard chessBoard;
 
@@ -40,6 +40,11 @@ public class ChessGame {
 	public List<Tile> availableTargets(Color color, String start) {
 		return chessBoard.getAllPossibleMoves(color).stream().filter(m -> m.getStart().getPosition().equals(start))
 				.map(m -> m.getEnd()).collect(Collectors.toList());
+	}
+
+	public Move getMove(Tile endTile) {
+		return chessBoard.getAllPossibleMoves(turn).stream().filter(m -> m.getEnd().equals(endTile)).findFirst()
+				.orElse(null);
 	}
 
 	public void play(Color color, String start, String end) throws IllegalTurnException, InvalidMoveException {
