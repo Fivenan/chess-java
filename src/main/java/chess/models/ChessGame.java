@@ -15,6 +15,8 @@ import main.java.chess.models.oop.moves.Move;
 
 public class ChessGame {
 
+	private long id;
+
 	private Map<Color, Player> players;
 	private Map<Color, List<Long>> time;
 
@@ -42,8 +44,8 @@ public class ChessGame {
 				.map(m -> m.getEnd()).collect(Collectors.toList());
 	}
 
-	public Move getMove(Tile endTile) {
-		return chessBoard.getAllPossibleMoves(turn).stream().filter(m -> m.getEnd().equals(endTile)).findFirst()
+	public Move getMove(Color color, Tile endTile) {
+		return chessBoard.getAllPossibleMoves(color).stream().filter(m -> m.getEnd().equals(endTile)).findFirst()
 				.orElse(null);
 	}
 
