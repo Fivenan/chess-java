@@ -24,6 +24,8 @@ public class ChessGame {
 
 	private Color turn;
 	private List<Move> moves;
+	private Map<Integer, Move> moveMap;
+	private Map<Integer, Long> moveTimeMap;
 
 	private Color winner;
 	private GameOver gameOverType;
