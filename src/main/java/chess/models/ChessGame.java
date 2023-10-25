@@ -41,6 +41,10 @@ public class ChessGame {
 		chessBoard = new OopChessBoard();
 	}
 
+	public void join(Player player, Color color) {
+		players.put(color, player);
+	}
+
 	public List<Tile> availableTargets(Color color, String start) {
 		return chessBoard.getAllPossibleMoves(color).stream().filter(m -> m.getStart().getPosition().equals(start))
 				.map(m -> m.getEnd()).collect(Collectors.toList());
