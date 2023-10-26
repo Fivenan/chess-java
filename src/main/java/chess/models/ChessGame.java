@@ -19,6 +19,7 @@ public class ChessGame {
 
 	private Map<Color, Player> players;
 	private Map<Color, List<Long>> time;
+	private List<Long> timeStamp;
 
 	private OopChessBoard chessBoard;
 
