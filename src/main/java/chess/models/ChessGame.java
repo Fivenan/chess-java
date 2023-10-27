@@ -1,6 +1,6 @@
 package main.java.chess.models;
 
-import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -17,7 +17,7 @@ public class ChessGame {
 
 	private long id;
 
-	private Map<Color, Player> players;
+	private Map<Player, Color> players;
 	private Map<Color, List<Long>> time;
 	private List<Long> timeStamp;
 
@@ -36,14 +36,19 @@ public class ChessGame {
 	}
 
 	public ChessGame(Player whitePlayer, Player blackPlayer) {
-		players = new EnumMap<>(Color.class);
-		players.put(Color.WHITE, whitePlayer);
-		players.put(Color.BLACK, blackPlayer);
+		players = new HashMap<>();
+		players.put(whitePlayer, Color.WHITE);
+		players.put(blackPlayer, Color.BLACK);
 		chessBoard = new OopChessBoard();
 	}
 
 	public void join(Player player, Color color) {
-		players.put(color, player);
+		players.put(player, color);
+	}
+
+	public List<Tile> availableTargets(Player player, String start) {
+		Color color = players.get(player);
+		return availableTargets(color, start);
 	}
 
 	public List<Tile> availableTargets(Color color, String start) {
