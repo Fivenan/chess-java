@@ -111,4 +111,9 @@ public class ChessGame {
 		// Print a message indicating the insufficient material
 		System.out.println("Game ends in a draw due to insufficient material.");
 	}
+
+	public Color getTurn() {
+		return turn;
+	}
+
 }
