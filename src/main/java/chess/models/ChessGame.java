@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import main.java.chess.exceptions.IllegalTurnException;
@@ -15,6 +16,8 @@ import main.java.chess.models.oop.Tile;
 import main.java.chess.models.oop.moves.Move;
 
 public class ChessGame {
+
+	private static final Logger logger = Logger.getLogger(ChessGame.class.getName());
 
 	private long id;
 
@@ -56,12 +59,15 @@ public class ChessGame {
 	}
 
 	public List<Tile> availableTargets(Color color, String start) {
-		return chessBoard.getAllPossibleMoves(color).stream().filter(m -> m.getStart().getPosition().equals(start))
+		return chessBoard.getAllPossibleMoves(color).stream() //
+				.filter(m -> m.getStart().getPosition().equals(start)) //
 				.map(m -> m.getEnd()).collect(Collectors.toList());
 	}
 
 	public Move getMove(Color color, Tile endTile) {
-		return chessBoard.getAllPossibleMoves(color).stream().filter(m -> m.getEnd().equals(endTile)).findFirst()
+		return chessBoard.getAllPossibleMoves(color).stream() //
+				.filter(m -> m.getEnd().equals(endTile)) //
+				.findFirst() //
 				.orElse(null);
 	}
 
@@ -86,7 +92,7 @@ public class ChessGame {
 		// Set the winner to the other player
 		winner = (turn == Color.WHITE) ? Color.BLACK : Color.WHITE;
 		// Print a message indicating the resignation
-		System.out.println(winner + " wins by resignation.");
+		logger.info(winner + " wins by resignation.");
 	}
 
 	public void agreedDraw() {
@@ -95,7 +101,7 @@ public class ChessGame {
 		// Set the winner to null (indicating a draw)
 		winner = null;
 		// Print a message indicating the agreed draw
-		System.out.println("Game ends in a draw by agreement.");
+		logger.info("Game ends in a draw by agreement.");
 	}
 
 	public void timeForfeit() {
@@ -104,7 +110,7 @@ public class ChessGame {
 		// Set the winner to the other player
 		winner = (turn == Color.WHITE) ? Color.BLACK : Color.WHITE;
 		// Print a message indicating the time forfeit
-		System.out.println(winner + " wins on time forfeit.");
+		logger.info(winner + " wins on time forfeit.");
 	}
 
 	public void insufficientMaterial() {
@@ -113,7 +119,7 @@ public class ChessGame {
 		// Set the winner to null (indicating a draw)
 		winner = null;
 		// Print a message indicating the insufficient material
-		System.out.println("Game ends in a draw due to insufficient material.");
+		logger.info("Game ends in a draw due to insufficient material.");
 	}
 
 	public Color getTurn() {
