@@ -1,5 +1,6 @@
 package main.java.chess.models;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,6 +49,9 @@ public class ChessGame {
 
 	public List<Tile> availableTargets(Player player, String start) {
 		Color color = players.get(player);
+		if (color != chessBoard.getTile(start).getPiece().color) {
+			return new ArrayList<Tile>();
+		}
 		return availableTargets(color, start);
 	}
 
