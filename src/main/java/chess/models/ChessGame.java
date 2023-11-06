@@ -83,7 +83,7 @@ public class ChessGame {
 			throw new IllegalTurnException("It's not your turn!");
 		}
 		chessBoard.apply(move);
-
+		turn = color == Color.WHITE ? Color.BLACK : Color.WHITE;
 	}
 
 	public void resignation() {
