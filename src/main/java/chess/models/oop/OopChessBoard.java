@@ -24,7 +24,7 @@ import main.java.chess.models.util.NotationValidator;
 
 public class OopChessBoard implements ChessBoardInterface {
 
-	private static final Logger LOGGER = Logger.getLogger(OopChessBoard.class.getName());
+	private static final Logger logger = Logger.getLogger(OopChessBoard.class.getName());
 
 	private Tile[][] tiles = new Tile[8][8];
 
@@ -73,11 +73,11 @@ public class OopChessBoard implements ChessBoardInterface {
 
 		// Validate FEN
 		if (!NotationValidator.isValidFEN(fen)) {
-			LOGGER.warning(fen + " is not a valid FEN.");
+			logger.warning(fen + " is not a valid FEN.");
 			return;
 		}
 
-		LOGGER.info("Setting board to " + fen);
+		logger.info("Setting board to " + fen);
 
 		String[] parts = fen.split(" ", 6);
 
@@ -341,7 +341,7 @@ public class OopChessBoard implements ChessBoardInterface {
 	public void applyMove(Move move) {
 
 		if (!Move.isLegalMove(move, this)) {
-			LOGGER.warning("Move is illegal.");
+			logger.warning("Move is illegal.");
 			return;
 		}
 
@@ -448,7 +448,7 @@ public class OopChessBoard implements ChessBoardInterface {
 	 */
 	public Tile getTile(String s) {
 		if (!s.matches("[a-h][1-8]")) {
-			LOGGER.warning("Invalid tile position: " + s);
+			logger.warning("Invalid tile position: " + s);
 			return null;
 		}
 		System.out.println("Tile: [rank: " + (7 + '1' - s.charAt(1)) + "], [file: " + (s.charAt(0) - 'a') + "]");

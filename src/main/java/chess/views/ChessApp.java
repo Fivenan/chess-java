@@ -23,7 +23,7 @@ public class ChessApp extends Application {
 		ChessBoardPane chessBoardPane = new ChessBoardPane(chessGame);
 		gridPane.add(chessBoardPane, 0, 0);
 
-		// Add Tic-Tac-Toe game on the right
+		// Add Chess Panel
 		ChessGameInfoPane chessGameInfoPane = new ChessGameInfoPane(chessGame);
 		gridPane.add(chessGameInfoPane, 1, 0);
 
