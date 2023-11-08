@@ -11,11 +11,12 @@ public class ChessBoardPane extends GridPane {
 	private TextField display;
 
 	private ChessGame chessGame;
+	private OopChessBoard oopChessBoard;
 
 	public ChessBoardPane(ChessGame chessGame) {
 
 		this.chessGame = chessGame;
-		OopChessBoard oopChessBoard = new OopChessBoard();
+		oopChessBoard = new OopChessBoard();
 		oopChessBoard.setBoard("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
 		Button[][] buttons = new Button[8][8];
 
@@ -42,7 +43,7 @@ public class ChessBoardPane extends GridPane {
 				buttons[row][col] = button;
 
 				// Set up event handler for button clicks
-//                button.setOnAction(e -> handleButtonClick(row, col));
+				button.setOnAction(e -> handleButtonClick(row, col));
 			}
 		}
 
@@ -52,8 +53,6 @@ public class ChessBoardPane extends GridPane {
 				add(buttons[row][col], col, row);
 			}
 		}
-
-
 
 //		// Create UI components
 //		display = new TextField();
@@ -73,5 +72,9 @@ public class ChessBoardPane extends GridPane {
 //		button1.setOnAction(e -> display.appendText("1"));
 //		button2.setOnAction(e -> display.appendText("2"));
 //		// Add more event handlers for other buttons
+	}
+
+	private Object handleButtonClick(final int row, int col) {
+		return null;
 	}
 }
