@@ -37,6 +37,10 @@ public class Tile {
 		return (file + rank) % 2 == 0 ? EMPTY_BLACK_TILE_SYMBOL : EMPTY_WHITE_TILE_SYMBOL;
 	}
 
+	public boolean isInPosition(int rank, int file) {
+		return (rank == this.rank) && (file == this.file);
+	}
+
 	/**
 	 * Returns the tile on the board
 	 * a --> 0, h --> 7
@@ -52,6 +56,21 @@ public class Tile {
 
 	public void clear() {
 		this.piece = null;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		Tile other = (Tile) obj;
+		return file == other.file && Objects.equals(piece, other.piece) && rank == other.rank;
 	}
 
 	public String getFile() {
@@ -73,21 +92,6 @@ public class Tile {
 	@Override
 	public int hashCode() {
 		return Objects.hash(file, piece, rank);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
-		Tile other = (Tile) obj;
-		return file == other.file && Objects.equals(piece, other.piece) && rank == other.rank;
 	}
 
 }

@@ -1,9 +1,11 @@
 package main.java.chess.views;
 
+import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import main.java.chess.models.ChessGame;
+import main.java.chess.models.Player;
 import main.java.chess.models.oop.OopChessBoard;
 
 public class ChessBoardPane extends GridPane {
@@ -12,6 +14,8 @@ public class ChessBoardPane extends GridPane {
 
 	private ChessGame chessGame;
 	private OopChessBoard oopChessBoard;
+
+	private Player activePlayer;
 
 	public ChessBoardPane(ChessGame chessGame) {
 
@@ -26,10 +30,12 @@ public class ChessBoardPane extends GridPane {
 		double tileWidth = windowWidth > windowHeight ? windowHeight / 8 : windowWidth / 8;
 		tileWidth = 50;
 
-		for (int row = 0; row < 8; row++) {
-			for (int col = 0; col < 8; col++) {
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
 				Button button = new Button();
 				button.setMinSize(tileWidth, tileWidth);
+				final Integer row = Integer.valueOf(i);
+				final Integer col = Integer.valueOf(j);
 				button.setText("" + row + "" + col);
 				button.setText("" + oopChessBoard.getTile(row, col).getNotation());
 //				if ((row + col) % 2 == 0) {
@@ -43,7 +49,7 @@ public class ChessBoardPane extends GridPane {
 				buttons[row][col] = button;
 
 				// Set up event handler for button clicks
-				button.setOnAction(e -> handleButtonClick(row, col));
+				button.setOnAction(e -> handleButtonClick(e, row, col));
 			}
 		}
 
@@ -74,7 +80,8 @@ public class ChessBoardPane extends GridPane {
 //		// Add more event handlers for other buttons
 	}
 
-	private Object handleButtonClick(final int row, int col) {
+	private Object handleButtonClick(ActionEvent e, int row, int col) {
+		chessGame.availableTargets(activePlayer, row, col);
 		return null;
 	}
 }

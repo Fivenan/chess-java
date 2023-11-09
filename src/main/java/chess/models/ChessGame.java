@@ -50,6 +50,14 @@ public class ChessGame {
 		players.put(player, color);
 	}
 
+	public List<Tile> availableTargets(Player player, int row, int col) {
+		Color color = players.get(player);
+		if (color != chessBoard.getTile(row, col).getPiece().color) {
+			return new ArrayList<Tile>();
+		}
+		return availableTargets(color, row, col);
+	}
+
 	public List<Tile> availableTargets(Player player, String start) {
 		Color color = players.get(player);
 		if (color != chessBoard.getTile(start).getPiece().color) {
@@ -61,6 +69,12 @@ public class ChessGame {
 	public List<Tile> availableTargets(Color color, String start) {
 		return chessBoard.getAllPossibleMoves(color).stream() //
 				.filter(m -> m.getStart().getPosition().equals(start)) //
+				.map(m -> m.getEnd()).collect(Collectors.toList());
+	}
+
+	public List<Tile> availableTargets(Color color, int row, int col) {
+		return chessBoard.getAllPossibleMoves(color).stream() //
+				.filter(m -> m.getStart().isInPosition(row, col)) //
 				.map(m -> m.getEnd()).collect(Collectors.toList());
 	}
 
