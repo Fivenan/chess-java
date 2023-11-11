@@ -66,9 +66,10 @@ public class CharArrayChessBoard implements ChessBoardInterface {
 			for (char c : ranks[rank].toCharArray()) {
 				if (Character.isDigit(c)) {
 					file += c - '0';
-					continue;
+					tiles[rank][file++] = 'x';
+				} else {
+					tiles[rank][file++] = c;
 				}
-				tiles[rank][file++] = c;
 			}
 		}
 	}
