@@ -120,4 +120,13 @@ public class CharArrayChessBoard implements ChessBoardInterface {
 		return null;
 	}
 
+	private char getTile(String s) {
+		if (!s.matches("[a-h][1-8]")) {
+			logger.warning("Invalid tile position: " + s);
+			return 0;
+		}
+		System.out.println("Tile: [rank: " + (7 + '1' - s.charAt(1)) + "], [file: " + (s.charAt(0) - 'a') + "]");
+		return tiles[7 + '1' - s.charAt(1)][s.charAt(0) - 'a'];
+	}
+
 }
