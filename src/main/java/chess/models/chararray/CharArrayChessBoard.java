@@ -76,7 +76,11 @@ public class CharArrayChessBoard implements ChessBoardInterface {
 
 	@Override
 	public void emptyBoard() {
-		// TODO Auto-generated method stub
+		for (int rank = 0; rank < 8; rank++) {
+			for (int file = 0; file < 8; file++) {
+				tiles[rank][file] = 'x';
+			}
+		}
 
 	}
 
