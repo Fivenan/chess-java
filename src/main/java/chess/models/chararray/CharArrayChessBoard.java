@@ -86,8 +86,7 @@ public class CharArrayChessBoard implements ChessBoardInterface {
 
 	@Override
 	public void initialize() {
-		// TODO Auto-generated method stub
-
+		setBoard("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
 	}
 
 	public boolean isGameOver() {
