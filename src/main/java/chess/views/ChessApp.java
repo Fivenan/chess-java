@@ -2,6 +2,7 @@ package main.java.chess.views;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import main.java.chess.models.ChessGame;
@@ -31,7 +32,11 @@ public class ChessApp extends Application {
 		Scene scene = new Scene(gridPane, 1300, 800);
 
 		// Set up the stage
+
+		Image icon = new Image("main/resources/icons/icon 0.jpg");
+
 		primaryStage.setTitle("Surreal Checkmate: Realm of Infinite Moves");
+		primaryStage.getIcons().add(icon);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
