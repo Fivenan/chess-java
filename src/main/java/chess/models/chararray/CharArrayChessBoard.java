@@ -119,7 +119,8 @@ public class CharArrayChessBoard implements ChessBoardInterface {
 
 	@Override
 	public Move move(String start, String end) throws InvalidMoveException {
-		// TODO Auto-generated method stub
+		char tmp = getTile(end);
+		tiles[getX(end)][getY(end)] = getTile(start);
 		return null;
 	}
 
@@ -130,6 +131,14 @@ public class CharArrayChessBoard implements ChessBoardInterface {
 		}
 		System.out.println("Tile: [rank: " + (7 + '1' - s.charAt(1)) + "], [file: " + (s.charAt(0) - 'a') + "]");
 		return tiles[7 + '1' - s.charAt(1)][s.charAt(0) - 'a'];
+	}
+
+	private int getX(String pos) {
+		return 7 + '1' - pos.charAt(1);
+	}
+
+	private int getY(String pos) {
+		return pos.charAt(0) - 'a';
 	}
 
 }
