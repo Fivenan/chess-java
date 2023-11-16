@@ -101,7 +101,8 @@ public class CharArrayChessBoard implements ChessBoardInterface {
 
 	@Override
 	public void apply(Move move) {
-		// TODO Auto-generated method stub
+		tiles[move.getEnd().rank][move.getEnd().file] = getTile(move.getStart().getPosition());
+		tiles[move.getStart().rank][move.getStart().file] = 'x';
 
 	}
 
@@ -129,7 +130,7 @@ public class CharArrayChessBoard implements ChessBoardInterface {
 			logger.warning("Invalid tile position: " + s);
 			return 0;
 		}
-		System.out.println("Tile: [rank: " + (7 + '1' - s.charAt(1)) + "], [file: " + (s.charAt(0) - 'a') + "]");
+		logger.info("Tile: [rank: " + (7 + '1' - s.charAt(1)) + "], [file: " + (s.charAt(0) - 'a') + "]");
 		return tiles[7 + '1' - s.charAt(1)][s.charAt(0) - 'a'];
 	}
 
