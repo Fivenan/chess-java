@@ -43,6 +43,7 @@ public class Tile {
 
 	/**
 	 * Returns the tile on the board
+	 * e.g.: a1, a2, a3
 	 * a --> 0, h --> 7
 	 * 1 --> 7, 8 --> 0
 	 */

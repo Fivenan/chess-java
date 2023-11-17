@@ -8,7 +8,7 @@ import main.java.chess.models.enums.PieceType;
 import main.java.chess.models.oop.OopChessBoard;
 import main.java.chess.models.oop.Tile;
 import main.java.chess.models.oop.moves.CapturingMove;
-import main.java.chess.models.oop.moves.Move;
+import main.java.chess.models.oop.moves.OopMove;
 import main.java.chess.models.oop.moves.NormalMove;
 
 public class Knight extends Piece {
@@ -20,8 +20,8 @@ public class Knight extends Piece {
 
 	}
 
-	public List<Move> generateValidMoves(OopChessBoard b, int rank, int file) {
-		List<Move> validMoves = new ArrayList<>();
+	public List<OopMove> generateValidMoves(OopChessBoard b, int rank, int file) {
+		List<OopMove> validMoves = new ArrayList<>();
 		validMoves.add(getMove(b, rank, file, rank + 2, file + 1));
 		validMoves.add(getMove(b, rank, file, rank + 2, file - 1));
 		validMoves.add(getMove(b, rank, file, rank - 2, file + 1));
@@ -39,7 +39,7 @@ public class Knight extends Piece {
 		return fileInBound && rankInBound;
 	}
 
-	private Move getMove(OopChessBoard b, int rank, int file, int toRank, int toFile) {
+	private OopMove getMove(OopChessBoard b, int rank, int file, int toRank, int toFile) {
 		if (!targetTileInBound(toRank, toFile)) {
 			return null;
 		}

@@ -7,7 +7,7 @@ import main.java.chess.models.enums.Color;
 import main.java.chess.models.enums.PieceType;
 import main.java.chess.models.oop.OopChessBoard;
 import main.java.chess.models.oop.moves.CastlingMove;
-import main.java.chess.models.oop.moves.Move;
+import main.java.chess.models.oop.moves.OopMove;
 
 public class King extends Piece {
 
@@ -17,8 +17,8 @@ public class King extends Piece {
 		super(PIECE_TYPE, color);
 	}
 
-	public List<Move> generateValidMoves(OopChessBoard b, int rank, int file) {
-		List<Move> validMoves = new ArrayList<>();
+	public List<OopMove> generateValidMoves(OopChessBoard b, int rank, int file) {
+		List<OopMove> validMoves = new ArrayList<>();
 		generateValidMovesRecursive(b, rank, file, -1, -1, validMoves, false);
 		generateValidMovesRecursive(b, rank, file, -1, 1, validMoves, false);
 		generateValidMovesRecursive(b, rank, file, 1, -1, validMoves, false);
@@ -46,7 +46,7 @@ public class King extends Piece {
 		return validMoves;
 	}
 
-	private void addIfValidForCastling(OopChessBoard b, int rank, int startFile, int endFile, List<Move> validMoves) {
+	private void addIfValidForCastling(OopChessBoard b, int rank, int startFile, int endFile, List<OopMove> validMoves) {
 		if (b.isEmptyBetweenTwoTilesInRow(rank, startFile, endFile)) {
 			validMoves.add(new CastlingMove(b, b.getTile(rank, startFile), b.getTile(rank, endFile)));
 		}

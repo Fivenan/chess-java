@@ -9,7 +9,7 @@ import main.java.chess.models.oop.Tile;
 import main.java.chess.models.pieces.Pawn;
 import main.java.chess.models.pieces.Piece;
 
-public class NormalMove extends Move {
+public class NormalMove extends OopMove {
 
 	public NormalMove(Tile start, Tile end) {
 		super(start, end);
@@ -53,7 +53,7 @@ public class NormalMove extends Move {
 	}
 
 	@Override
-	public String getNotation(List<Move> otherMovesWithSameTarget) {
+	public String getNotation(List<OopMove> otherMovesWithSameTarget) {
 		StringBuilder res = new StringBuilder();
 		Piece piece = getStart().getPiece();
 		if (!(piece instanceof Pawn)) {

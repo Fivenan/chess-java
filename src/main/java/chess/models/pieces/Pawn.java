@@ -9,7 +9,7 @@ import main.java.chess.models.oop.OopChessBoard;
 import main.java.chess.models.oop.Tile;
 import main.java.chess.models.oop.moves.CapturingMove;
 import main.java.chess.models.oop.moves.EnPassantMove;
-import main.java.chess.models.oop.moves.Move;
+import main.java.chess.models.oop.moves.OopMove;
 import main.java.chess.models.oop.moves.NormalMove;
 import main.java.chess.models.oop.moves.PawnTwoStepMove;
 import main.java.chess.models.oop.moves.PromotionCapturingMove;
@@ -24,10 +24,10 @@ public class Pawn extends Piece {
 	}
 
 	@Override
-	public List<Move> generateValidMoves(OopChessBoard b, int rank, int file) {
+	public List<OopMove> generateValidMoves(OopChessBoard b, int rank, int file) {
 
-		List<Move> validMoves = new ArrayList<>();
-		Move tmp;
+		List<OopMove> validMoves = new ArrayList<>();
+		OopMove tmp;
 		if (canCaptureWestFile(b, rank, file)) {
 			tmp = new CapturingMove(b.getTile(rank, file), b.getTile(rank + movingDirection(), file - 1));
 			if (canPromote(rank)) {

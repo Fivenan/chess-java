@@ -10,24 +10,24 @@ import main.java.chess.models.oop.Tile;
 import main.java.chess.models.pieces.Pawn;
 import main.java.chess.models.pieces.Piece;
 
-public abstract class Move {
+public abstract class OopMove {
 
 	private Piece movingPiece;
 	private Tile start;
 	private Tile end;
 
-	public Move(Tile start, Tile end) {
+	public OopMove(Tile start, Tile end) {
 		this.movingPiece = start.getPiece();
 		this.start = start;
 		this.end = end;
 	}
 
-	public abstract String getNotation(List<Move> otherMovesWithSameTarget);
+	public abstract String getNotation(List<OopMove> otherMovesWithSameTarget);
 
-	public String getSpecifyingTile(List<Move> otherMovesWithSameTarget) {
+	public String getSpecifyingTile(List<OopMove> otherMovesWithSameTarget) {
 		String specificFile = "";
 		String specificRank = "";
-		for (Move otherMove : otherMovesWithSameTarget) {
+		for (OopMove otherMove : otherMovesWithSameTarget) {
 			if (this.getStart().getPiece().pieceType == otherMove.getStart().getPiece().pieceType) {
 				if (otherMove.getStart().file == this.getStart().file) {
 					specificFile = this.getStart().getFile();
@@ -41,7 +41,7 @@ public abstract class Move {
 		return specificFile + specificRank;
 	}
 
-	public static String print(OopChessBoard b, Move m) {
+	public static String print(OopChessBoard b, OopMove m) {
 		Piece p = b.getTile(m.getStart().rank, m.getStart().file).getPiece();
 		if (p instanceof Pawn) {
 			if ((m.getStart().rank == 6 && p.color == Color.BLACK)
@@ -85,9 +85,9 @@ public abstract class Move {
 		return null;
 	}
 
-	public static boolean isLegalMove(Move move, OopChessBoard board) {
+	public static boolean isLegalMove(OopMove move, OopChessBoard board) {
 		Tile start = board.getTile(move.getStart().getPosition());
-		List<Move> validMoves = board.getTile(move.getStart().rank, move.getStart().file).getPiece()
+		List<OopMove> validMoves = board.getTile(move.getStart().rank, move.getStart().file).getPiece()
 				.generateValidMoves(board, start.rank, start.file);
 		return validMoves.contains(move);
 	}
@@ -120,7 +120,7 @@ public abstract class Move {
 		if (getClass() != obj.getClass()) {
 			return false;
 		}
-		Move other = (Move) obj;
+		OopMove other = (OopMove) obj;
 		return Objects.equals(end, other.end) && Objects.equals(start, other.start);
 	}
 

@@ -22,7 +22,7 @@ public class PromotionCapturingMove extends CapturingMove {
 	}
 
 	@Override
-	public String getNotation(List<Move> otherMovesWithSameTarget) {
+	public String getNotation(List<OopMove> otherMovesWithSameTarget) {
 		return getStart().getFile() + "x" + getEnd().getNotation() + "=" + promotedPiece.getNotation();
 	}
 

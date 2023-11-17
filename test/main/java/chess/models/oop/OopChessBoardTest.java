@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import main.java.chess.models.oop.moves.Move;
+import main.java.chess.models.oop.moves.OopMove;
 import main.java.chess.models.oop.moves.PawnTwoStepMove;
 
 /**
@@ -99,28 +99,28 @@ class OopChessBoardTest {
 
 	/**
 	 * Test method for
-	 * {@link main.java.chess.models.oop.OopChessBoard#apply(main.java.chess.models.Move)}.
+	 * {@link main.java.chess.models.oop.OopChessBoard#apply(main.java.chess.models.OopMove)}.
 	 */
 	@Test
 	void testApplyMoveCheckBoard() {
 		String startFen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 		String endFen = "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR";
 		chessBoard.setBoard(startFen);
-		Move move = new PawnTwoStepMove(chessBoard, chessBoard.getTile(6, 4), chessBoard.getTile(4, 4));
+		OopMove move = new PawnTwoStepMove(chessBoard, chessBoard.getTile(6, 4), chessBoard.getTile(4, 4));
 		chessBoard.apply(move);
 		assertEquals(endFen, chessBoard.getFENBoard());
 	}
 
 	/**
 	 * Test method for
-	 * {@link main.java.chess.models.oop.OopChessBoard#apply(main.java.chess.models.Move)}.
+	 * {@link main.java.chess.models.oop.OopChessBoard#apply(main.java.chess.models.OopMove)}.
 	 */
 	@Test
 	void testApplyMoveCompleteFEN() {
 		String startFen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 		String endFen = "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1";
 		chessBoard.setBoard(startFen);
-		Move move = new PawnTwoStepMove(chessBoard, chessBoard.getTile(6, 4), chessBoard.getTile(4, 4));
+		OopMove move = new PawnTwoStepMove(chessBoard, chessBoard.getTile(6, 4), chessBoard.getTile(4, 4));
 		chessBoard.apply(move);
 		assertEquals(endFen, chessBoard.getFEN());
 	}
@@ -133,7 +133,7 @@ class OopChessBoardTest {
 	void testGetAllPossibleMoves() {
 		String startFen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 		chessBoard.setBoard(startFen);
-		List<Move> moves = chessBoard.getAllPossibleMoves();
+		List<OopMove> moves = chessBoard.getAllPossibleMoves();
 		moves.stream().forEach(System.out::println);
 	}
 

@@ -13,7 +13,7 @@ import main.java.chess.models.enums.Color;
 import main.java.chess.models.enums.GameOver;
 import main.java.chess.models.oop.OopChessBoard;
 import main.java.chess.models.oop.Tile;
-import main.java.chess.models.oop.moves.Move;
+import main.java.chess.models.oop.moves.OopMove;
 
 public class ChessGame {
 
@@ -28,8 +28,8 @@ public class ChessGame {
 	private OopChessBoard chessBoard;
 
 	private Color turn;
-	private List<Move> moves;
-	private Map<Integer, Move> moveMap;
+	private List<OopMove> moves;
+	private Map<Integer, OopMove> moveMap;
 	private Map<Integer, Long> moveTimeMap;
 
 	private Color winner;
@@ -78,7 +78,7 @@ public class ChessGame {
 				.map(m -> m.getEnd()).collect(Collectors.toList());
 	}
 
-	public Move getMove(Color color, Tile endTile) {
+	public OopMove getMove(Color color, Tile endTile) {
 		return chessBoard.getAllPossibleMoves(color).stream() //
 				.filter(m -> m.getEnd().equals(endTile)) //
 				.findFirst() //
@@ -92,7 +92,7 @@ public class ChessGame {
 		moves.add(chessBoard.move(start, end));
 	}
 
-	public void play(Color color, Move move) throws IllegalTurnException {
+	public void play(Color color, OopMove move) throws IllegalTurnException {
 		if (color != turn) {
 			throw new IllegalTurnException("It's not your turn!");
 		}

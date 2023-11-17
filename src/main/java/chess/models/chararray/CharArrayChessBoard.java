@@ -4,7 +4,7 @@ import java.util.logging.Logger;
 
 import main.java.chess.exceptions.InvalidMoveException;
 import main.java.chess.models.ChessBoardInterface;
-import main.java.chess.models.oop.moves.Move;
+import main.java.chess.models.oop.moves.OopMove;
 import main.java.chess.models.util.BoardUtil;
 import main.java.chess.models.util.NotationValidator;
 
@@ -100,7 +100,7 @@ public class CharArrayChessBoard implements ChessBoardInterface {
 	}
 
 	@Override
-	public void apply(Move move) {
+	public void apply(OopMove move) {
 		tiles[move.getEnd().rank][move.getEnd().file] = getTile(move.getStart().getPosition());
 		tiles[move.getStart().rank][move.getStart().file] = 'x';
 
@@ -119,7 +119,7 @@ public class CharArrayChessBoard implements ChessBoardInterface {
 	}
 
 	@Override
-	public Move move(String start, String end) throws InvalidMoveException {
+	public OopMove move(String start, String end) throws InvalidMoveException {
 		char tmp = getTile(end);
 		tiles[getX(end)][getY(end)] = getTile(start);
 		return null;

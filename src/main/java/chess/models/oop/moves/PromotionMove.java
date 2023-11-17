@@ -8,7 +8,7 @@ import main.java.chess.models.oop.Tile;
 import main.java.chess.models.pieces.Piece;
 import main.java.chess.models.pieces.PieceFactory;
 
-public class PromotionMove extends Move {
+public class PromotionMove extends OopMove {
 
 	private Piece promotedPiece;
 
@@ -35,7 +35,7 @@ public class PromotionMove extends Move {
 	}
 
 	@Override
-	public String getNotation(List<Move> otherMovesWithSameTarget) {
+	public String getNotation(List<OopMove> otherMovesWithSameTarget) {
 		return "" + getEnd().getNotation() + "=" + promotedPiece.getNotation();
 	}
 

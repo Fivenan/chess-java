@@ -9,7 +9,7 @@ import main.java.chess.models.enums.PieceType;
 import main.java.chess.models.oop.OopChessBoard;
 import main.java.chess.models.oop.Tile;
 import main.java.chess.models.oop.moves.CapturingMove;
-import main.java.chess.models.oop.moves.Move;
+import main.java.chess.models.oop.moves.OopMove;
 import main.java.chess.models.oop.moves.NormalMove;
 
 public abstract class Piece {
@@ -34,17 +34,17 @@ public abstract class Piece {
 		return pieceType.getValue();
 	}
 
-	public abstract List<Move> generateValidMoves(OopChessBoard b, int rank, int file);
+	public abstract List<OopMove> generateValidMoves(OopChessBoard b, int rank, int file);
 
 	public List<Tile> generateValidTargetTiles(OopChessBoard b, int rank, int file) {
 		return generateValidMoves(b, rank, file).stream() //
-				.map(Move::getEnd) //
+				.map(OopMove::getEnd) //
 				.collect(Collectors.toList());
 	}
 
 	void generateValidMovesRecursive(OopChessBoard b, int rank, int file, int dr, int df,
-			List<Move> validMoves, boolean recurse) {
-		Move tmp;
+			List<OopMove> validMoves, boolean recurse) {
+		OopMove tmp;
 		int toRank = rank + dr;
 		int toFile = file + df;
 		if (!isInTheBoard(toRank, toFile)) {

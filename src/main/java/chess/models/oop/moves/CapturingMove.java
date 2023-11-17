@@ -8,7 +8,7 @@ import main.java.chess.models.oop.Tile;
 import main.java.chess.models.pieces.Pawn;
 import main.java.chess.models.pieces.Piece;
 
-public class CapturingMove extends Move {
+public class CapturingMove extends OopMove {
 
 	private Piece capturedPiece;
 	private Tile capturedTile;
@@ -65,7 +65,7 @@ public class CapturingMove extends Move {
 	}
 
 	@Override
-	public String getNotation(List<Move> otherMovesWithSameTarget) { // Nexg5 Ng4x5
+	public String getNotation(List<OopMove> otherMovesWithSameTarget) { // Nexg5 Ng4x5
 		StringBuilder res = new StringBuilder();
 		Piece piece = getStart().getPiece();
 		if (!(piece instanceof Pawn)) {

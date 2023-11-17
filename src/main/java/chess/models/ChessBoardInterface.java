@@ -1,7 +1,7 @@
 package main.java.chess.models;
 
 import main.java.chess.exceptions.InvalidMoveException;
-import main.java.chess.models.oop.moves.Move;
+import main.java.chess.models.oop.moves.OopMove;
 
 public interface ChessBoardInterface {
 
@@ -15,7 +15,7 @@ public interface ChessBoardInterface {
 
 	public void moveTo(String endPosition);
 
-	public void apply(Move move);
+	public void apply(OopMove move);
 
 	public String getFENBoard();
 
@@ -23,6 +23,6 @@ public interface ChessBoardInterface {
 
 	public String toString();
 
-	public Move move(String start, String end) throws InvalidMoveException;
+	public OopMove move(String start, String end) throws InvalidMoveException;
 
 }

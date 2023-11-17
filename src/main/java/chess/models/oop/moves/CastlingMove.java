@@ -5,12 +5,12 @@ import java.util.List;
 import main.java.chess.models.oop.OopChessBoard;
 import main.java.chess.models.oop.Tile;
 
-public class CastlingMove extends Move {
+public class CastlingMove extends OopMove {
 
 	Tile rookStartTile;
 	Tile rookEndTile;
 
-	Move rookMove;
+	OopMove rookMove;
 
 	public CastlingMove(OopChessBoard b, Tile start, Tile end) {
 		super(start, end);
@@ -37,12 +37,12 @@ public class CastlingMove extends Move {
 		return rookStartTile;
 	}
 
-	public Move getRookMove() {
+	public OopMove getRookMove() {
 		return rookMove;
 	}
 
 	@Override
-	public String getNotation(List<Move> otherMovesWithSameTarget) {
+	public String getNotation(List<OopMove> otherMovesWithSameTarget) {
 		return (rookStartTile.file == 0) ? "O-O-O" : "O-O";
 	}
 

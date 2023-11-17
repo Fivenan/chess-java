@@ -16,7 +16,7 @@ import main.java.chess.models.enums.GameOver;
 import main.java.chess.models.enums.PieceType;
 import main.java.chess.models.oop.moves.CapturingMove;
 import main.java.chess.models.oop.moves.CastlingMove;
-import main.java.chess.models.oop.moves.Move;
+import main.java.chess.models.oop.moves.OopMove;
 import main.java.chess.models.pieces.Pawn;
 import main.java.chess.models.pieces.Piece;
 import main.java.chess.models.pieces.PieceFactory;
@@ -30,7 +30,7 @@ public class OopChessBoard implements ChessBoardInterface {
 
 	private Color turn = Color.WHITE;
 
-	private Move lastMove;
+	private OopMove lastMove;
 
 	private boolean whiteCanCastleKingSide = false;
 
@@ -48,14 +48,14 @@ public class OopChessBoard implements ChessBoardInterface {
 
 	private Map<Color, Player> players;
 
-	private List<Move> moveHistory = new ArrayList<>();;
+	private List<OopMove> moveHistory = new ArrayList<>();;
 
 	public OopChessBoard() {
 		emptyBoard();
 	}
 
-	public void setBoard(List<Move> moves) {
-		for (Move move : moves) {
+	public void setBoard(List<OopMove> moves) {
+		for (OopMove move : moves) {
 			apply(move);
 		}
 		moveHistory = moves;
@@ -163,7 +163,7 @@ public class OopChessBoard implements ChessBoardInterface {
 	}
 
 	public boolean isGameOver() {
-		List<Move> moves = getAllPossibleMoves(turn);
+		List<OopMove> moves = getAllPossibleMoves(turn);
 		if (moves.isEmpty()) {
 			if (isCheckmate()) {
 				return true;
@@ -179,7 +179,7 @@ public class OopChessBoard implements ChessBoardInterface {
 
 	// get the game over type if the game is over based on GameOver.java
 	private GameOver getGameOverType() {
-		List<Move> moves = getAllPossibleMoves(turn);
+		List<OopMove> moves = getAllPossibleMoves(turn);
 		if (moves.isEmpty()) {
 			if (isCheckmate()) {
 				return GameOver.CHECKMATE;
@@ -198,8 +198,8 @@ public class OopChessBoard implements ChessBoardInterface {
 		if (!isBeingChecked()) {
 			return false;
 		}
-		List<Move> moves = getAllPossibleMoves(turn);
-		for (Move move : moves) {
+		List<OopMove> moves = getAllPossibleMoves(turn);
+		for (OopMove move : moves) {
 			apply(move);
 			if (!isBeingChecked()) {
 				return false;
@@ -211,8 +211,8 @@ public class OopChessBoard implements ChessBoardInterface {
 	private boolean isCheck() {
 		boolean capturedIsKing = false;
 		boolean colorIsDifferent = false;
-		List<Move> possibleMoves = getAllPossibleMoves();
-		for (Move move : possibleMoves) {
+		List<OopMove> possibleMoves = getAllPossibleMoves();
+		for (OopMove move : possibleMoves) {
 			if (move instanceof CapturingMove) {
 				capturedIsKing = ((CapturingMove) move).getCapturedPiece().pieceType == PieceType.KING;
 				colorIsDifferent = ((CapturingMove) move).getStart().getPiece().color != ((CapturingMove) move)
@@ -224,8 +224,8 @@ public class OopChessBoard implements ChessBoardInterface {
 
 	private boolean isCheck(Color color) {
 		boolean capturedIsKing = false;
-		List<Move> possibleMoves = getAllPossibleMoves(color);
-		for (Move move : possibleMoves) {
+		List<OopMove> possibleMoves = getAllPossibleMoves(color);
+		for (OopMove move : possibleMoves) {
 			if (move instanceof CapturingMove) {
 				capturedIsKing = ((CapturingMove) move).getCapturedPiece().pieceType == PieceType.KING;
 			}
@@ -235,8 +235,8 @@ public class OopChessBoard implements ChessBoardInterface {
 
 	private boolean isBeingChecked() {
 		boolean capturedIsKing = false;
-		List<Move> possibleMoves = getAllPossibleMoves(getOpponentColor());
-		for (Move move : possibleMoves) {
+		List<OopMove> possibleMoves = getAllPossibleMoves(getOpponentColor());
+		for (OopMove move : possibleMoves) {
 			if (move instanceof CapturingMove) {
 				capturedIsKing = ((CapturingMove) move).getCapturedPiece().pieceType == PieceType.KING;
 			}
@@ -244,7 +244,7 @@ public class OopChessBoard implements ChessBoardInterface {
 		return capturedIsKing;
 	}
 
-	private boolean causesCheck(Move move) {
+	private boolean causesCheck(OopMove move) {
 		OopChessBoard board = cloneBoard();
 		board.apply(move);
 		return board.isBeingChecked();
@@ -259,8 +259,8 @@ public class OopChessBoard implements ChessBoardInterface {
 		String endPosition = moveNotation.substring(moveNotation.length() - 2);
 		int endRank = getTile(endPosition).rank;
 		int endFile = getTile(endPosition).file;
-		List<Move> possibleMoves = getAllPossibleMoves();
-		Map<String, Move> targetedPossibleMoves = possibleMoves.stream()
+		List<OopMove> possibleMoves = getAllPossibleMoves();
+		Map<String, OopMove> targetedPossibleMoves = possibleMoves.stream()
 				.filter(m -> m.getEnd().file == endFile && m.getEnd().rank == endRank)
 				.collect(Collectors.toMap(m -> m.getEnd().getPosition(), Function.identity()));
 		if (targetedPossibleMoves.containsKey(moveNotation)) {
@@ -271,14 +271,14 @@ public class OopChessBoard implements ChessBoardInterface {
 
 	}
 
-	public Move move(String start, String end) throws InvalidMoveException {
+	public OopMove move(String start, String end) throws InvalidMoveException {
 		Tile startTile = getTile(start);
 		Tile endTile = getTile(end);
 		if (startTile.isEmpty()) {
 			throw new InvalidMoveException("Tile " + startTile.getPosition() + " is empty.");
 		}
-		List<Move> moves = startTile.getPiece().generateValidMoves(this, startTile.rank, startTile.file);
-		for (Move move : moves) {
+		List<OopMove> moves = startTile.getPiece().generateValidMoves(this, startTile.rank, startTile.file);
+		for (OopMove move : moves) {
 			if (move.getEnd().equals(endTile)) {
 				apply(move);
 				return move;
@@ -289,11 +289,11 @@ public class OopChessBoard implements ChessBoardInterface {
 	}
 
 	@Override
-	public void apply(Move move) {
+	public void apply(OopMove move) {
 		// check the possible moves
 		Piece movingPiece = move.getStart().getPiece();
 
-		List<Move> moves = movingPiece.generateValidMoves(this, move.getStart().rank, move.getStart().file);
+		List<OopMove> moves = movingPiece.generateValidMoves(this, move.getStart().rank, move.getStart().file);
 		if (!moves.contains(move)) {
 			return;
 		}
@@ -338,9 +338,9 @@ public class OopChessBoard implements ChessBoardInterface {
 		}
 	}
 
-	public void applyMove(Move move) {
+	public void applyMove(OopMove move) {
 
-		if (!Move.isLegalMove(move, this)) {
+		if (!OopMove.isLegalMove(move, this)) {
 			logger.warning("Move is illegal.");
 			return;
 		}
@@ -353,8 +353,8 @@ public class OopChessBoard implements ChessBoardInterface {
 		moveHistory.add(move);
 	}
 
-	public List<Move> getAllPossibleMoves() {
-		List<Move> moves = new ArrayList<>();
+	public List<OopMove> getAllPossibleMoves() {
+		List<OopMove> moves = new ArrayList<>();
 		for (Tile[] tilesInRank : tiles) {
 			for (Tile tile : tilesInRank) {
 				if (!tile.isEmpty()) {
@@ -367,8 +367,8 @@ public class OopChessBoard implements ChessBoardInterface {
 		return moves;
 	}
 
-	public List<Move> getAllPossibleMoves(Color color) {
-		List<Move> moves = new ArrayList<>();
+	public List<OopMove> getAllPossibleMoves(Color color) {
+		List<OopMove> moves = new ArrayList<>();
 		for (Tile[] tilesInRank : tiles) {
 			for (Tile tile : tilesInRank) {
 				if (!tile.isEmpty() && tile.getPiece().color == color) {
@@ -545,11 +545,11 @@ public class OopChessBoard implements ChessBoardInterface {
 		this.turn = turn;
 	}
 
-	public Move getLastMove() {
+	public OopMove getLastMove() {
 		return lastMove;
 	}
 
-	public void setLastMove(Move lastMove) {
+	public void setLastMove(OopMove lastMove) {
 		this.lastMove = lastMove;
 	}
 
@@ -617,11 +617,11 @@ public class OopChessBoard implements ChessBoardInterface {
 		this.players = players;
 	}
 
-	public List<Move> getMoveHistory() {
+	public List<OopMove> getMoveHistory() {
 		return moveHistory;
 	}
 
-	public void setMoveHistory(List<Move> moveHistory) {
+	public void setMoveHistory(List<OopMove> moveHistory) {
 		this.moveHistory = moveHistory;
 	}
 
