@@ -14,6 +14,11 @@ running chess for 2 players with simple login session.
 UI is made using JavaFX.
 
 Login and register
+
 forgot password
+
 puzzles
+
 saved positions
+
+against AI
