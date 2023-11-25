@@ -7,6 +7,7 @@ Implementing chess with Java
 
 #### What
 running chess for 2 players with simple login session. 
+supports stockfish
 
 #### How to run
 `java -jar java-chess.jar`
