@@ -69,7 +69,7 @@ public class ChessGame {
 	public List<Tile> availableTargets(Color color, String start) {
 		return chessBoard.getAllPossibleMoves(color).stream() //
 				.filter(m -> m.getStart().getPosition().equals(start)) //
-				.map(m -> m.getEnd()).collect(Collectors.toList());
+				.map(OopMove::getEnd).collect(Collectors.toList());
 	}
 
 	public List<Tile> availableTargets(Color color, int row, int col) {
